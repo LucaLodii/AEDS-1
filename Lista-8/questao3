@@ -1,0 +1,46 @@
+#include <stdio.h>
+
+int main() {
+    int num_escolas, num_jurados;
+    float nota, soma_notas, media;
+
+    // Solicita o número de escolas participantes
+    printf("Informe o número de escolas (ou blocos) participantes: ");
+    scanf("%d", &num_escolas);
+
+    // Loop para cada escola
+    for (int i = 1; i <= num_escolas; i++) {
+        soma_notas = 0; // Reinicia a soma das notas para cada escola
+
+        // Solicita o número de jurados para a escola atual
+        printf("\nInforme o número de jurados para a escola %d: ", i);
+        scanf("%d", &num_jurados);
+
+        // Loop para coletar as notas dos jurados
+        for (int j = 1; j <= num_jurados; j++) {
+            do {
+                printf("Digite a nota do jurado %d para a escola %d [0..10]: ", j, i);
+                scanf("%f", &nota);
+
+                if (nota < 0 || nota > 10) {
+                    printf("Nota inválida! Digite uma nota entre 0 e 10.\n");
+                }
+            } while (nota < 0 || nota > 10); // Repete enquanto a nota for inválida
+
+            soma_notas += nota;
+        }
+
+        // Calcula a média da escola
+        media = soma_notas / num_jurados;
+
+        // Exibe a média da escola
+        printf("\nA média da escola %d foi: %.2f\n", i, media);
+
+        // Mensagem especial para escolas com média maior ou igual a 9.0
+        if (media >= 9.0) {
+            printf("Parabéns! Desfile de excelência!\n");
+        }
+    }
+
+    return 0;
+}
