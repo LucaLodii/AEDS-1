@@ -14,7 +14,7 @@ int main(){
             }
             divisor++;
 
-        }while(divisor <= inteiro);
+        }while(divisor <= inteiro/2);
     
         printf("\nnumero de divisores do inteiro %d eh: %d",inteiro,countd);
 
