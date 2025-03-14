@@ -1,24 +1,35 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
 
-int main(){
+void apresentacao()
+{
+    printf("\nSoma de dois numeros\n");
+}
+float leiaReal()
+{
+    float x;
+    printf("\nDigite o primeiro numero: ");
+    scanf("%f", &x);
+    return x;
+}
+float functionSoma(float X, float Y)
+{
+    return X+Y;
+}
 
-    int inteiro, divisor=1, resultado, count_divisores=0;
+void final(float C){
+    printf("\nA soma eh: %.f", C);
+}
 
+int main()
+{
+    setlocale(LC_ALL, "");
+    apresentacao();
 
-    printf("\nDigite um inteiro qualquer para saber o num de divisores: ");
-    scanf("%i",&inteiro);
-
-        do{
-            resultado = inteiro % divisor;
-                if(resultado == 0) {
-                    count_divisores++;
-                    printf("\n%d",divisor);}
-            divisor++;
-                    
-
-        }while(divisor <= inteiro);
-
-        printf("\no numero de divisores eh: %d",count_divisores);
-
+    float A = leiaReal();
+    float B = leiaReal();
+    float C = functionSoma (A, B);
+    final(C);
     return 0;
-} 
+}

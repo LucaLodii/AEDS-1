@@ -17,7 +17,7 @@ int main(){
                     count_nprimo++;
 
                     divisor++;
-        }while(divisor < inteiro);
+        }while(divisor <= inteiro/2);
 
         if(count_nprimo>=1) printf("\nnao eh primo");
             else printf("\neh primo");

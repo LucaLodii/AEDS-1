@@ -1,11 +1,28 @@
 #include <stdio.h>
-int main(){
+#include <stdlib.h>
+#include <locale.h>
 
-    int termo = 2, razao = 3, i;
+void apresentacao(){
+    printf("\nSoma de dois numeros\n");
+}
+float leiaReal(){
+    float x;
+    printf("\nDigite o numero: ");
+    scanf("%f", &x);
+    return x;
+}
+float soma(float X, float Y){
+    return X+Y;
+}
+void resultado(float C){
+    printf("\nO resultado eh: %.f", C);
+}
 
-    for (i=0; i<10; i++){
-        printf("\n%d",termo);
-        termo += razao;
+    int main(){
+        apresentacao();
+        float A = leiaReal();
+        float B = leiaReal();
+        float C = soma(A, B);
+        resultado (C);
+        return 0;
     }
-    return 0;
-} 

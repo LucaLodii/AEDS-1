@@ -1,3 +1,4 @@
+//A VERSÃO BONITA FOI PERDIDA
 int main()
 {
     int empregados, salario_min = 1518, count_sm = 0, salario = 1, maior_salario, menor_salario, percentual, amplitude;
@@ -32,3 +33,4 @@ int main()
 
     return 0;
 }
+//A VERSÃO BONITA FOI PERDIDA
