@@ -1,35 +1,23 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <locale.h>
 
-void apresentacao()
-{
-    printf("\nSoma de dois numeros\n");
-}
-float leiaReal()
-{
-    float x;
-    printf("\nDigite o primeiro numero: ");
-    scanf("%f", &x);
-    return x;
-}
-float functionSoma(float X, float Y)
-{
-    return X+Y;
+
+void imprimirDecrescente(int n,int j){
+    if (j<=n){
+        printf("%d ",j);
+        imprimirDecrescente(n,j+1);
+    }
 }
 
-void final(float C){
-    printf("\nA soma eh: %.f", C);
+void lerEntradaEImprimir(){
+    int j = 0;
+    int n;
+    printf("\nContando de n ate 0\nDigite n: ");
+    scanf("%d",&n);
+    imprimirDecrescente(n,j);
 }
 
-int main()
-{
-    setlocale(LC_ALL, "");
-    apresentacao();
-
-    float A = leiaReal();
-    float B = leiaReal();
-    float C = functionSoma (A, B);
-    final(C);
+int main(){
+    lerEntradaEImprimir();
     return 0;
 }

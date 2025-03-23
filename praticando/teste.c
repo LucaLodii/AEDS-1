@@ -1,28 +1,21 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <locale.h>
+
+void apresentacao2(int A){
+    if (A>=0){
+        printf("%d ",A);
+        apresentacao2(A-1);
+    }
+}
 
 void apresentacao(){
-    printf("\nSoma de dois numeros\n");
-}
-float leiaReal(){
-    float x;
-    printf("\nDigite o numero: ");
-    scanf("%f", &x);
-    return x;
-}
-float soma(float X, float Y){
-    return X+Y;
-}
-void resultado(float C){
-    printf("\nO resultado eh: %.f", C);
+    int n;
+    printf("\nDigite um numero para este programa o subtrair ate 0: ");
+    scanf("%d",&n);
+        apresentacao2(n);
 }
 
-    int main(){
-        apresentacao();
-        float A = leiaReal();
-        float B = leiaReal();
-        float C = soma(A, B);
-        resultado (C);
-        return 0;
-    }
+int main(){
+    apresentacao();
+    return 0;
+}
