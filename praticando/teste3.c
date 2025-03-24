@@ -1,23 +1,25 @@
 #include <stdio.h>
 
-void function2(int n, int m){
-    if (n<=m){
-        printf("\n%d",n);
+void calc(int num, int i, int fatorial){
+    if  (i <= num) {
+        printf("%d ",fatorial);
+        i++;
+        
     }
-    function2(n+1,m);
-
+    calc(num,i,fatorial *= i);
 }
 
-void function1(){
-    int m, n;
-    printf("\nEste programa soma de n ate m\nDigite n (o menor num): ");
-    scanf("%d",&n);
-    printf("\nAgora m: ");
-    scanf("%d",&m);
-        function2(n,m);
+void lerNatural(){
+    int num;
+    int i = 1;
+    int fatorial = 1;
+    do {
+        printf("\nDigite um numero NATURAL: ");
+        scanf("%d", &num);
+    } while (num < 0);  
+    calc(num,i, fatorial);
 }
-
 
 int main(){
-    function1();
+    lerNatural();
 }

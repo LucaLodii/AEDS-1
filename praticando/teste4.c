@@ -1,25 +1,22 @@
 #include <stdio.h>
 
-void calc(int num, int i, int fatorial){
-    if  (i <= num) {
-        printf("%d ",fatorial);
-        i++;
-        
-    }
-    calc(num,i,fatorial *= i);
+
+void escreveInvertido(int n) {
+if(n==0) printf("\n0"); // Caso especial: o número zero
+while (n > 0) {
+printf("%d", n % 10); // escreve o último dígito
+n = n / 10; // remove o último dígito
+} // fim while(n)
 }
 
-void lerNatural(){
-    int num;
-    int i = 1;
-    int fatorial = 1;
-    do {
-        printf("\nDigite um numero NATURAL: ");
-        scanf("%d", &num);
-    } while (num < 0);  
-    calc(num,i, fatorial);
+void apresentacao() {
+    int n;
+    printf("Informe o numero para eu te falar quantos digitos ele tem: ");
+    scanf("%d", &n);
+    escreveInvertido(n);
 }
 
-int main(){
-    lerNatural();
+int main() {
+    apresentacao();
+    return 0;
 }
