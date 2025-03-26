@@ -1,10 +1,10 @@
 #include <stdio.h>
 
-void calc(int num, int i, int fatorial){
-    if(num>=0){
-        printf("%d ",fatorial);
+void calc(int num, int i, int fatorial) {
+    if (i <= num) {
+        printf("%d! = %d\n", i, fatorial);
+        calc(num, i + 1, fatorial * (i + 1));
     }
-    calc(num-1, i+1, fatorial *= i);
 }
 
 void introduction(){
