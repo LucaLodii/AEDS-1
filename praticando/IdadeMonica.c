@@ -4,7 +4,7 @@
     int idadeM(){
         int idadeM;
         do{
-            printf("\nDigite a idade de dona monica: ");
+            //printf("\nDigite a idade de dona monica: ");
             scanf("%d",&idadeM);
         } while (idadeM <= 40 && idadeM >=110);
         return idadeM;
@@ -12,7 +12,7 @@
     int idadeFilhos(int i, int A){
         int idadeF;
         do{
-            printf("\nDigite a idade do %io filho: ",i);
+            //printf("\nDigite a idade do %io filho: ",i);
             scanf("%d",&idadeF);
         } while (idadeF <= 1 && idadeF < A);
         return idadeF;
