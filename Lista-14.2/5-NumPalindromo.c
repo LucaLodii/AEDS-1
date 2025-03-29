@@ -1,36 +1,32 @@
 #include <stdio.h>
 
-void escreveInvertido(int n, int palindromo) {
-    int original = n;  // Store the original number
-    int reversed = 0;  // To build the reversed number
-    
-    printf("Invertido: ");
-    if (n == 0) {
-        printf("0");
-    }
-    
-    while (n > 0) {
-        int digit = n % 10;
-        reversed = reversed * 10 + digit;
-        printf("%d", digit);
-        n = n / 10;
-    }
-    
-    if (original == reversed) {
-        printf("\nEh Palindromo");
+int ehPalindromo(int invertido, int numOriginal) {
+    if(invertido == numOriginal) {
+        printf("\nEh palindromo!");
     } else {
-        printf("\nNao eh palindromo");
+        printf("\nNAO eh palindromo!");
     }
+    return 0;
 }
 
-void apresentacao() {
-    int n;
-    printf("Informe um numero para eu inverte-lo: ");
-    scanf("%d", &n);
-    escreveInvertido(n, 1);  // Second argument not needed anymore
+int numInvertido(int num) {
+    int invertido = 0;
+    while(num > 0) {
+        invertido = invertido * 10 + num % 10;
+        num /= 10;
+    }
+    return invertido;
 }
 
 int main() {
-    apresentacao();
+    int num, numOriginal;
+    
+    printf("Digite um numero: ");
+    scanf("%d", &num);
+    
+    numOriginal = num;
+    int invertido = numInvertido(num);
+    ehPalindromo(invertido, numOriginal);
+    
     return 0;
 }
