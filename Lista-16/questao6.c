@@ -5,10 +5,19 @@ void moverDisco(int origem, int destino) {
 }
 
 void hanoi(int discos, int origem, int destino, int auxiliar) {
-    // Implemente os passos recursivos aqui depois
-    // 1. Mover n-1 discos para o pino auxiliar
-    // 2. Mover o disco restante para o destino
-    // 3. Mover os n-1 discos do auxiliar para o destino
+    if (discos == 1) {
+        moverDisco(origem, destino);  // No need for nested if - we already checked discos == 1
+    }
+    else {
+        // Etapa 1: Mova (n-1) discos para o auxiliar (dica: troque destino/auxiliar nos parâmetros)
+        hanoi(discos-1, origem, auxiliar, destino);
+
+        // Etapa 2: Mova o disco maior para o destino final
+        moverDisco(origem, destino);
+
+        // Etapa 3: Mova os (n-1) discos do auxiliar para o destino (dica: troque origem/auxiliar)
+        hanoi(discos-1, auxiliar, destino, origem);
+    }
 }
 
 int main() {
