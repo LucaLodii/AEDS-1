@@ -2,14 +2,12 @@
 #include <stdlib.h>
 
 void trocaMaiorUltimo(float notas[], int n) {
-    // Find max value and its position
     int pos_maior = 0;
     for (int i = 1; i < n; i++) {
         if (notas[i] > notas[pos_maior]) {
             pos_maior = i;
         }
     }
-    // Swap with last position
     float temp = notas[n-1];
     notas[n-1] = notas[pos_maior];
     notas[pos_maior] = temp;
