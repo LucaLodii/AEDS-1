@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdbool.h>
 
+//QUESTÃO DIFÍCIL SE GUIE PELOS COMENTÁRIOS
+
 bool ehPrimo(int n) {
     bool primo;
     if(n < 2) primo = false;

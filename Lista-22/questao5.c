@@ -27,7 +27,7 @@ int main(){
 
     ordemCrescente(arr, n);
 
-    printf("\nArranjo apos troca: ");         //Valores apos a funcao que trocaa as notas
+    printf("\nArranjo apos troca: ");         //Valores apos a funcao que trocar as notas
     for (int i = 0; i < n; i++) {
         printf("%.f ", arr[i]);
     }

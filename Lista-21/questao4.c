@@ -1,0 +1,89 @@
+#include <stdlib.h>
+#include <stdio.h>
+
+void aprovadosReprovados(int turma[], int n){
+    float countAprovados = 0, countReprovados = 0;
+    for (int i = 0; i < n; i++) {
+        if (turma[i] >= 60) {
+            countAprovados++;
+        } else {
+            countReprovados++;
+        }
+    }
+    float pAprovados = (float)countAprovados / n * 100;
+    float pReprovados = (float)countReprovados / n * 100;
+    
+    printf("\nPorcentagem de aprovados: %.1f%%", pAprovados);
+    printf("\nPorcentagem de reprovados: %.1f%%", pReprovados);
+}
+
+int menorAprovado(int turma[], int n){
+    int menorNota = 100;
+    for (int i = 0; i < n; i++)
+    {
+        if (turma[i] >= 60 && turma[i] < menorNota)
+        {
+            menorNota = turma[i];
+        }
+    }
+    printf("\nA menor nota entre os aprovados eh: %i", menorNota);
+    return menorNota;
+}
+
+void maiorEmenor(int turma[], int n){
+    int maior = turma[0], menor = turma[0];
+    for (int i = 0; i < n; i++)
+    {
+        if (turma[i] >= menor)
+            maior = turma[i];
+        else if (turma[i] <= maior)
+            menor = turma[i];
+    }
+    printf("\nA maior nota foi %i", maior);
+    printf("\nA menor nota foi %i", menor);
+}
+
+void mediaNotas(int turma[], int n, int soma){
+    float media = (float)soma / n;
+    int countAcima = 0;
+    printf("\nA media das notas eh: %.1f", media); // AQUI FALA A MEDIA
+    for (int i = 0; i < n; i++)
+    {
+        if (turma[i] >= media)
+            countAcima++;
+    }
+    printf("\n%i alunos foram acima da media!", countAcima); // AQUI FALA QUANTOS FORAM ACIMA DA MEDIA
+}
+
+int lerNotas(int turma[], int n){
+    int soma = 0;
+    printf("\nInsira todas as notas da sua turma\n");
+    for (int i = 0; i < n; i++)
+    {
+        printf("Nota %d: ", i + 1);
+        scanf("%d", &turma[i]);
+        soma += turma[i];
+
+            if (turma[i] < 0) { //NÃO SE CONTA COMO FLAG MAS TA AI
+            printf("Leitura interrompida pelo usuario.\n");
+            return soma;  
+        }
+    }
+    return soma;
+}
+
+int main(){
+    int n = 0, soma = 0;
+    printf("\nInsira quantos alunos tem em sua turma: ");
+    scanf("%i", &n);
+    int *turma = (int *)malloc(n * sizeof(int)); // tamanho turma
+
+    soma = lerNotas(turma, n);
+    mediaNotas(turma, n, soma);
+    maiorEmenor(turma, n);
+    menorAprovado(turma, n);
+    aprovadosReprovados(turma, n);
+
+    free(turma);
+    return 0;
+}

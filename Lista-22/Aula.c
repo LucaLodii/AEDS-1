@@ -19,7 +19,6 @@ int ordena(int idades[], int n) {
                 pos_maior = i;
             }
         }
-        
         // Troca com a última posição não ordenada
         int temp = idades[(n-1)-j];
         idades[(n-1)-j] = idades[pos_maior];
