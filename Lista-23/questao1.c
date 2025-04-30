@@ -1,43 +1,72 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-float opcao5(float notas[], int i, int *maior, int *menor){
-    float amplitude = *maior - *menor;
-    printf("\nA amplitude eh: %.f",amplitude);
+void opcao6(float notas[], int i)
+{
+    for (int j = 0; j < i - 1; j++)
+    {
+        int pos_maior = j;
+        for (int k = j + 1; k < i; k++)
+        {
+            if (notas[k] > notas[pos_maior])
+            {
+                pos_maior = k;
+            }
+        }
+        float temp = notas[j];
+        notas[j] = notas[pos_maior];
+        notas[pos_maior] = temp;
+    }
 }
 
-float opcao4(float notas[], int i){
-    *maior = notas[0], *menor = notas[0]; //tem q ser = notas[0], se for igual a 0 não funciona!!!
-    maior = malloc(sizeof(float));
-    menor = malloc(sizeof(float));
-    for(int j = 0; j < i; j++){
-        if(notas[j] > *maior){
+void opcao5(float maior, float menor)
+{
+    printf("\nAmplitude: %.1f (Maior: %.1f, Menor: %.1f)", maior - menor, maior, menor);
+}
+
+void opcao4(float notas[], int i, float *maior, float *menor)
+{
+    if (i == 0)
+    {
+        printf("\nNenhuma nota cadastrada ainda!");
+        return;
+    }
+
+    *maior = notas[0]; // tem q ser = notas[0], se for igual a 0 não funciona!!!
+    *menor = notas[0];
+
+    for (int j = 1; j < i; j++)
+    {
+        if (notas[j] > *maior)
+        {
             *maior = notas[j];
         }
-        else if (notas[j] < *menor) {
-            *maior = notas[j];
+        if (notas[j] < *menor)
+        {
+            *menor = notas[j];
         }
     }
-    printf("\nA maior nota foi: %.f",*maior);
-    printf("\nA menor nota foi: %.f",*menor);
-    return *maior, *menor;
+    printf("\nA maior nota foi: %.1f", *maior);
+    printf("\nA menor nota foi: %.1f", *menor);
 }
 
 void opcao3(float notas[], int i)
 {
     int countAprovados = 0;
-    for(int j = 0; j < i; j++){
-        if(notas[j] >= 60) countAprovados++;
-    //printf("\nNumero de notas cadastradas: %i", i);
+    for (int j = 0; j < i; j++)
+    {
+        if (notas[j] >= 60)
+            countAprovados++;
+        // printf("\nNumero de notas cadastradas: %i", i);
     }
     printf("\nNumero de alunos aprovados: %i", countAprovados);
 }
 
 void opcao2(float notas[], int i)
 {
-    if (i == 0) //Assim ele não lista lixo
+    if (i == 0) // Assim ele não lista lixo
     {
-        printf("\nNenhuma nota cadastrada ainda!"); 
+        printf("\nNenhuma nota cadastrada ainda!");
         return;
     }
     printf("\nNotas cadastradas:");
@@ -73,7 +102,7 @@ int opcao1(float notas[], int i)
 int main()
 {
     int opcao, i = 0;
-    float notas[80];
+    float notas[80], maior, menor;
 
     do
     {
@@ -101,18 +130,22 @@ int main()
             opcao2(notas, i);
             break;
         case 3:
-            printf("\nInformar o número de alunos aprovados");
+            printf("\nInformar o numero de alunos aprovados");
             opcao3(notas, i);
             break;
         case 4:
             printf("\nInformar o valor da maior e menor nota da turma");
-            opcao4(notas, i);
+            opcao4(notas, i, &maior, &menor);
             break;
         case 5:
             printf("\nInformar a amplitude das notas");
-            //opcao5(notas, i);
+            opcao5(maior, menor);
             break;
-        // ... outros casos ...
+        case 6:
+            printf("\nNotas ordenadas:");
+            opcao6(notas, i);
+            opcao2(notas, i);
+            break;
         default:
             if (opcao >= 3 && opcao <= 6)
                 printf("\nOpcao %d ainda nao implementada\n", opcao);
