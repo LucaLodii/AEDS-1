@@ -28,7 +28,6 @@ int main() {
     printf("Digite o número de linhas (parte superior): ");
     scanf("%d", &n);
     
-    // Inicia com: linhas = n, asteriscos = 1 (valor inicial)
     losangoSuperior(n, 1);
     
     return 0;

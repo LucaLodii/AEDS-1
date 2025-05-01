@@ -34,9 +34,9 @@ void maiorEmenor(int turma[], int n){
     int maior = turma[0], menor = turma[0];
     for (int i = 0; i < n; i++)
     {
-        if (turma[i] >= menor)
+        if (turma[i] > maior)
             maior = turma[i];
-        else if (turma[i] <= maior)
+        else if (turma[i] < menor)
             menor = turma[i];
     }
     printf("\nA maior nota foi %i", maior);
