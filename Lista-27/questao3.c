@@ -3,13 +3,11 @@
 
 #define MAX_SIZE 3 
 
-bool contemZero(float matriz[MAX_SIZE][MAX_SIZE], float chave){
-    for(int i = 0; i < MAX_SIZE; i++){
-        for(int j = 0; j < MAX_SIZE; j++){
-            if(matriz[i][j] == chave) return true;
-        }
+void diagonalSecundaria(float matriz[MAX_SIZE][MAX_SIZE]){
+    printf("\nListando os valores que compoe a diagonal secundaria");
+    for(int i = 0, j = 2; i <= 2 && j >= 0; i++, j--){
+        printf("\nPosicao [%d][%d]: %.f ",i, j, matriz[i][j]);
     }
-    return false;
 }
 
 void leMatriz(float matriz[MAX_SIZE][MAX_SIZE]){
@@ -23,17 +21,10 @@ void leMatriz(float matriz[MAX_SIZE][MAX_SIZE]){
 }
 
 int main(){
-    float chave = 0;
-    printf("\nO valor chave eh: %.2f", chave);
-
     float matriz[MAX_SIZE][MAX_SIZE];
     leMatriz(matriz);
 
-    if(contemZero(matriz, chave)) {
-        printf("\nA matriz contem zero!");
-    } else {
-        printf("\nA matriz NAO contem zero!");
-    }
+    diagonalSecundaria(matriz);
 
 
     return 0;
