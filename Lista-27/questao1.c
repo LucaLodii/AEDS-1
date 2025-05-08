@@ -3,7 +3,7 @@
 
 #define MAX_SIZE 3 
 
-bool contemZero(float matriz[MAX_SIZE][MAX_SIZE], float chave){
+bool contemChave(float matriz[MAX_SIZE][MAX_SIZE], float chave){
     for(int i = 0; i < MAX_SIZE; i++){
         for(int j = 0; j < MAX_SIZE; j++){
             if(matriz[i][j] == chave) return true;
@@ -29,12 +29,11 @@ int main(){
     float matriz[MAX_SIZE][MAX_SIZE];
     leMatriz(matriz);
 
-    if(contemZero(matriz, chave)) {
+    if(contemChave(matriz, chave)) {
         printf("\nA matriz contem zero!");
     } else {
         printf("\nA matriz NAO contem zero!");
     }
-
 
     return 0;
 }
