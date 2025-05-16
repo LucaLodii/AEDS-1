@@ -1,54 +1,154 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
-#include "pessoa.h"
 
-#define MAX 100
+const int MAX = 100;
 int TAM = 0;
+
+typedef struct 
+{
+    int dia;
+    int mes;
+    int ano;
+}Data;
+
+
+typedef struct
+{
+    char nome[50];
+    Data nascimento;
+} Pessoa;
+
+// Protótipos das funções
+void cadastrarPessoa(Pessoa pessoas[]);
+void listarPessoas(Pessoa pessoas[]);
+float idadeMedia(Pessoa pessoas[]);
+void salvarDados(Pessoa pessoas[]);
+void carregarDados(Pessoa pessoas[]);
+int calcularIdade(Data nascimento);
 
 int main()
 {
-    int choice;
-    do{
-        system("clear");
-        printf("=============================\n");
-        printf("     🧾 Gerenciar Alunos\n");
-        printf("=============================\n");
-        printf("1. ➕ Cadastrar Aluno\n");
-        printf("2. 📋 Listar Alunos\n");
-        printf("3. 🔍 Idade Média dos Alunos\n");
-        printf("0. ❌ Sair\n");
-        printf("-----------------------------\n");
+    Pessoa pessoas[MAX];
+    int opcao;
+    do
+    {
+        printf("\nMenu de funcionalidades, escolha uma opcao: \n");
+        printf("\n0 - Sair do Programa");
+        printf("\n1 - Cadastar pessoa");
+        printf("\n2 - Listar todas as pessoas cadastradas (nome e idade)");
+        printf("\n3 - Informar a idade média da turma\n");
+        scanf("%i", &opcao);
 
-        printf("\nWhat do you want to do? [0 to 9]: ");
-        scanf("%i", &choice);
-        while (getchar() != '\n' && getchar() != EOF);
-
-        switch (choice)
+        switch (opcao)
         {
         case 0:
-            choice = 0;
+            printf("\nObrigado por usar este programa");
             break;
-
         case 1:
-            cadastrar_pessoa();
-            getchar();
+            printf("\nCadastar pessoa: ");
+            cadastrarPessoa(pessoas);
             break;
-
         case 2:
-            lista();
-            getchar();
+            printf("\nListar todas as pessoas cadastradas (nome e idade): ");
+                listarPessoas(pessoas);
             break;
-
-        case 3: 
-
+        case 3:
+            printf("\nInformar a idade media da turma: ");
+                idadeMedia(pessoas);
             break;
 
         default:
+            printf("\nOpcao invalida!\n");
             break;
         }
-    }while(choice != 0);
+    } while (opcao != 0);
+}
 
-    return 0;
+// Funções
+void cadastrarPessoa(Pessoa pessoas[]) {
+    if (TAM >= MAX) {
+        printf("Limite máximo atingido!\n");
+        return;
+    }
+    
+    printf("\nNome: ");
+    scanf("%49s", pessoas[TAM].nome);
+    
+    printf("Data de nascimento (DD MM AAAA): ");
+    scanf("%d/%d/%d", 
+          &pessoas[TAM].nascimento.dia, 
+          &pessoas[TAM].nascimento.mes, 
+          &pessoas[TAM].nascimento.ano);
+    
+    TAM++;
+    printf("Cadastro realizado!\n");
+}
+
+void listarPessoas(Pessoa pessoas[]) {
+    if (TAM == 0) {
+        printf("Nenhuma pessoa cadastrada!\n");
+        return;
+    }
+    
+    printf("\nPessoas cadastradas:\n");
+    for (int i = 0; i < TAM; i++) {
+        int idade = calcularIdade(pessoas[i].nascimento);
+        printf("%s - %02d/%02d/%d (%d anos)\n", 
+               pessoas[i].nome,
+               pessoas[i].nascimento.dia,
+               pessoas[i].nascimento.mes,
+               pessoas[i].nascimento.ano,
+               idade);
+    }
+}
+float idadeMedia(Pessoa pessoas[]) {
+    if (TAM == 0) {
+        printf("Nenhuma pessoa cadastrada!\n");
+        return 0.0f;
+    }
+    
+    int soma = 0;
+    for (int i = 0; i < TAM; i++) {
+        soma += calcularIdade(pessoas[i].nascimento);
+    }
+    
+    float media = (float)soma / TAM;
+    printf("Idade media: %.1f anos\n", media);
+    return media;
+}
+int calcularIdade(Data nascimento) { // essa parte foi gpt guentei nn
+    //int idade = ANO_ATUAL - nascimento.ano;
+    
+    // Você pode adicionar aqui a lógica para verificar se já fez aniversário
+    // Se quiser implementar, precisaria pedir o mês e dia atual ao usuário
+    // ou manter ANO_ATUAL, MES_ATUAL e DIA_ATUAL como variáveis globais
+    
+    //return idade;
+}
+
+void salvarDados(Pessoa pessoas[]) {
+    FILE *arquivoTAM = fopen("tamanho.dat", "wb");
+    if (arquivoTAM) {
+        fwrite(&TAM, sizeof(int), 1, arquivoTAM);
+        fclose(arquivoTAM);
+    }
+
+    FILE *arquivoPessoas = fopen("pessoas.dat", "wb");
+    if (arquivoPessoas) {
+        fwrite(pessoas, sizeof(Pessoa), TAM, arquivoPessoas);
+        fclose(arquivoPessoas);
+    }
+}
+void carregarDados(Pessoa pessoas[]) {
+    FILE *arquivoTAM = fopen("tamanho.dat", "rb");
+    if (arquivoTAM) {
+        fread(&TAM, sizeof(int), 1, arquivoTAM);
+        fclose(arquivoTAM);
+    }
+
+    FILE *arquivoPessoas = fopen("pessoas.dat", "rb");
+    if (arquivoPessoas) {
+        fread(pessoas, sizeof(Pessoa), TAM, arquivoPessoas);
+        fclose(arquivoPessoas);
+    }
 }
