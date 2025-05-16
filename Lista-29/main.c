@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-const int MAX = 100;
+#define MAX 100 // era pra ser const mas fdc
 int TAM = 0;
 
 typedef struct 
