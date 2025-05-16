@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define MAX 100 // era pra ser const mas fdc
 int TAM = 0;
@@ -71,8 +72,11 @@ void cadastrarPessoa(Pessoa pessoas[]) {
         return;
     }
     
+    fflush(stdin);
     printf("\nNome: ");
-    scanf("%49s", pessoas[TAM].nome);
+    //scanf("%49s", pessoas[TAM].nome);
+    fgets(pessoas[TAM].nome, sizeof(pessoas[TAM].nome), stdin);
+    pessoas[TAM].nome[strcspn(pessoas[TAM].nome, "\n")] = '\0'; // pra n pular linha
     
     printf("Data de nascimento (DD MM AAAA): ");
     scanf("%d/%d/%d", 
@@ -92,13 +96,11 @@ void listarPessoas(Pessoa pessoas[]) {
     
     printf("\nPessoas cadastradas:\n");
     for (int i = 0; i < TAM; i++) {
-        int idade = calcularIdade(pessoas[i].nascimento);
-        printf("%s - %02d/%02d/%d (%d anos)\n", 
+        printf("%s - %02d/%02d/%d\n", 
                pessoas[i].nome,
                pessoas[i].nascimento.dia,
                pessoas[i].nascimento.mes,
-               pessoas[i].nascimento.ano,
-               idade);
+               pessoas[i].nascimento.ano);
     }
 }
 float idadeMedia(Pessoa pessoas[]) {
