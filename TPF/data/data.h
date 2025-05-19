@@ -7,11 +7,13 @@ typedef struct {
     int ano;
 } Data;
 
-int calcularIdade(Data nascimento);
 Data obterDataAtual();
+
+int calcularIdade(Data nascimento);
+int diasMes(Data data);
+
 void leiaData(Data *data);
 void escreveData(Data data);
 const char* mesExtenso(Data data);
-int diasMes(Data data);
 
 #endif
