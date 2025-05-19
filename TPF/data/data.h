@@ -7,7 +7,11 @@ typedef struct {
     int ano;
 } Data;
 
-// Calcula idade baseado na data atual do sistema
 int calcularIdade(Data nascimento);
+Data obterDataAtual();
+void leiaData(Data *data);
+void escreveData(Data data);
+const char* mesExtenso(Data data);
+int diasMes(Data data);
 
 #endif

@@ -3,6 +3,9 @@
         "stdio.h": "c",
         "oi": "c",
         "stdbool.h": "c",
-        "xstring": "c"
+        "xstring": "c",
+        "pessoas.h": "c",
+        "time.h": "c",
+        "xutility": "c"
     }
 }
