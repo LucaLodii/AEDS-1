@@ -15,6 +15,7 @@ typedef struct {
 
 // Funções de inicialização/encerramento
 void abertura(Pessoa pessoas[]);
+void carregaPessoas(Pessoa pessoas[]);
 void despedida(Pessoa pessoas[]);
 
 // Funções de persistência
