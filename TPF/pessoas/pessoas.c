@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "pessoas.h"
 #include "data.h"
 
@@ -45,20 +46,69 @@ void listarPessoas(Pessoa pessoas[]) {
     }
 }
 
-float idadeMedia(Pessoa pessoas[]) {
+float idade_media(Pessoa pessoas[]) {  
     if (TAM == 0) {
         printf("Nenhuma pessoa cadastrada!\n");
         return 0.0f;
     }
 
-    int soma = 0;
+    int soma_idade = 0;
+    Data hoje;
+
+    time_t now = time(NULL);
+    struct tm *lt = localtime(&now);
+    hoje.dia = lt->tm_mday;
+    hoje.mes = lt->tm_mon + 1;
+    hoje.ano = lt->tm_year + 1900;
+
     for (int i = 0; i < TAM; i++) {
-        soma += calcularIdade(pessoas[i].nascimento);
+        soma_idade += calcular_idade(pessoas[i].nascimento, hoje);
     }
 
-    float media = (float)soma / TAM;
-    printf("Idade media: %.1f anos\n", media);
-    return media;
+    return soma_idade/(float)TAM;
+}
+
+int calcular_idade(Data nascimento, Data hoje){
+    int idade;
+    int soma_dias = 0;
+
+    int dias_mes[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    int dias_mes_bissexto[] = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    //calcular quantos dias ele viveu ate hoje
+    for(int i = nascimento.ano; i < hoje.ano; i++){
+        if((i % 4 == 0 && i % 100 != 0) || (i % 400 == 0)){
+            soma_dias += 366;
+        } else {
+            soma_dias += 365;
+        }
+    }
+    //subtrai dias ano nascimento
+    if((nascimento.ano % 4 == 0 && nascimento.ano % 100 != 0) || (nascimento.ano % 400 == 0)){
+        for(int i = 0; i < nascimento.mes-1; i++){
+            soma_dias -= dias_mes_bissexto[i];
+        }
+    } else {
+        for(int i = 0; i < nascimento.mes-1; i++){
+            soma_dias -= dias_mes[i];
+        }
+    }
+    soma_dias -= nascimento.dia;
+    
+    //adiciona dias ano atual
+    if((hoje.ano % 4 == 0 && hoje.ano % 100 != 0) || (hoje.ano % 400 == 0)){
+        for(int i = 0; i < hoje.mes-1; i++){
+            soma_dias += dias_mes_bissexto[i];
+        }
+    } else {
+        for(int i = 0; i < hoje.mes-1; i++){
+            soma_dias += dias_mes[i];
+        }
+    }
+    soma_dias += hoje.dia;
+
+    idade = soma_dias/365;
+
+    return idade;
 }
 
 void salvarDados(Pessoa pessoas[]) {

@@ -1,18 +1,18 @@
 #ifndef PESSOAS_H
 #define PESSOAS_H
 
-#include "data.h"
+#include "../data/data.h"
 
 #define MAX 100
 
-extern int TAM; // Variável global compartilhada
+extern int TAM;
 
 typedef struct {
     char nome[50];
     Data nascimento;
 } Pessoa;
 
-// Funções de gestão de pessoas
+int calcular_idade(Data nascimento, Data hoje);
 void cadastrarPessoa(Pessoa pessoas[]);
 void listarPessoas(Pessoa pessoas[]);
 float idadeMedia(Pessoa pessoas[]);
