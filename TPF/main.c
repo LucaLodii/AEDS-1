@@ -5,7 +5,7 @@
 int main()
 {
     Pessoa pessoas[MAX];
-    abertura(); // Inicializa o sistema
+    void abertura(Pessoa pessoas[]); // Inicializa o sistema
 
     int opcao;
     do
