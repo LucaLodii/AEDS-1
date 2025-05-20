@@ -5,7 +5,7 @@
 int main()
 {
     Pessoa pessoas[MAX];
-    void abertura(Pessoa pessoas[]); // Inicializa o sistema
+    abertura(pessoas); // Inicializa o sistema
 
     int opcao;
     do
@@ -14,7 +14,11 @@ int main()
         printf("0 - Sair do Programa\n");
         printf("1 - Cadastrar pessoa\n");
         printf("2 - Listar todas as pessoas cadastradas\n");
-        printf("3 - Informar a idade media da turma\n");
+        printf("3 - Pesquisar por nome\n");
+        printf("4 - Pesquisar por CPF\n");
+        printf("5 - Excluir pessoa\n");
+        printf("6 - Apagar todas as pessoas cadastradas\n");
+        printf("7 - Informar a idade media da turma\n");
         scanf("%i", &opcao);
 
         switch (opcao)
@@ -40,6 +44,18 @@ int main()
             }
             break;
         case 3:
+            printf("\nInforme o nome: ");
+            break;
+        case 4:
+            printf("\nInforme o CPF: ");
+            break;
+            case 5:
+            printf("\nInforme quem excluir: ");
+            break;
+        case 6:
+            printf("\nApagar cadastrados?");
+            break;
+        case 7:
             printf("\nIdade média: %.1f anos\n", idadeMedia(pessoas));
             break;
         default:
