@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdbool.h>
 #include "data/data.h"
 #include "pessoas/pessoas.h"
 
@@ -57,7 +58,7 @@ int main()
             deletaPessoa(pessoas);
             break;
         case 6:
-            limparCadastros(pessoas);
+            apagarTodos(pessoas);
             break;
         case 7:
             printf("\nIdade média: %.1f anos\n", idadeMedia(pessoas));

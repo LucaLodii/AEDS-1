@@ -205,8 +205,24 @@ void pesquisaPessoaNome(Pessoa pessoas[])
     }
 }
 
-Pessoa* pesquisaPessoaCPF(Pessoa pessoas[]){
-    // a ser feita
+void pesquisaPessoaCPF(Pessoa pessoas[]) {
+    char supostoCPF[15];
+    printf("\nDigite o CPF a ser encontrado (000.000.000-00): ");
+    fflush(stdin); 
+    fgets(supostoCPF, 15, stdin);
+    supostoCPF[strcspn(supostoCPF, "\n")] = '\0'; 
+
+    int encontradas = 0;
+    for (int i = 0; i < TAM; i++) {
+        if (strcmp(pessoas[i].CPF, supostoCPF) == 0) {
+            escrevaPessoa(pessoas, i);
+            encontradas++;
+        }
+    }
+    
+    if (encontradas == 0) {
+        printf("Nenhuma pessoa encontrada com o CPF '%s'.\n", supostoCPF);
+    }
 }
 
 bool deletaPessoa(Pessoa pessoas[]) {

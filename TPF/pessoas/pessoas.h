@@ -29,13 +29,13 @@ void escrevaPessoa(Pessoa pessoas[], int i);
 
 // Funções de pesquisa
 void pesquisaPessoaNome(Pessoa pessoas[]);
-Pessoa* pesquisaPessoaCPF(Pessoa pessoas[]);
+void pesquisaPessoaCPF(Pessoa pessoas[]);
 
 // Funções de manipulação
 void cadastrePessoa(Pessoa pessoas[]);
 void leiaCPF(char cpf[]);
 bool deletaPessoa(Pessoa pessoas[]);
-void limparCadastros(Pessoa pessoas[]);
+void apagarTodos(Pessoa pessoas[]);
 float idadeMedia(Pessoa pessoas[]);
 
 #endif
