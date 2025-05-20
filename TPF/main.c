@@ -43,17 +43,21 @@ int main()
                 }
             }
             break;
+
         case 3:
-            printf("\nInforme o nome: ");
+            pesquisaPessoaNome(pessoas);
             break;
+
         case 4:
-            printf("\nInforme o CPF: ");
+        {
+            pesquisaPessoaCPF(pessoas);
             break;
-            case 5:
-            printf("\nInforme quem excluir: ");
+        }
+        case 5:
+            deletaPessoa(pessoas);
             break;
         case 6:
-            printf("\nApagar cadastrados?");
+            limparCadastros(pessoas);
             break;
         case 7:
             printf("\nIdade média: %.1f anos\n", idadeMedia(pessoas));
