@@ -226,11 +226,29 @@ void pesquisaPessoaCPF(Pessoa pessoas[]) {
 }
 
 bool deletaPessoa(Pessoa pessoas[]) {
-    // a ser feita
+    char cpf[15];
+    printf("\nCPF para excluir (000.000.000-00): ");
+    fflush(stdin);
+    fgets(cpf, 15, stdin);
+    cpf[strcspn(cpf, "\n")] = '\0';
+
+    for (int i = 0; i < TAM; i++) {
+        if (strcmp(pessoas[i].CPF, cpf) == 0) {
+            for (int j = i; j < TAM - 1; j++) {             // ISSO Q É O TAL DO SHIFT (exemplo da arquibancada @lucioMauro)
+                pessoas[j] = pessoas[j + 1];
+            }
+            TAM--;
+            printf("Pessoa excluida com sucesso!\n");
+            return true;
+        }
+    }
+    printf("CPF não encontrado.\n");
+    return false;
 }
 
 void apagarTodos(Pessoa pessoas[]){
-    // a ser feita
+    TAM = 0;
+    printf("Todos os cadastros foram removidos.\n");
 }
 
 void carregaPessoas(Pessoa pessoas[])
