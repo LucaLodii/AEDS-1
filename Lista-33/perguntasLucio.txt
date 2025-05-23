@@ -1,5 +1,6 @@
 1- em questoes como a questao 2, você vai falar a quantidade de funcionarios dentro do array?
 pq ai eu vejo se uso for ou while.
-RESPOSTA: 
+RESPOSTA: Considere o tamanho físico do arranjo definido em MAX e o tamanho lógico na variável TAM
 
-2- 
+2- Pode usar string.h?
+RESPOSTA: só se não proibir
