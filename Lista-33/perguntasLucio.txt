@@ -1,0 +1,5 @@
+1- em questoes como a questao 2, você vai falar a quantidade de funcionarios dentro do array?
+pq ai eu vejo se uso for ou while.
+RESPOSTA: 
+
+2- 
