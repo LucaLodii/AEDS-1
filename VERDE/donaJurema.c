@@ -5,7 +5,6 @@ int existe_caixa_valida(int caixas[], int N);
 void processa_fila(int caixas[], int N, int K, int turno_atual);
 int calcular_coleta(int frutas);
 
-// Variáveis globais
 int coletado_leticia = 0;
 
 int main() {
