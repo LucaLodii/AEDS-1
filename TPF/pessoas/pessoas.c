@@ -208,7 +208,7 @@ void pesquisaPessoaNome(Pessoa pessoas[])
 void pesquisaPessoaCPF(Pessoa pessoas[]) {
     char supostoCPF[15];
     printf("\nDigite o CPF a ser encontrado (000.000.000-00): ");
-    fflush(stdin); 
+    fflush(stdin);
     fgets(supostoCPF, 15, stdin);
     supostoCPF[strcspn(supostoCPF, "\n")] = '\0'; 
 
