@@ -6,6 +6,7 @@
         "xstring": "c",
         "pessoas.h": "c",
         "time.h": "c",
-        "xutility": "c"
+        "xutility": "c",
+        "stdlib.h": "c"
     }
 }

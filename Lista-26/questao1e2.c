@@ -19,13 +19,13 @@ void leMatriz(float matriz[MAX_LIN][MAX_COL])
     for(int i = 0; i < MAX_LIN; i++) {
         for(int j = 0; j < MAX_COL; j++) {
             printf("Posicao [%d][%d]: ", i, j);
-            scanf("%f", &matriz[i][j]); 
+            scanf("%f", &matriz[i][j]);
         }
     }
 }
 
 void escreveMatriz(float matriz[MAX_LIN][MAX_COL]) {
-        for(int i = 0; i < MAX_LIN; i++) {
+    for(int i = 0; i < MAX_LIN; i++) {
         for(int j = 0; j < MAX_COL; j++) {
             printf("\nPosicao [%d][%d] = %.1f ", i, j, matriz[i][j]);
         }

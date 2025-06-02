@@ -61,7 +61,7 @@ int main()
             apagarTodos(pessoas);
             break;
         case 7:
-            printf("\nIdade média: %.1f anos\n", idadeMedia(pessoas));
+            printf("\nIdade média: %.1f anos\n", idadeMedia(pessoas));  // ESSA É UMA FUNÇÃO EXTRA, EU FIZ PQ QUIS
             break;
         default:
             printf("\nOpcao invalida!\n");

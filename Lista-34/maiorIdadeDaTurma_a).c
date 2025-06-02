@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#define MAX 50 
+#define MAX 50
 
 typedef struct {
     char nome[50];
