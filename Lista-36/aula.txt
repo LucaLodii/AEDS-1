@@ -1,15 +1,12 @@
-Princípios de OO:
+Princípios de POO:
     1- Abstração: A Abstração do Brasil é a amazônia, Minas, Pampas etc.
-        → Criar modelos simplificados (classes) que representam entidades do mundo real, destacando
+        → Criar modelos simplificados (classes) que representam entidades do mundo real.
         
     2- Encapsulamento: Público e Privado. Limitar o escopo de visibilidade.
-
         → Esconder detalhes internos (dados privados) e expor apenas o necessário (métodos públicos).
-        Exemplo:
 
     3- Generalização: Hierarquia de classes: compartilhar atributos/comportamentos comuns.
         → Uma classe herda características de outra (classe base → classe derivada).
-        xemplo:
 
     4- Polimorfismo: Mesma ação, comportamentos diferentes.
         → Um método pode ter múltiplas formas (sobrescrita em classes derivadas).
@@ -18,11 +15,12 @@ Princípios de OO:
 Anotações:
     1- Se não especificou é privado (em C++, membros de classes são private por padrão).
     
-    2- Privado: Dados   Público: Funções.
+    2- Privado: Dados  |  Público: Funções.
     
     3- This conta quem é o objeto
     Exemplo:    void setNome(string nome) {
                     this->nome = nome; // Distingue atributo do parâmetro
                 }
 
-    4- Mesmo nome, preferência é a variável local (variáveis locais têm prioridade sobre atributos da classe. Use this para acessar o atributo).
+    4- Mesmo nome, preferência é a variável local (variáveis locais têm prioridade sobre atributos da classe. Use this para 
+        acessar o atributo).

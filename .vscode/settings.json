@@ -7,6 +7,7 @@
         "pessoas.h": "c",
         "time.h": "c",
         "xutility": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "iostream": "cpp"
     }
 }
