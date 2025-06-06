@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <iostream>
 #include "data/data.h"
 #include "pessoas/pessoas.h"
 

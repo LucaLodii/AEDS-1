@@ -2,30 +2,46 @@
 #define PESSOAS_H
 
 #include "../data/data.h"
+#include <iostream>
+#include <cstring>
 
 #define MAX_STR 50
 #define MAX 100
 
 extern int TAM;
 
-typedef struct {
-    char CPF[15];           // Implementado na lista 32, 000.000.000-00
-    char nome[MAX_STR];
+class Pessoa {
+private:
+    char nome[MAX_STR];          // Nome da pessoa
+    char CPF[15];                // CPF: 000.000.000-00
     Data nascimento;
-} Pessoa;
 
-// Funções de inicialização/encerramento
-void abertura(Pessoa pessoas[]); 
-void carregaPessoas(Pessoa pessoas[]);
-void despedida(Pessoa pessoas[]); 
+public:
+    // Getters e Setters
+    void setNome(const char* novoNome);
+    const char* getNome() const;
 
-// Não sei o nome
-int tamanho(char* arq);
-void gravaPessoas(Pessoa pessoas[]); 
+    void setCPF(const char* novoCPF);
+    const char* getCPF() const;
 
-// Funções de exibição
-void escrevaEstPessoa(Pessoa pessoa);
-void escrevaPessoa(Pessoa pessoas[], int i); 
+    bool setNascimento(int dia, int mes, int ano);
+    Data getNascimento() const;
+
+    // Leitura e escrita de dados
+    void leiaNome();
+    void escrevaNome() const;
+
+    void leiaPessoa();
+    void escrevaPessoa() const;
+};
+
+// Funções auxiliares (sistema de gerenciamento)
+void abertura(Pessoa pessoas[]);               // Inicializa o sistema
+void carregaPessoas(Pessoa pessoas[]);         // Carrega do arquivo
+void despedida(Pessoa pessoas[]);              // Grava no arquivo ao encerrar
+
+int tamanho(char* arq);                        // Verifica tamanho do arquivo
+void gravaPessoas(Pessoa pessoas[]);           // Salva no arquivo
 
 // Funções de pesquisa
 void pesquisaPessoaNome(Pessoa pessoas[]);
