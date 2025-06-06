@@ -14,7 +14,24 @@ private:
 public:
     void setLado(float lado)
     {
-        this->lado = lado;
+        if(lado >= 0){
+            this->lado = lado;
+        }
+    }
+
+    float getLado()
+    {
+        return lado;
+    }
+
+    float calcularPerimetro()
+    {
+        return lado * 4;
+    }
+
+    float calcularArea()
+    {
+        return lado * lado;
     }
 
     void leiaLado()
@@ -35,15 +52,6 @@ public:
         cout << "Area: " << calcularArea() << endl;
     }
 
-    float calcularPerimetro()
-    {
-        return lado * 4;
-    }
-
-    float calcularArea()
-    {
-        return lado * lado;
-    }
 };
 
 int main()
