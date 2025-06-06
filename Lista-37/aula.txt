@@ -1,0 +1,10 @@
+1- Normalmente em exercicios que vc pode alguma informação como o da lista passada, vc deve seguir esse padrão:
+    Set this, get return, leia/escreva cin/cout 
+
+2- Leitura de diagramas POO:
+    " - " (menos) é privado
+    " + "(mais) é público
+
+3- String em C++:
+    getline = fgets
+    e continua precisando usar fflush

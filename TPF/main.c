@@ -19,7 +19,7 @@ int main()
         printf("4 - Pesquisar por CPF\n");
         printf("5 - Excluir pessoa\n");
         printf("6 - Apagar todas as pessoas cadastradas\n");
-        printf("7 - Informar a idade media da turma\n");
+        printf("7 - EXTRA: Informar a idade media da turma\n");        // ESSA É UMA FUNÇÃO EXTRA, EU FIZ PQ QUIS
         scanf("%i", &opcao);
 
         switch (opcao)
