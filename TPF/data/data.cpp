@@ -4,16 +4,15 @@
 
 using namespace std;
 
-char *Data::mesExtenso()
+string Data::mesExtenso()
 {
-    static char *extenso[] = {
-        (char *)"janeiro", (char *)"fevereiro", (char *)"marco", (char *)"abril", (char *)"maio", (char *)"junho",
-        (char *)"julho", (char *)"agosto", (char *)"setembro", (char *)"outubro", (char *)"novembro", (char *)"dezembro"};
-
+    string mes = " ";
+    string extenso[] = {"janeiro", "fevereiro", "marco", "abril",
+                        "maio", "junho", "julho", "agosto",
+                        "setembro", "outubro", "novembro", "dezembro"};
     if (dataValida())
-        return extenso[mes - 1];
-    else
-        return (char *)""; // Retorna string vazia se for inválido
+        mes = extenso[(this->mes - 1)];
+    return mes;
 }
 
 bool Data::dataValida()
@@ -39,7 +38,11 @@ int Data::diasMes() const
         {
             bissexto = true;
         }
-        return bissexto ? 29 : 28;
+
+        if (bissexto)
+            return 29;
+        else
+            return 28;
     }
 
     static const int diasPorMes[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
@@ -136,3 +139,19 @@ int calcularIdade(const Data &nascimento)
 
     return idade;
 }
+
+bool Data::setData(int d, int m, int a)
+{
+    setAno(a); // define primeiro o ano
+    if (setMes(m) && setDia(d))
+    {
+        return true;
+    }
+    return false;
+}
+
+Data Data::getData()
+{
+    return *this; // retorna o próprio objeto (cópia)
+}
+

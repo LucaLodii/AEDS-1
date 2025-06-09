@@ -23,7 +23,7 @@ public:
     int getMes() const;
     int getAno() const;
 
-    char* mesExtenso();
+    string mesExtenso();
     bool dataValida();
     void leData();
     void escreveData() const;
