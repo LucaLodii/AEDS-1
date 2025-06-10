@@ -2,40 +2,111 @@
 #include <string>
 using namespace std;
 
-#define _MAX 10 // número máximo de candidatos
-static int TAM = 0;
+const int _MAX = 10; // número máximo de candidatos
 
 class Candidato
 {
-    private:
+private:
+    string nome;
+    double nota;
+
+public:
+    // Construtor
+    Candidato(string nome, double nota)
+    {
+        this->nome = nome;
+        this->nota = nota;
+    }
+
+    void setNome(string nome)
+    {
+        this->nome = nome;
+    }
+
+    string getNome()
+    {
+        return nome;
+    }
+
+    void setNota(double nota)
+    {
+        this->nota = nota;
+    }
+
+    double getNota()
+    {
+        return nota;
+    }
+
+
+};
+
+// ======== Funções auxiliares (fora da classe) ========
+
+int qtCandidatos()
+{
+    int n;
+    do
+    {
+        cout << "Digite o número de candidatos (max " << _MAX << "): ";
+        cin >> n;
+    } while (n < 1 || n > _MAX); 
+    return n;
+}
+
+void criarCandidatos(int n, Candidato *candidatos[])
+{
+    for (int i = 0; i < n; i++)
+    {
         string nome;
         double nota;
+        cout << "\nCandidato " << i + 1 << ":\n";
+        cout << "Nome: ";
+        cin >> ws; // GPT falou q tem q ter pra limpar o buffer
+        getline(cin, nome);
 
-    public:
-        void setNome()
-        {
-            this->nome = nome;
-        }
-        string getNome()
-        {
-            return nome;
-        }
+        cout << "Nota: ";
+        cin >> nota;
 
-        void setNota()
+        candidatos[i] = new Candidato(nome, nota); // CRIAÇÃO CORRETA AQUI
+    }
+}
+
+double notaMedia(int n, Candidato *candidatos[])
+{
+    double soma = 0;
+    for (int i = 0; i < n; i++)
+    {
+        soma += candidatos[i]->getNota();
+    }
+    return soma / n; // FALTAVA RETURN
+}
+
+void listarAcimaDaMedia(int n, Candidato *candidatos[], double media)
+{
+    cout << "\nCandidatos com nota acima da média (" << media << "):\n";
+    for (int i = 0; i < n; i++)
+    {
+        if (candidatos[i]->getNota() > media)
         {
-            this->nota = nota;
+            cout << candidatos[i]->getNome() << " - " << candidatos[i]->getNota() << endl;
         }
-        double getNota()
-        {
-            return nota;
-        }
-        // ADICIONAR AS OUTRAS FUNÇÕES 
-};
+    }
+}
 
 int main()
 {
-    // funcao que le o numero<MAX de candidatos
-    // fazer um for com o numero retornado da funcao acima que contenha: New, nome e nota.
-    // funcao para ler a media
-    // funcao q lista os candidatos acima da nota media
+    Candidato *candidatos[_MAX];
+
+    int n = qtCandidatos();
+    criarCandidatos(n, candidatos);
+    double media = notaMedia(n, candidatos);
+    listarAcimaDaMedia(n, candidatos, media);
+
+    for (int i = 0; i < n; i++)
+    {
+        delete candidatos[i];
+    }
+
+    return 0;
 }
