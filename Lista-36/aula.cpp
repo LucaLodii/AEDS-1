@@ -1,6 +1,5 @@
-#include <stdio.h>
-// #include <stdlib.h>  Não precisa!
-#include <iostream>
+// <stdlib.h> não é necessária!
+#include <iostream> // substitue <stdio.h>
 #include <string>
 using namespace std;
 

@@ -3,51 +3,50 @@
 
 #include "../data/data.h"
 #include <iostream>
-#include <cstring>
+#include <string>
 
-#define MAX_STR 50
+using namespace std;
+
 #define MAX 100
 
 extern int TAM;
 
 class Pessoa {
 private:
-    char nome[MAX_STR];          // Nome da pessoa
-    char CPF[15];                // CPF: 000.000.000-00
+   string nome;      // Nome da pessoa
+   string CPF;       // CPF: 000.000.000-00
     Data nascimento;
 
 public:
-    // Getters e Setters
-    void setNome(const char* novoNome);
-    const char* getNome() const;
+    void setNome(const string& novoNome);
+   string getNome();
 
-    void setCPF(const char* novoCPF);
-    const char* getCPF() const;
+    void setCPF(const string& novoCPF);
+   string getCPF() const;
 
     bool setNascimento(int dia, int mes, int ano);
     Data getNascimento() const;
 
-    // Leitura e escrita de dados
     void leiaNome();
     void escrevaNome() const;
 
-    void leiaPessoa();
-    void escrevaPessoa() const;
+    void lePessoa();
+    void escrevePessoa() const;
 };
 
-// Funções auxiliares (sistema de gerenciamento)
+// --- Funções auxiliares do sistema ---
 void abertura(Pessoa pessoas[]);               // Inicializa o sistema
 void carregaPessoas(Pessoa pessoas[]);         // Carrega do arquivo
 void despedida(Pessoa pessoas[]);              // Grava no arquivo ao encerrar
 
-int tamanho(char* arq);                        // Verifica tamanho do arquivo
+int tamanho(const string& arq);                        // Verifica tamanho do arquivo
 void gravaPessoas(Pessoa pessoas[]);           // Salva no arquivo
 
-// Funções de pesquisa
+// --- Funções de pesquisa ---
 void pesquisaPessoaNome(Pessoa pessoas[]);
 void pesquisaPessoaCPF(Pessoa pessoas[]);
 
-// Funções de manipulação
+// --- Funções de manipulação ---
 void cadastrePessoa(Pessoa pessoas[]);
 void leiaCPF(char cpf[]);
 bool deletaPessoa(Pessoa pessoas[]);

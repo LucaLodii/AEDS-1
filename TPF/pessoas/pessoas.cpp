@@ -8,17 +8,22 @@ using namespace std;
 
 int TAM = 0; // Definição da variável global
 
-void abertura(Pessoa pessoas[]) {
+void abertura(Pessoa pessoas[])
+{
     cout << "\nControle de Pessoas\n";
-    TAM = tamanho((char*)"tamanhoArq.dat");
+    TAM = tamanho((char *)"tamanhoArq.dat");
     carregaPessoas(pessoas);
 }
 
-int tamanho(char* arq) {
-    FILE* arqTamanho = fopen(arq, "r");
-    if (arqTamanho != nullptr) {
+int tamanho(char *arq)
+{
+    FILE *arqTamanho = fopen(arq, "r");
+    if (arqTamanho != nullptr)
+    {
         fscanf(arqTamanho, "%i", &TAM);
-    } else {
+    }
+    else
+    {
         arqTamanho = fopen(arq, "w");
         TAM = 0;
         fprintf(arqTamanho, "%i", TAM);
@@ -27,7 +32,8 @@ int tamanho(char* arq) {
     return TAM;
 }
 
-void escrevaEstPessoa(Pessoa pessoa) {
+void escrevaEstPessoa(Pessoa pessoa)
+{
     cout << "Nome: " << pessoa.getNome() << endl;
     cout << "CPF: " << pessoa.getCPF() << endl;
 
@@ -37,12 +43,15 @@ void escrevaEstPessoa(Pessoa pessoa) {
          << nasc.getAno() << endl;
 }
 
-void escrevaPessoa(Pessoa pessoas[], int i) {
+void escrevePessoa(Pessoa pessoas[], int i)
+{
     escrevaEstPessoa(pessoas[i]);
 }
 
-void cadastrePessoa(Pessoa pessoas[]) {
-    if (TAM >= MAX) {
+void cadastrePessoa(Pessoa pessoas[])
+{
+    if (TAM >= MAX)
+    {
         cout << "Limite máximo de pessoas atingido!" << endl;
         return;
     }
@@ -54,7 +63,7 @@ void cadastrePessoa(Pessoa pessoas[]) {
 
     Data nascimento;
     cout << "\nData de nascimento: ";
-    nascimento.leiaData();
+    nascimento.leData();
     pessoas[TAM].setNascimento(nascimento.getDia(), nascimento.getMes(), nascimento.getAno());
 
     char cpf[15];
@@ -65,84 +74,106 @@ void cadastrePessoa(Pessoa pessoas[]) {
     TAM++;
 }
 
-void leiaCPF(char cpf[]) {
+void leiaCPF(char cpf[])
+{
     int formatoValido = 0;
-    while (!formatoValido) {
+    while (!formatoValido)
+    {
         cout << "\nCPF (formato 000.000.000-00): ";
         fflush(stdin);
-        if (scanf("%14s", cpf) == 1) {
-            if (strlen(cpf) == 14 && cpf[3] == '.' && cpf[7] == '.' && cpf[11] == '-') {
+        if (scanf("%14s", cpf) == 1)
+        {
+            if (strlen(cpf) == 14 && cpf[3] == '.' && cpf[7] == '.' && cpf[11] == '-')
+            {
                 formatoValido = 1;
-            } else {
+            }
+            else
+            {
                 cout << "Formato incorreto! Use: 000.000.000-00\n";
             }
-        } else {
+        }
+        else
+        {
             cout << "Erro na leitura. Tente novamente.\n";
         }
     }
 }
 
-float idadeMedia(Pessoa pessoas[]) {
-    if (TAM == 0) {
+float idadeMedia(Pessoa pessoas[])
+{
+    if (TAM == 0)
+    {
         cout << "Nenhuma pessoa cadastrada!\n";
         return 0.0f;
     }
     float soma = 0;
-    for (int i = 0; i < TAM; i++) {
+    for (int i = 0; i < TAM; i++)
+    {
         soma += calcularIdade(pessoas[i].getNascimento());
     }
     return soma / TAM;
 }
 
-void pesquisaPessoaNome(Pessoa pessoas[]) {
-    char supostoNome[50];
-    cout << "\nDigite o nome a ser econtrado: ";
-    fflush(stdin);
-    fgets(supostoNome, 50, stdin);
-    supostoNome[strcspn(supostoNome, "\n")] = '\0';
+void pesquisaPessoaNome(Pessoa pessoas[])
+{
+    string supostoNome;
+    cout << "\nDigite o nome a ser encontrado: ";
+    cin.ignore();
+    getline(cin, supostoNome);
 
     int encontradas = 0;
-    for (int i = 0; i < TAM; i++) {
-        if (strcmp(pessoas[i].getNome(), supostoNome) == 0) {
-            escrevaPessoa(pessoas, i);
+    for (int i = 0; i < TAM; i++)
+    {
+        if (pessoas[i].getNome() == supostoNome)
+        {
+            escrevePessoa(pessoas, i);
             encontradas++;
         }
     }
-    if (encontradas == 0) {
-        printf("Nenhuma pessoa encontrada com o nome '%s'.\n", supostoNome);
+
+    if (encontradas == 0)
+    {
+        cout << "Nenhuma pessoa encontrada com o nome '" << supostoNome << "'.\n";
     }
 }
 
-void pesquisaPessoaCPF(Pessoa pessoas[]) {
-    char supostoCPF[15];
+void pesquisaPessoaCPF(Pessoa pessoas[])
+{
+    string supostoCPF;
     cout << "\nDigite o CPF a ser encontrado (000.000.000-00): ";
-    fflush(stdin);
-    fgets(supostoCPF, 15, stdin);
-    supostoCPF[strcspn(supostoCPF, "\n")] = '\0';
+    cin.ignore(); // evita erro caso o buffer do cin esteja sujo
+    getline(cin, supostoCPF);
 
     int encontradas = 0;
-    for (int i = 0; i < TAM; i++) {
-        if (strcmp(pessoas[i].getCPF(), supostoCPF) == 0) {
-            escrevaPessoa(pessoas, i);
+    for (int i = 0; i < TAM; i++)
+    {
+        if (pessoas[i].getCPF() == supostoCPF)
+        {
+            escrevePessoa(pessoas, i);
             encontradas++;
         }
     }
-    if (encontradas == 0) {
-        printf("Nenhuma pessoa encontrada com o CPF '%s'.\n", supostoCPF);
+
+    if (encontradas == 0)
+    {
+        cout << "Nenhuma pessoa encontrada com o CPF '" << supostoCPF << "'.\n";
     }
 }
 
-bool deletaPessoa(Pessoa pessoas[]) {
-    char cpf[15];
+bool deletaPessoa(Pessoa pessoas[])
+{
+    string cpf;
     cout << "\nCPF para excluir (000.000.000-00): ";
-    fflush(stdin);
-    fgets(cpf, 15, stdin);
-    cpf[strcspn(cpf, "\n")] = '\0';
+    cin.ignore();
+    getline(cin, cpf);
 
-    for (int i = 0; i < TAM; i++) {
-        if (strcmp(pessoas[i].getCPF(), cpf) == 0) {
-            for (int j = i; j < TAM - 1; j++) {
-                pessoas[j] = pessoas[j + 1]; // ISSO Q É O TAL DO SHIFT (exemplo da arquibancada @lucioMauro)
+    for (int i = 0; i < TAM; i++)
+    {
+        if (pessoas[i].getCPF() == cpf)
+        {
+            for (int j = i; j < TAM - 1; j++)
+            {
+                pessoas[j] = pessoas[j + 1]; // Faz o "shift"
             }
             TAM--;
             cout << "Pessoa excluída com sucesso!\n";
@@ -153,7 +184,9 @@ bool deletaPessoa(Pessoa pessoas[]) {
     return false;
 }
 
-void apagarTodos(Pessoa pessoas[]){
+
+void apagarTodos(Pessoa pessoas[])
+{
     TAM = 0;
     printf("Todos os cadastros foram removidos.\n");
 }
