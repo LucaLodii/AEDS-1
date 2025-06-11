@@ -3,6 +3,7 @@
 #include <fstream>
 #include <cstring>
 #include <cstdio>
+#include <string>
 #include "pessoas.h"
 using namespace std;
 
@@ -32,20 +33,73 @@ int tamanho(char *arq)
     return TAM;
 }
 
-void escrevaEstPessoa(Pessoa pessoa)
+void Pessoa::setNome(string)
 {
-    cout << "Nome: " << pessoa.getNome() << endl;
-    cout << "CPF: " << pessoa.getCPF() << endl;
-
-    Data nasc = pessoa.getNascimento();
-    cout << "Nascimento: " << nasc.getDia() << "/"
-         << nasc.getMes() << "/"
-         << nasc.getAno() << endl;
+    this->nome = nome;
 }
 
-void escrevePessoa(Pessoa pessoas[], int i)
+string Pessoa::getNome()
 {
-    escrevaEstPessoa(pessoas[i]);
+    return nome;
+}
+
+void Pessoa::setCPF(string)
+{
+    if (CPF.length() == 14 && CPF[3] == '.' && CPF[7] == '.' && CPF[11] == '-')
+    {
+        this->CPF = CPF;
+    }
+}
+
+string Pessoa::getCPF()
+{
+    return CPF;
+}
+
+bool Pessoa::setNascimento(int dia, int mes, int ano)
+{
+    Data d;
+    if (d.setDia(dia) && d.setMes(mes))
+    {
+        d.setAno(ano);
+        nascimento = d;
+        return true;
+    }
+    return false;
+}
+
+Data Pessoa::getNascimento()
+{
+    return nascimento;
+}
+
+void Pessoa::leiaPessoa()
+{
+    fflush(stdin);
+
+    cout << "Nome: ";
+    getline(cin, nome);
+
+    fflush(stdin);
+
+    cout << "CPF (000.000.000-00): ";
+    string cpf;
+    getline(cin, cpf);
+    setCPF(cpf);
+
+    Data d;
+    cout << "Data de nascimento: ";
+    d.leiaData();
+    nascimento = d;
+}
+
+void Pessoa::escrevePessoa()
+{
+    cout << "\nNome: " << nome;
+    cout << "\nCPF: " << CPF;
+    cout << "\nNascimento: ";
+    nascimento.escreveData();
+    cout << endl;
 }
 
 void cadastrePessoa(Pessoa pessoas[])
@@ -56,19 +110,23 @@ void cadastrePessoa(Pessoa pessoas[])
         return;
     }
 
-    string nome;
+    fflush(stdin);
+
     cout << "\nNome: ";
-    getline(cin >> ws, nome);
-    pessoas[TAM].setNome(nome.c_str());
+    string nome;
+    getline(cin, nome);
+    pessoas[TAM].setNome(nome);
 
     Data nascimento;
     cout << "\nData de nascimento: ";
-    nascimento.leData();
+    nascimento.leiaData();
     pessoas[TAM].setNascimento(nascimento.getDia(), nascimento.getMes(), nascimento.getAno());
 
-    char cpf[15];
+    fflush(stdin);
+
     cout << "CPF: ";
-    leiaCPF(cpf);
+    string cpf;
+    getline(cin, cpf);
     pessoas[TAM].setCPF(cpf);
 
     TAM++;
@@ -99,21 +157,6 @@ void leiaCPF(char cpf[])
     }
 }
 
-float idadeMedia(Pessoa pessoas[])
-{
-    if (TAM == 0)
-    {
-        cout << "Nenhuma pessoa cadastrada!\n";
-        return 0.0f;
-    }
-    float soma = 0;
-    for (int i = 0; i < TAM; i++)
-    {
-        soma += calcularIdade(pessoas[i].getNascimento());
-    }
-    return soma / TAM;
-}
-
 void pesquisaPessoaNome(Pessoa pessoas[])
 {
     string supostoNome;
@@ -126,7 +169,7 @@ void pesquisaPessoaNome(Pessoa pessoas[])
     {
         if (pessoas[i].getNome() == supostoNome)
         {
-            escrevePessoa(pessoas, i);
+            pessoas[i].escrevePessoa();
             encontradas++;
         }
     }
@@ -149,7 +192,7 @@ void pesquisaPessoaCPF(Pessoa pessoas[])
     {
         if (pessoas[i].getCPF() == supostoCPF)
         {
-            escrevePessoa(pessoas, i);
+            pessoas[i].escrevePessoa();
             encontradas++;
         }
     }
@@ -183,7 +226,6 @@ bool deletaPessoa(Pessoa pessoas[])
     cout << "CPF não encontrado.\n";
     return false;
 }
-
 
 void apagarTodos(Pessoa pessoas[])
 {

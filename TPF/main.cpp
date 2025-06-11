@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <iostream>
+#include <string>
 #include "data/data.h"
 #include "pessoas/pessoas.h"
 
@@ -20,7 +21,6 @@ int main()
         printf("4 - Pesquisar por CPF\n");
         printf("5 - Excluir pessoa\n");
         printf("6 - Apagar todas as pessoas cadastradas\n");
-        printf("7 - EXTRA: Informar a idade media da turma\n");        // ESSA É UMA FUNÇÃO EXTRA, EU FIZ PQ QUIS
         scanf("%i", &opcao);
 
         switch (opcao)
@@ -29,9 +29,11 @@ int main()
             printf("\nObrigado por usar este programa\n");
             despedida(pessoas);
             break;
+
         case 1:
             cadastrePessoa(pessoas);
             break;
+
         case 2:
             if (TAM == 0)
             {
@@ -41,7 +43,7 @@ int main()
             {
                 for (int i = 0; i < TAM; i++)
                 {
-                    escrevaPessoa(pessoas, i);
+                    pessoas[i].escrevePessoa(); // Chamada correta do método
                 }
             }
             break;
@@ -61,12 +63,11 @@ int main()
         case 6:
             apagarTodos(pessoas);
             break;
-        case 7:
-            printf("\nIdade média: %.1f anos\n", idadeMedia(pessoas));  // ESSA É UMA FUNÇÃO EXTRA, EU FIZ PQ QUIS
-            break;
+            
         default:
             printf("\nOpcao invalida!\n");
         }
+
     } while (opcao != 0);
 
     return 0;

@@ -1,13 +1,14 @@
 #include "data.h"
 #include <iostream>
 #include <ctime>
+#include <string>
 
 using namespace std;
 
-string Data::mesExtenso()
+std::string Data::mesExtenso()
 {
-    string mes = " ";
-    string extenso[] = {"janeiro", "fevereiro", "marco", "abril",
+    std::string mes = " ";
+    std::string extenso[] = {"janeiro", "fevereiro", "marco", "abril",
                         "maio", "junho", "julho", "agosto",
                         "setembro", "outubro", "novembro", "dezembro"};
     if (dataValida())
@@ -94,14 +95,14 @@ void Data::escreveData() const
     cout << dia << "/" << mes << "/" << ano;
 }
 
-void Data::leData()
+void Data::leiaData()
 {
     int d, m, a;
     do
     {
         cout << "Dia: ";
         cin >> d;
-        cout << "Mês: ";
+        cout << "Mes: ";
         cin >> m;
         cout << "Ano: ";
         cin >> a;

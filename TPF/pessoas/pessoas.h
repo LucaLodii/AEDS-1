@@ -18,20 +18,20 @@ private:
     Data nascimento;
 
 public:
-    void setNome(const string& novoNome);
+    void setNome(string);
    string getNome();
 
-    void setCPF(const string& novoCPF);
-   string getCPF() const;
+    void setCPF(string);
+   string getCPF();
 
     bool setNascimento(int dia, int mes, int ano);
-    Data getNascimento() const;
+    Data getNascimento();
 
     void leiaNome();
-    void escrevaNome() const;
+    void escrevaNome();
 
-    void lePessoa();
-    void escrevePessoa() const;
+    void leiaPessoa();
+    void escrevePessoa();
 };
 
 // --- Funções auxiliares do sistema ---
@@ -39,7 +39,7 @@ void abertura(Pessoa pessoas[]);               // Inicializa o sistema
 void carregaPessoas(Pessoa pessoas[]);         // Carrega do arquivo
 void despedida(Pessoa pessoas[]);              // Grava no arquivo ao encerrar
 
-int tamanho(const string& arq);                        // Verifica tamanho do arquivo
+int tamanho(char* arq);                       // Verifica tamanho do arquivo
 void gravaPessoas(Pessoa pessoas[]);           // Salva no arquivo
 
 // --- Funções de pesquisa ---
@@ -51,6 +51,5 @@ void cadastrePessoa(Pessoa pessoas[]);
 void leiaCPF(char cpf[]);
 bool deletaPessoa(Pessoa pessoas[]);
 void apagarTodos(Pessoa pessoas[]);
-float idadeMedia(Pessoa pessoas[]);
 
 #endif

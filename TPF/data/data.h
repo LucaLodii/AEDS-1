@@ -1,6 +1,9 @@
 #ifndef DATA_H
 #define DATA_H
 
+#include <iostream>
+#include <string>
+
 class Data
 {
 private:
@@ -23,9 +26,9 @@ public:
     int getMes() const;
     int getAno() const;
 
-    string mesExtenso();
+    std::string mesExtenso();
     bool dataValida();
-    void leData();
+    void leiaData();
     void escreveData() const;
 };
 
