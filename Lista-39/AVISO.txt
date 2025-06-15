@@ -1,0 +1,32 @@
+Essa Lista é muito grande porém está no TPF
+
+--- Trabalho Prático Final ---
+Você deverá criar uma versão do Trabalho Prático Final implementando as seguintes estratégias:
+1. Acrescentar o atributo privado CPF na descrição da pessoa. Prover as funcionalidades públicas para
+    manipulá-lo.
+2. Permitir que uma instância de Data seja criada com as seguintes opções:
+    a. Sem parâmetro algum: neste caso, inicializar dia, mês e ano com o valor zero;
+    b. Com três parâmetros inteiros, representando dia, mês e ano, respectivamente;
+    c. Com um único valor inteiro, representando o ano - neste caso, dia e mês igual a zero.
+3. Permitir que uma instância de Pessoa seja criada com as seguintes opções:
+    a. Sem parâmetro algum: neste caso, inicializar nome e data com valores vazios;
+    b. Com quatro parâmetros: uma string relativa ao nome e três valores inteiros relativos à data de
+    nascimento da pessoa;
+    c. Com um único parâmetro, uma string, relativa ao nome da pessoa - neste caso, a data de
+    nascimento deverá ser inicializada com vazios.
+4. A versão anterior traz a variável global TAM com o papel de contar o tamanho lógico do vetor de
+    pessoas. Transforme-a em um atributo estático da classe Pessoa. Implemente os construtores e o
+    destrutor de forma que sejam eles responsáveis por incrementar TAM a cada novo objeto Pessoa e
+    decrementá-lo, a cada exclusão.
+5. Garanta a correta execução a partir do menu de opções já implementado, testando todas as
+    funcionalidades providas até então, isto é:
+    0 - Sair do programa
+    1 - Cadastrar uma pessoa
+    2 - Listar todas as pessoas
+    3 - Pesquisar por nome
+    4 - Pesquisar por CPF
+    5 - Excluir pessoa
+    6 - Apagar todas as pessoas cadastradas
+6. Garanta a persistência dos dados (armazenar em memória secundária - arquivos): do tamanho lógico
+    e das pessoas cadastradas.
+

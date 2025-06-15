@@ -2,7 +2,7 @@
 #include <string>
 using namespace std;
 
-const int _MAX = 10; // número máximo de candidatos
+const int _MAX = 10; // numero máximo de candidatos
 
 class Candidato
 {
@@ -37,8 +37,6 @@ public:
     {
         return nota;
     }
-
-
 };
 
 // ======== Funções auxiliares (fora da classe) ========
@@ -48,27 +46,29 @@ int qtCandidatos()
     int n;
     do
     {
-        cout << "Digite o número de candidatos (max " << _MAX << "): ";
+        cout << "Digite o numero de candidatos (max " << _MAX << "): ";
         cin >> n;
-    } while (n < 1 || n > _MAX); 
+    } while (n < 1 || n > _MAX);
     return n;
 }
 
 void criarCandidatos(int n, Candidato *candidatos[])
 {
+    string nome;
+    double nota;
+
     for (int i = 0; i < n; i++)
     {
-        string nome;
-        double nota;
         cout << "\nCandidato " << i + 1 << ":\n";
+
         cout << "Nome: ";
-        cin >> ws; // GPT falou q tem q ter pra limpar o buffer
+        fflush(stdin);
         getline(cin, nome);
 
         cout << "Nota: ";
         cin >> nota;
 
-        candidatos[i] = new Candidato(nome, nota); // CRIAÇÃO CORRETA AQUI
+        candidatos[i] = new Candidato(nome, nota);
     }
 }
 
@@ -84,7 +84,7 @@ double notaMedia(int n, Candidato *candidatos[])
 
 void listarAcimaDaMedia(int n, Candidato *candidatos[], double media)
 {
-    cout << "\nCandidatos com nota acima da média (" << media << "):\n";
+    cout << "\nCandidatos com nota acima da media (" << media << "):\n";
     for (int i = 0; i < n; i++)
     {
         if (candidatos[i]->getNota() > media)
