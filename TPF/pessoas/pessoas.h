@@ -27,8 +27,8 @@ public:
     bool setNascimento(int dia, int mes, int ano);
     Data getNascimento();
 
-    void leiaNome();
-    void escrevaNome();
+    // void leiaNome();
+    // void escrevaNome();
 
     void leiaPessoa();
     void escrevePessoa();
@@ -51,7 +51,7 @@ void pesquisaPessoaNome(Pessoa pessoas[]);
 void pesquisaPessoaCPF(Pessoa pessoas[]);
 
 // --- Funções de manipulação ---
-void cadastrePessoa(Pessoa pessoas[]);
+// void cadastrePessoa(Pessoa pessoas[]);
 void leiaCPF(char cpf[]);
 bool deletaPessoa(Pessoa pessoas[]);
 void apagarTodos(Pessoa pessoas[]);
