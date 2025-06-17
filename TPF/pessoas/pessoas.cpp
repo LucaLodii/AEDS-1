@@ -15,7 +15,11 @@ void Pessoa::escrevePessoa()
 {
     string nome, cpf;
     int dia, mes, ano;
-    cin >> nome >> cpf;
+    cout << "Nome: ";
+    cin >> nome;
+    cout << "CPF: ";
+    cin >> cpf; 
+    cout << "Data de nascimento: [DD/MM/AAAA] ";
     cin >> dia;
     cin.ignore(1, '/');
     cin >> mes;
@@ -118,15 +122,6 @@ void Pessoa::leiaPessoa()
     d.leiaData();
     nascimento = d;
 }
-
-// void Pessoa::escrevePessoa()
-// {
-//     cout << "\nNome: " << nome;
-//     cout << "\nCPF: " << CPF;
-//     cout << "\nNascimento: ";
-//     nascimento.escreveData();
-//     cout << endl;
-// }
 
 // void cadastrePessoa(Pessoa pessoas[])
 // {
