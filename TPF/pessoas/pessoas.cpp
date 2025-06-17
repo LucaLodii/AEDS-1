@@ -9,6 +9,32 @@ using namespace std;
 
 int TAM = 0; // Definição da variável global
 
+Pessoa* pessoas[MAX];
+
+void Pessoa::escrevePessoa()
+{
+    string nome, cpf;
+    int dia, mes, ano;
+    cin >> nome >> cpf;
+    cin >> dia;
+    cin.ignore(1, '/');
+    cin >> mes;
+    cin.ignore(1, '/');
+    cin >> ano;
+    pessoas[TAM] = new Pessoa(nome, cpf, dia, mes, ano);
+}
+
+Pessoa::Pessoa(string nome, string cpf, int dia, int mes, int ano)
+{
+    this->nome = nome;
+    this->CPF = cpf;
+    setNascimento(dia, mes, ano);
+
+    TAM++;
+}
+
+Pessoa::Pessoa(){}
+
 void abertura(Pessoa pessoas[])
 {
     cout << "\nControle de Pessoas\n";
@@ -93,44 +119,44 @@ void Pessoa::leiaPessoa()
     nascimento = d;
 }
 
-void Pessoa::escrevePessoa()
-{
-    cout << "\nNome: " << nome;
-    cout << "\nCPF: " << CPF;
-    cout << "\nNascimento: ";
-    nascimento.escreveData();
-    cout << endl;
-}
+// void Pessoa::escrevePessoa()
+// {
+//     cout << "\nNome: " << nome;
+//     cout << "\nCPF: " << CPF;
+//     cout << "\nNascimento: ";
+//     nascimento.escreveData();
+//     cout << endl;
+// }
 
-void cadastrePessoa(Pessoa pessoas[])
-{
-    if (TAM >= MAX)
-    {
-        cout << "Limite máximo de pessoas atingido!" << endl;
-        return;
-    }
+// void cadastrePessoa(Pessoa pessoas[])
+// {
+//     if (TAM >= MAX)
+//     {
+//         cout << "Limite máximo de pessoas atingido!" << endl;
+//         return;
+//     }
 
-    fflush(stdin);
+//     fflush(stdin);
 
-    cout << "\nNome: ";
-    string nome;
-    getline(cin, nome);
-    pessoas[TAM].setNome(nome);
+//     cout << "\nNome: ";
+//     string nome;
+//     getline(cin, nome);
+//     pessoas[TAM].setNome(nome);
 
-    Data nascimento;
-    cout << "\nData de nascimento: ";
-    nascimento.leiaData();
-    pessoas[TAM].setNascimento(nascimento.getDia(), nascimento.getMes(), nascimento.getAno());
+//     Data nascimento;
+//     cout << "\nData de nascimento: ";
+//     nascimento.leiaData();
+//     pessoas[TAM].setNascimento(nascimento.getDia(), nascimento.getMes(), nascimento.getAno());
 
-    fflush(stdin);
+//     fflush(stdin);
 
-    cout << "CPF: ";
-    string cpf;
-    getline(cin, cpf);
-    pessoas[TAM].setCPF(cpf);
+//     cout << "CPF: ";
+//     string cpf;
+//     getline(cin, cpf);
+//     pessoas[TAM].setCPF(cpf);
 
-    TAM++;
-}
+//     TAM++;
+// }
 
 void leiaCPF(char cpf[])
 {

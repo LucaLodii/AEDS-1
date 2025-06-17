@@ -32,6 +32,12 @@ public:
 
     void leiaPessoa();
     void escrevePessoa();
+
+    void escrevePessoa(){};
+
+    Pessoa(){};
+
+    Pessoa(string nome, string cpf, int dia, int mes, int ano){};
 };
 
 // --- Funções auxiliares do sistema ---
