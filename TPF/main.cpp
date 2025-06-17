@@ -32,6 +32,7 @@ int main()
 
         case 1:
             pessoas[TAM].escrevePessoa();
+            pessoas[TAM].leiaPessoa();
             break;
 
         case 2:
