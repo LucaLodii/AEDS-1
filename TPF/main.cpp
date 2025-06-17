@@ -31,7 +31,7 @@ int main()
             break;
 
         case 1:
-            cadastrePessoa(pessoas);
+            pessoas[TAM].escrevePessoa();
             break;
 
         case 2:
