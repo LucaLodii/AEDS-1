@@ -26,6 +26,7 @@ void Pessoa::escrevePessoa()
     cin.ignore(1, '/');
     cin >> ano;
     pessoas[TAM] = new Pessoa(nome, cpf, dia, mes, ano);
+    TAM++;
 }
 
 Pessoa::Pessoa(string nome, string cpf, int dia, int mes, int ano)
@@ -33,8 +34,6 @@ Pessoa::Pessoa(string nome, string cpf, int dia, int mes, int ano)
     this->nome = nome;
     this->CPF = cpf;
     setNascimento(dia, mes, ano);
-
-    TAM++;
 }
 
 Pessoa::Pessoa(){}
