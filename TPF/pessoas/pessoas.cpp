@@ -31,8 +31,8 @@ void Pessoa::escrevePessoa()
 
 Pessoa::Pessoa(string nome, string cpf, int dia, int mes, int ano)
 {
-    this->nome = nome;
-    this->CPF = cpf;
+    setNome(nome);
+    setCPF(cpf);
     setNascimento(dia, mes, ano);
 }
 
