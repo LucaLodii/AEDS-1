@@ -1,0 +1,36 @@
+Essa Lista é apenas para o TPF, abaixo está o que foi pedido nela
+
+Trabalho Prático Final
+1) Assegure ter implementado todas as funcionalidades solicitadas nas etapas anteriores deste
+trabalho. Revise os três elementos principais: a classe Data, a classe Pessoa e todas as funções
+necessárias para disponibilizar as operações através do menu de opções.
+
+2) Nesta parte do trabalho, você irá aplicar os conceitos de Herança. Para isto, considere a classe
+Pessoa aquela que generaliza as propriedades de alunos e professores. Isto significa que uma
+Pessoa pode se especializar em Aluno ou em Professor. Ela deverá conter os atributos privados
+para representar o nome da pessoa e sua data de nascimento. Deve ser descrita também pelas
+operações públicas para armazenar os dados (sets), recuperá-los (gets), fazer a entrada de dados
+(leitura) e saída dos dados (escrita). Deverá ainda conter construtores que permitam igit push origin mainnicializar os
+atributos com os valores recebidos em variáveis paramétricas, bem como autorizar a criação das
+instâncias sem informar parâmetro algum.
+
+3) Implemente as classes Aluno e Professor como especialização de Pessoa. A classe Aluno, além
+das propriedades herdadas de Pessoa, deve acrescentar em sua descrição o atributo (privado) que
+representa seu número de matrícula e a classe Professor deve acrescentar em sua descrição o
+atributo (privado) que representa sua titulação (“Especialista”, “Mestre” ou “Doutor”). Ambas
+deverão ter um atributo público e estático que represente a quantidade de instâncias criadas
+(objetos) de suas classes. Esta quantidade é fundamental para permitir identificar a posição do
+arranjo que deverá receber uma nova instância de Aluno ou de Professor.
+
+4) Acrescente à classe Data um método que permita verificar se o atributo (dado-membro) mês da
+referida classe é igual a um mês recebido em uma variável paramétrica. A função deverá retornar
+verdadeiro caso o mês do objeto corrente for igual àquele armazenado na variável paramétrica, ou
+falso, caso contrário.
+Pontifícia Universidade Católica de Minas Gerais
+ICEI - Instituto de Ciências Exatas e Informática
+DCC - Departamento de Ciência da Computação
+Campus Lourdes
+Bacharelado em Ciência da Computação
+Algoritmos e Estruturas de Dados I
+Professor: Lúcio Mauro Pereira
+Lista de Exercícios nº 40
