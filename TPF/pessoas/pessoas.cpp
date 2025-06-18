@@ -33,7 +33,7 @@ int tamanho(char *arq)
     return TAM;
 }
 
-void Pessoa::setNome(string)
+void Pessoa::setNome(string nome)
 {
     this->nome = nome;
 }
@@ -43,7 +43,7 @@ string Pessoa::getNome()
     return nome;
 }
 
-void Pessoa::setCPF(string)
+void Pessoa::setCPF(string CPF)
 {
     if (CPF.length() == 14 && CPF[3] == '.' && CPF[7] == '.' && CPF[11] == '-')
     {
@@ -219,7 +219,7 @@ bool deletaPessoa(Pessoa pessoas[])
                 pessoas[j] = pessoas[j + 1]; // Faz o "shift"
             }
             TAM--;
-            cout << "Pessoa excluída com sucesso!\n";
+            cout << "Pessoa excluida com sucesso!\n";
             return true;
         }
     }
