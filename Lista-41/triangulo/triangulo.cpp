@@ -1,7 +1,8 @@
-#include "triangulo/triangulo.h"
+#include "triangulo.h"
+#include "../FigGeo/figGeo.h"
 #include <cmath>
 
-int quantidadeT = 0;
+int Triangulo::quantidadeT = 0;
 
 Triangulo::Triangulo()
 {
@@ -74,6 +75,11 @@ float Triangulo::area() {
 bool Triangulo::ehValido() {
     bool ehTriangulo = (a + b > c) && (a + c > b) && (b + c > a);
     return ehTriangulo;
+}
+
+string Triangulo::getTipo()
+{
+    return "triangulo";
 }
 
 int Triangulo::getQuantidade()

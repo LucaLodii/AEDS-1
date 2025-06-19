@@ -1,8 +1,9 @@
 #include "quadrado.h"
+#include "../FigGeo/figGeo.h"
 
 using namespace std;
 
-int quantidadeQ = 0;
+int Quadrado::quantidadeQ = 0;
 
 Quadrado::Quadrado() : lado(0.0f)
 {
@@ -67,6 +68,11 @@ float Quadrado::area()
 {
     return lado * lado;
 }
+
+string Quadrado::getTipo() { 
+    return "quadrado"; 
+}
+
 
 int Quadrado::getQuantidade()
 {

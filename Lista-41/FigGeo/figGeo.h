@@ -25,10 +25,10 @@ public:
     virtual void leia();
     virtual void escreva();
 
-    virtual float perimetro();
-    virtual float area();
+    virtual float perimetro() = 0;
+    virtual float area() = 0;
 
-    virtual string getTipo() const = 0;
+    virtual string getTipo() = 0;
 };
 
 #endif

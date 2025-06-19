@@ -1,7 +1,7 @@
 #ifndef QUADRADO_H
 #define QUADRADO_H
 
-#include "FigGeo.h"
+#include "../FigGeo/figGeo.h"
 #include <iostream>
 #include <string>
 
@@ -30,6 +30,8 @@ class Quadrado : public FigGeo
         float area();
 
         static int getQuantidade();
+
+        string getTipo();
 };
 
 #endif 

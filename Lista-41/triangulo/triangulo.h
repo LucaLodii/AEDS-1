@@ -1,7 +1,7 @@
 #ifndef TRIANGULO_H
 #define TRIANGULO_H
 
-#include "FigGeo.h"
+#include "../FigGeo/figGeo.h"
 #include <iostream>
 #include <string>
 
@@ -21,6 +21,8 @@ class Triangulo : public FigGeo
         Triangulo(float a, float b, float c);
         Triangulo(float a, float b, float c, string cor);
 
+        ~Triangulo();
+
         void setTriangulo(float a, float b, float c, string cor);
 
         float getA();
@@ -36,6 +38,8 @@ class Triangulo : public FigGeo
         bool ehValido();
 
         static int getQuantidade();
+
+        string getTipo();
 };
 
 #endif 

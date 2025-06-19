@@ -1,7 +1,7 @@
 #ifndef CIRUCLO_H
 #define CIRCULO_H
 
-#include "FigGeo.h"
+#include "../FigGeo/figGeo.h"
 #include <iostream>
 #include <string>
 #include <cmath>
@@ -19,6 +19,8 @@ class Circulo : public FigGeo
         Circulo(float raio);
         Circulo(float raio, string cor);
 
+        ~Circulo();
+
         void setRaio(float raio);
         float getRaio();
 
@@ -28,7 +30,7 @@ class Circulo : public FigGeo
         float perimetro();
         float area();
 
-        virtual string getTipo();
+        string getTipo();
 
         static int getQuantidade();
 };

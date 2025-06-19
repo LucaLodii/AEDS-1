@@ -1,4 +1,4 @@
-#include "figGeo/figGeo.h"
+#include "../FigGeo/figGeo.h"
 #include <iostream>
 
 using namespace std;

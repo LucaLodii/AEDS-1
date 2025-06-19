@@ -6,7 +6,7 @@
 #include <iostream>
 #include <string>
 
-#include "FigGeo/FigGeo.h"
+#include "FigGeo/figGeo.h"
 #include "Circulo/Circulo.h"
 #include "Quadrado/Quadrado.h"
 #include "Triangulo/Triangulo.h"
@@ -41,7 +41,7 @@ int main()
         switch (opcao)
         {
         case 0:
-            cout << "\nObrigado por usar este programa!\n";
+            std::cout << "\nObrigado por usar este programa!\n";
             break;
 
         case 1:
@@ -49,60 +49,58 @@ int main()
             int opcaoC;
             do
             {
-                cout << "\nSubmenu - Circulos\n";
-                cout << "0 - Voltar ao menu anterior\n";
-                cout << "1 - Cadastrar\n";
-                cout << "2 - Listar\n";
-                cout << "Escolha: ";
-                cin >> opcaoC;
+                std::cout << "\nSubmenu - Circulos\n";
+                std::cout << "0 - Voltar ao menu anterior\n";
+                std::cout << "1 - Cadastrar\n";
+                std::cout << "2 - Listar\n";
+                std::cout << "Escolha: ";
+                std::cin >> opcaoC;
 
                 switch (opcaoC)
                 {
                 case 1:
                 {
-                    cout << "\nCadastrar Circulo\n";
+                    std::cout << "\nCadastrar Circulo\n";
                     if (numFigurasCadastradas < MAX)
                     {
                         Circulo *novo = new Circulo();
                         novo->leia();
                         arrFiguras[numFigurasCadastradas] = novo;
                         numFigurasCadastradas++;
-                        cout << "Circulo cadastrado com sucesso! Total de círculos: " << Circulo::getQuantidade() << "\n";
+                        std::cout << "Circulo cadastrado com sucesso! Total de círculos: " << Circulo::getQuantidade() << "\n";
                     }
                     else
                     {
-                        cout << "Limite de figuras atingido!\n";
+                        std::cout << "Limite de figuras atingido!\n";
                     }
                     break;
                 }
-                    // Para esse case 2 tive que fazer uma função getTipo visto que o arr que o Lucio pediu armazena qualquer figura e não as diferencia
-                    // Isso se repete nas outras formas
                 case 2:
                 {
-                    cout << "\nListando Círculos:\n";
+                    std::cout << "\nListando Círculos:\n";
                     bool encontrouCirculo = false;
 
-                    for (int i = 0; i < Circulo::getQuantidade(); ++i)
+                    for (int i = 0; i < numFigurasCadastradas; ++i)
                     {
-                        if (arrFiguras[i] != NULL && arrFiguras[i]->getTipo() == "circulo")
+                        Circulo *c = dynamic_cast<Circulo *>(arrFiguras[i]);
+                        if (c)
                         {
-                            arrFiguras[i]->escreva();
+                            c->escreva();
                             encontrouCirculo = true;
                         }
                     }
 
                     if (!encontrouCirculo)
                     {
-                        cout << "Nenhum círculo cadastrado.\n";
+                        std::cout << "Nenhum círculo cadastrado.\n";
                     }
                     break;
                 }
-
                 case 0:
-                    cout << "Voltando...\n";
+                    std::cout << "Voltando...\n";
                     break;
                 default:
-                    cout << "Opcao invalida!\n";
+                    std::cout << "Opcao invalida!\n";
                     break;
                 }
             } while (opcaoC != 0);
@@ -114,57 +112,58 @@ int main()
             int opcaoQ;
             do
             {
-                cout << "\nSubmenu - Quadrados\n";
-                cout << "0 - Voltar ao menu anterior\n";
-                cout << "1 - Cadastrar\n";
-                cout << "2 - Listar\n";
-                cout << "Escolha: ";
-                cin >> opcaoQ;
+                std::cout << "\nSubmenu - Quadrados\n";
+                std::cout << "0 - Voltar ao menu anterior\n";
+                std::cout << "1 - Cadastrar\n";
+                std::cout << "2 - Listar\n";
+                std::cout << "Escolha: ";
+                std::cin >> opcaoQ;
 
                 switch (opcaoQ)
                 {
                 case 1:
                 {
-                    cout << "\nCadastrar Quadrado\n";
+                    std::cout << "\nCadastrar Quadrado\n";
                     if (numFigurasCadastradas < MAX)
                     {
                         Quadrado *novo = new Quadrado();
                         novo->leia();
                         arrFiguras[numFigurasCadastradas] = novo;
                         numFigurasCadastradas++;
-                        cout << "Quadrado cadastrado com sucesso! Total de quadrados: " << Quadrado::getQuantidade() << "\n";
+                        std::cout << "Quadrado cadastrado com sucesso! Total de quadrados: " << Quadrado::getQuantidade() << "\n";
                     }
                     else
                     {
-                        cout << "Limite de figuras atingido!\n";
+                        std::cout << "Limite de figuras atingido!\n";
                     }
                     break;
                 }
-                // case 2:
-                // {
-                //     cout << "\nListando Quadrados:\n";
-                //     bool encontrouQuadrado = false;
-                //     for (int i = 0; i < numFigurasCadastradas; ++i)
-                //     {
-                //         // Verifica se o ponteiro aponta para um objeto Quadrado
-                //         Quadrado* q = dynamic_cast<Quadrado*>(arrFiguras[i]);
-                //         if (q) // Se for um Quadrado
-                //         {
-                //             q->escreva(); // Chama o método escreva do Quadrado
-                //             encontrouQuadrado = true;
-                //         }
-                //     }
-                //     if (!encontrouQuadrado)
-                //     {
-                //         cout << "Nenhum quadrado cadastrado.\n";
-                //     }
-                //     break;
-                // }
+                case 2:
+                {
+                    std::cout << "\nListando Quadrados:\n";
+                    bool encontrouQuadrado = false;
+
+                    for (int i = 0; i < numFigurasCadastradas; ++i)
+                    {
+                        Quadrado *q = dynamic_cast<Quadrado *>(arrFiguras[i]);
+                        if (q)
+                        {
+                            q->escreva();
+                            encontrouQuadrado = true;
+                        }
+                    }
+
+                    if (!encontrouQuadrado)
+                    {
+                        std::cout << "Nenhum quadrado cadastrado.\n";
+                    }
+                    break;
+                }
                 case 0:
-                    cout << "Voltando...\n";
+                    std::cout << "Voltando...\n";
                     break;
                 default:
-                    cout << "Opcao invalida!\n";
+                    std::cout << "Opcao invalida!\n";
                     break;
                 }
             } while (opcaoQ != 0);
@@ -196,7 +195,7 @@ int main()
                         {
                             arrFiguras[numFigurasCadastradas] = novo;
                             numFigurasCadastradas++;
-                            cout << "Triângulo cadastrado com sucesso! Total de triângulos: " << Triangulo::getQuantidade() << "\n";
+                            cout << "Triangulo cadastrado com sucesso! Total de triangulos: " << Triangulo::getQuantidade() << "\n";
                         }
                         else
                         {
@@ -210,26 +209,27 @@ int main()
                     }
                     break;
                 }
-                // case 2:
-                // {
-                //     cout << "\nListando Triângulos:\n";
-                //     bool encontrouTriangulo = false;
-                //     for (int i = 0; i < numFigurasCadastradas; ++i)
-                //     {
-                //         // Verifica se o ponteiro aponta para um objeto Triangulo
-                //         Triangulo* t = dynamic_cast<Triangulo*>(arrFiguras[i]);
-                //         if (t) // Se for um Triangulo
-                //         {
-                //             t->escreva(); // Chama o método escreva do Triangulo
-                //             encontrouTriangulo = true;
-                //         }
-                //     }
-                //     if (!encontrouTriangulo)
-                //     {
-                //         cout << "Nenhum triângulo cadastrado.\n";
-                //     }
-                //     break;
-                // }
+                case 2:
+                {
+                    cout << "\nListando Triangulos:\n";
+                    bool encontrouTriangulo = false;
+
+                    for (int i = 0; i < numFigurasCadastradas; ++i)
+                    {
+                        Triangulo *t = dynamic_cast<Triangulo *>(arrFiguras[i]);
+                        if (t)
+                        {
+                            t->escreva();
+                            encontrouTriangulo = true;
+                        }
+                    }
+
+                    if (!encontrouTriangulo)
+                    {
+                        cout << "Nenhum triangulo cadastrado.\n";
+                    }
+                    break;
+                }
                 case 0:
                     cout << "Voltando...\n";
                     break;
@@ -252,7 +252,7 @@ int main()
     // ATENÇÃO: Como o destrutor de FigGeo NÃO é virtual no seu último FigGeo.h,
     // o 'delete' aqui chamará apenas o destrutor de FigGeo, e não os destrutores
     // das classes derivadas (Circulo, Quadrado, Triangulo). Isso pode causar
-    // vazamentos de memória para recursos específicos dessas classes.
+    // vazamentos de memória para recursos especificos dessas classes.
     // Recomenda-se fortemente que o destrutor em FigGeo.h seja 'virtual ~FigGeo();'.
     for (int i = 0; i < numFigurasCadastradas; ++i)
     {

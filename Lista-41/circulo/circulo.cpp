@@ -1,8 +1,9 @@
-#include "circulo/circulo.h"
+#include "circulo.h"
+#include "../FigGeo/figGeo.h"
 
 using namespace std;
 
-int quantidadeC = 0;
+int Circulo::quantidadeC = 0;
 
 Circulo::Circulo() : raio(0.0f)
 {
