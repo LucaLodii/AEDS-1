@@ -1,15 +1,13 @@
-#ifndef PESSOAS_H
-#define PESSOAS_H
+#ifndef PESSOAS_HPP
+#define PESSOAS_HPP
 
-#include "../data/data.h"
+#include "../data/data.hpp"
 #include <iostream>
 #include <string>
 
 using namespace std;
 
 #define MAX 100
-
-extern int TAM;
 
 class Pessoa
 {
@@ -19,6 +17,13 @@ private:
     Data nascimento;
 
 public:
+    static int TAM;
+    Pessoa();
+    Pessoa(string nome);
+    Pessoa(string nome, int dia, int mes, int ano);
+
+    ~Pessoa();
+
     void setNome(string);
     string getNome();
 

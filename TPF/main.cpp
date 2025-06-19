@@ -2,8 +2,8 @@
 #include <stdbool.h>
 #include <iostream>
 #include <string>
-#include "data/data.h"
-#include "pessoas/pessoas.h"
+#include "data/data.hpp"
+#include "pessoas/pessoas.hpp"
 
 // Para rodar: g++ main.cpp pessoas/pessoas.cpp data/data.cpp -o main
 
@@ -13,6 +13,7 @@ int main()
     abertura(pessoas); // Inicializa o sistema
 
     int opcao;
+    bool pessoasCadastradas = false;
     do
     {
         printf("\nMenu de funcionalidades, escolha uma opcao: \n");
@@ -36,17 +37,15 @@ int main()
             cadastrePessoa(pessoas);
             break;
 
-        case 2:
-            if (TAM == 0)
+        case 2: // For each
+            for (Pessoa pessoa : pessoas)
             {
-                printf("\nNenhuma pessoa cadastrada!\n");
+                pessoa.escrevePessoa();
+                pessoasCadastradas = true;
             }
-            else
+            if (!pessoasCadastradas)
             {
-                for (int i = 0; i < TAM; i++)
-                {
-                    pessoas[i].escrevePessoa(); // Chamada correta do método
-                }
+                cout << "Nenhuma pessoa cadastrada." << endl;
             }
             break;
 
@@ -65,7 +64,7 @@ int main()
         case 6:
             apagarTodos(pessoas);
             break;
-            
+
         default:
             printf("\nOpcao invalida!\n");
         }

@@ -1,11 +1,11 @@
-#include "data.h"
+#include "data.hpp"
 #include <iostream>
 #include <ctime>
 #include <string>
 
 using namespace std;
 
-string Data::mesExtenso() const
+string Data::mesExtenso()
 {
     string mes = " ";
     string extenso[] = {"janeiro", "fevereiro", "marco", "abril",
@@ -145,7 +145,20 @@ int calcularIdade(const Data &nascimento)
     return idade;
 }
 
-// Pedir ajuda
+Data::Data()
+{
+    setData();
+}
+
+Data::Data(int ano)
+{
+    setData(ano);
+}
+
+Data::Data(int dia, int mes, int ano)
+{
+    setData(dia, mes, ano);
+}
 
 bool Data::setData() {
     dia = 0;
@@ -163,8 +176,8 @@ bool Data::setData(int a) {
 
 bool Data::setData(int d, int m, int a)
 {
-    setAno(a);
+    bool yearSet = setAno(a);
     bool monthSet = setMes(m);
     bool daySet = setDia(d);
-    return monthSet && daySet;
+    return monthSet && daySet && yearSet;
 }

@@ -1,18 +1,18 @@
-#include "../data/data.h"
+#include "../data/data.hpp"
 #include <iostream>
 #include <fstream>
 #include <cstring>
 #include <cstdio>
 #include <string>
-#include "pessoas.h"
+#include "pessoas.hpp"
 using namespace std;
 
-int TAM = 0; // Definição da variável global
+int Pessoa::TAM = 0; // Definição da variável global
 
 void abertura(Pessoa pessoas[])
 {
     cout << "\nControle de Pessoas\n";
-    TAM = tamanho((char *)"tamanhoArq.dat");
+    Pessoa::TAM = tamanho((char *)"tamanhoArq.dat");
     carregaPessoas(pessoas);
 }
 
@@ -21,16 +21,16 @@ int tamanho(char *arq)
     FILE *arqTamanho = fopen(arq, "r");
     if (arqTamanho != nullptr)
     {
-        fscanf(arqTamanho, "%i", &TAM);
+        fscanf(arqTamanho, "%i", &Pessoa::TAM);
     }
     else
     {
         arqTamanho = fopen(arq, "w");
-        TAM = 0;
-        fprintf(arqTamanho, "%i", TAM);
+        Pessoa::TAM = 0;
+        fprintf(arqTamanho, "%i", Pessoa::TAM);
     }
     fclose(arqTamanho);
-    return TAM;
+    return Pessoa::TAM;
 }
 
 void Pessoa::setNome(string nome)
@@ -70,7 +70,7 @@ void Pessoa::leiaPessoa()
 {
     string nome;
     cout << "\nNome: ";
-    getline(cin, nome);
+    cin >> nome;
     setNome(nome);
     cout << "\nData de nascimento: ";
     this->nascimento.leiaData();
@@ -85,9 +85,9 @@ void Pessoa::escrevePessoa()
 
 void cadastrePessoa(Pessoa pessoas[])
 {
-    if (TAM >= MAX)
+    if (Pessoa::TAM >= MAX)
     {
-        cout << "Limite máximo de pessoas atingido!" << endl;
+        cout << "Limite maximo de pessoas atingido!" << endl;
         return;
     }
 
@@ -96,21 +96,21 @@ void cadastrePessoa(Pessoa pessoas[])
     cout << "\nNome: ";
     string nome;
     getline(cin, nome);
-    pessoas[TAM].setNome(nome);
+    pessoas[Pessoa::TAM].setNome(nome);
 
     Data nascimento;
     cout << "\nData de nascimento: ";
     nascimento.leiaData();
-    pessoas[TAM].setNascimento(nascimento.getDia(), nascimento.getMes(), nascimento.getAno());
+    pessoas[Pessoa::TAM].setNascimento(nascimento.getDia(), nascimento.getMes(), nascimento.getAno());
 
     fflush(stdin);
 
     cout << "CPF: ";
     string cpf;
     getline(cin, cpf);
-    pessoas[TAM].setCPF(cpf);
+    pessoas[Pessoa::TAM].setCPF(cpf);
 
-    TAM++;
+    Pessoa::TAM++;
 }
 
 void leiaCPF(char cpf[])
@@ -146,7 +146,7 @@ void pesquisaPessoaNome(Pessoa pessoas[])
     getline(cin, supostoNome);
 
     int encontradas = 0;
-    for (int i = 0; i < TAM; i++)
+    for (int i = 0; i < Pessoa::TAM; i++)
     {
         if (pessoas[i].getNome() == supostoNome)
         {
@@ -169,7 +169,7 @@ void pesquisaPessoaCPF(Pessoa pessoas[])
     getline(cin, supostoCPF);
 
     int encontradas = 0;
-    for (int i = 0; i < TAM; i++)
+    for (int i = 0; i < Pessoa::TAM; i++)
     {
         if (pessoas[i].getCPF() == supostoCPF)
         {
@@ -191,15 +191,15 @@ bool deletaPessoa(Pessoa pessoas[])
     cin.ignore();
     getline(cin, cpf);
 
-    for (int i = 0; i < TAM; i++)
+    for (int i = 0; i < Pessoa::TAM; i++)
     {
         if (pessoas[i].getCPF() == cpf)
         {
-            for (int j = i; j < TAM - 1; j++)
+            for (int j = i; j < Pessoa::TAM - 1; j++)
             {
                 pessoas[j] = pessoas[j + 1]; // Faz o "shift"
             }
-            TAM--;
+            Pessoa::TAM--;
             cout << "Pessoa excluida com sucesso!\n";
             return true;
         }
@@ -208,9 +208,35 @@ bool deletaPessoa(Pessoa pessoas[])
     return false;
 }
 
+Pessoa::Pessoa()
+{
+    nascimento.setData();
+    nome = "";
+    TAM++;
+}
+
+Pessoa::Pessoa(string nome)
+{
+    nascimento.setData();
+    setNome(nome);
+    TAM++;
+}
+
+Pessoa::Pessoa(string nome, int dia, int mes, int ano)
+{
+    nascimento.setData(dia, mes, ano);
+    setNome(nome);
+    TAM++;
+}
+
+Pessoa::~Pessoa()
+{
+    TAM--;
+}
+
 void apagarTodos(Pessoa pessoas[])
 {
-    TAM = 0;
+    Pessoa::TAM = 0;
     printf("Todos os cadastros foram removidos.\n");
 }
 
@@ -219,7 +245,7 @@ void carregaPessoas(Pessoa pessoas[])
     FILE *arquivo = fopen("pessoas.dat", "rb");
     if (arquivo)
     {
-        fread(pessoas, sizeof(Pessoa), TAM, arquivo);
+        fread(pessoas, sizeof(Pessoa), Pessoa::TAM, arquivo);
         fclose(arquivo);
     }
 }
@@ -229,7 +255,7 @@ void gravaPessoas(Pessoa pessoas[])
     FILE *arquivo = fopen("pessoas.dat", "wb");
     if (arquivo)
     {
-        fwrite(pessoas, sizeof(Pessoa), TAM, arquivo);
+        fwrite(pessoas, sizeof(Pessoa), Pessoa::TAM, arquivo);
         fclose(arquivo);
     }
 }
