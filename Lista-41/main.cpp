@@ -7,7 +7,7 @@
 #include "triangulo/triangulo.h"
 
 const int MAX = 100;
-FigGeo *arranjoFiguras[MAX];
+FigGeo *arrFiguras[MAX];
 
 int main()
 {

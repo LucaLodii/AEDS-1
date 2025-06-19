@@ -9,27 +9,24 @@ using namespace std;
 class FigGeo
 {
 private:
-
     string cor;
 
 public:
     FigGeo();
     FigGeo(string cor);
 
-    virtual ~FigGeo();
+    ~FigGeo();
 
-    virtual int getQuantidade();
+    int getQuantidade();
 
     void setCor(string cor);
     string getCor();
 
-    virtual void leia();
+    void leia();
+    void escreva();
 
-    virtual void escreva();
-
-    virtual float perimetro();
-
-    virtual float area();
+    float perimetro();
+    float area();
 };
 
 #endif
