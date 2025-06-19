@@ -68,6 +68,10 @@ float Circulo::area()
     return M_PI * raio * raio;
 }
 
+string Circulo::getTipo() { 
+    return "circulo"; 
+}
+
 int Circulo::getQuantidade()
 {
     return quantidadeC;

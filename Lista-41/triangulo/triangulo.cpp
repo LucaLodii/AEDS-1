@@ -70,13 +70,13 @@ float Triangulo::area() {
     return sqrt(s * (s - a) * (s - b) * (s - c));
 }
 
-int Triangulo::getQuantidade()
-{
-    return quantidadeT;
-}
 
 bool Triangulo::ehValido() {
     bool ehTriangulo = (a + b > c) && (a + c > b) && (b + c > a);
     return ehTriangulo;
 }
 
+int Triangulo::getQuantidade()
+{
+    return quantidadeT;
+}

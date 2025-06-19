@@ -35,7 +35,7 @@ class Triangulo : public FigGeo
 
         bool ehValido();
 
-        int getQuantidade();
+        static int getQuantidade();
 };
 
 #endif 

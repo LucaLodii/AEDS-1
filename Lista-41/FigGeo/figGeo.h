@@ -22,11 +22,13 @@ public:
     void setCor(string cor);
     string getCor();
 
-    void leia();
-    void escreva();
+    virtual void leia();
+    virtual void escreva();
 
-    float perimetro();
-    float area();
+    virtual float perimetro();
+    virtual float area();
+
+    virtual string getTipo() const = 0;
 };
 
 #endif

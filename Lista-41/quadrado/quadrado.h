@@ -29,7 +29,7 @@ class Quadrado : public FigGeo
         float perimetro();
         float area();
 
-        int getQuantidade();
+        static int getQuantidade();
 };
 
 #endif 

@@ -28,7 +28,9 @@ class Circulo : public FigGeo
         float perimetro();
         float area();
 
-        int getQuantidade();
+        virtual string getTipo();
+
+        static int getQuantidade();
 };
 
 #endif 
