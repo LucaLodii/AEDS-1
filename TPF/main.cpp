@@ -5,6 +5,8 @@
 #include "data/data.h"
 #include "pessoas/pessoas.h"
 
+// Para rodar: g++ main.cpp pessoas/pessoas.cpp data/data.cpp -o main
+
 int main()
 {
     Pessoa pessoas[MAX];

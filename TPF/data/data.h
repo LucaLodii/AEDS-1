@@ -12,24 +12,26 @@ private:
     int ano;
 
 public:
-
-    int diasMes() const;
-
-    bool setData(int dia, int mes, int ano);
-    Data getData();
-
     bool setDia(int dia);
     bool setMes(int mes);
-    void setAno(int ano);
+    bool setAno(int ano);
+
+    bool setData();
+    bool setData(int ano);
+    bool setData(int dia, int mes, int ano);
 
     int getDia() const;
     int getMes() const;
     int getAno() const;
 
-    std::string mesExtenso();
-    bool dataValida();
+    bool dataValida() const;
+
+    string mesExtenso() const;
+
+    int diasMes();
+
+    void escreveData();
     void leiaData();
-    void escreveData() const;
 };
 
 Data obterDataAtual();

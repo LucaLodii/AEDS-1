@@ -11,18 +11,19 @@ using namespace std;
 
 extern int TAM;
 
-class Pessoa {
+class Pessoa
+{
 private:
-   string nome;      // Nome da pessoa
-   string CPF;       // CPF: 000.000.000-00
+    string nome; // Nome da pessoa
+    string CPF;  // CPF: 000.000.000-00
     Data nascimento;
 
 public:
     void setNome(string);
-   string getNome();
+    string getNome();
 
     void setCPF(string);
-   string getCPF();
+    string getCPF();
 
     bool setNascimento(int dia, int mes, int ano);
     Data getNascimento();
@@ -35,12 +36,12 @@ public:
 };
 
 // --- Funções auxiliares do sistema ---
-void abertura(Pessoa pessoas[]);               // Inicializa o sistema
-void carregaPessoas(Pessoa pessoas[]);         // Carrega do arquivo
-void despedida(Pessoa pessoas[]);              // Grava no arquivo ao encerrar
+void abertura(Pessoa pessoas[]);       // Inicializa o sistema
+void carregaPessoas(Pessoa pessoas[]); // Carrega do arquivo
+void despedida(Pessoa pessoas[]);      // Grava no arquivo ao encerrar
 
-int tamanho(char* arq);                       // Verifica tamanho do arquivo
-void gravaPessoas(Pessoa pessoas[]);           // Salva no arquivo
+int tamanho(char *arq);              // Verifica tamanho do arquivo
+void gravaPessoas(Pessoa pessoas[]); // Salva no arquivo
 
 // --- Funções de pesquisa ---
 void pesquisaPessoaNome(Pessoa pessoas[]);

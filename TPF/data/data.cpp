@@ -5,10 +5,10 @@
 
 using namespace std;
 
-std::string Data::mesExtenso()
+string Data::mesExtenso() const
 {
-    std::string mes = " ";
-    std::string extenso[] = {"janeiro", "fevereiro", "marco", "abril",
+    string mes = " ";
+    string extenso[] = {"janeiro", "fevereiro", "marco", "abril",
                         "maio", "junho", "julho", "agosto",
                         "setembro", "outubro", "novembro", "dezembro"};
     if (dataValida())
@@ -16,7 +16,7 @@ std::string Data::mesExtenso()
     return mes;
 }
 
-bool Data::dataValida()
+bool Data::dataValida() const
 {
     bool valida = true;
     if (this->dia < 0 || this->dia > 31)
@@ -26,7 +26,7 @@ bool Data::dataValida()
     return valida;
 }
 
-int Data::diasMes() const
+int Data::diasMes()
 {
     if (mes == 2)
     {
@@ -70,9 +70,14 @@ bool Data::setMes(int m)
     return false;
 }
 
-void Data::setAno(int a)
+bool Data::setAno(int a)
 {
-    ano = a;
+    if (a >= 1900 && a <= 2100)
+    {
+        ano = a;
+        return true;
+    }
+    return false;
 }
 
 int Data::getDia() const
@@ -90,7 +95,7 @@ int Data::getAno() const
     return ano;
 }
 
-void Data::escreveData() const
+void Data::escreveData()
 {
     cout << dia << "/" << mes << "/" << ano;
 }
@@ -137,22 +142,29 @@ int calcularIdade(const Data &nascimento)
             idade--;
         }
     }
-
     return idade;
+}
+
+// Pedir ajuda
+
+bool Data::setData() {
+    dia = 0;
+    mes = 0;
+    ano = 0;
+    return true;
+}
+
+bool Data::setData(int a) {
+    dia = 0;
+    mes = 0;
+    ano = a;
+    return true;
 }
 
 bool Data::setData(int d, int m, int a)
 {
-    setAno(a); // define primeiro o ano
-    if (setMes(m) && setDia(d))
-    {
-        return true;
-    }
-    return false;
+    setAno(a);
+    bool monthSet = setMes(m);
+    bool daySet = setDia(d);
+    return monthSet && daySet;
 }
-
-Data Data::getData()
-{
-    return *this; // retorna o próprio objeto (cópia)
-}
-

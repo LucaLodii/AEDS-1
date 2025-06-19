@@ -58,14 +58,7 @@ string Pessoa::getCPF()
 
 bool Pessoa::setNascimento(int dia, int mes, int ano)
 {
-    Data d;
-    if (d.setDia(dia) && d.setMes(mes))
-    {
-        d.setAno(ano);
-        nascimento = d;
-        return true;
-    }
-    return false;
+    this->nascimento.setData(dia, mes, ano);
 }
 
 Data Pessoa::getNascimento()
@@ -75,31 +68,19 @@ Data Pessoa::getNascimento()
 
 void Pessoa::leiaPessoa()
 {
-    fflush(stdin);
-
-    cout << "Nome: ";
+    string nome;
+    cout << "\nNome: ";
     getline(cin, nome);
-
-    fflush(stdin);
-
-    cout << "CPF (000.000.000-00): ";
-    string cpf;
-    getline(cin, cpf);
-    setCPF(cpf);
-
-    Data d;
-    cout << "Data de nascimento: ";
-    d.leiaData();
-    nascimento = d;
+    setNome(nome);
+    cout << "\nData de nascimento: ";
+    this->nascimento.leiaData();
 }
 
 void Pessoa::escrevePessoa()
 {
-    cout << "\nNome: " << nome;
-    cout << "\nCPF: " << CPF;
-    cout << "\nNascimento: ";
+    cout << "\nNome: " << getNome();
+    cout << "\nData de Nascimento: ";
     nascimento.escreveData();
-    cout << endl;
 }
 
 void cadastrePessoa(Pessoa pessoas[])
