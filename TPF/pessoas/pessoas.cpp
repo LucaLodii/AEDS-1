@@ -92,6 +92,7 @@ void cadastrePessoa(Pessoa pessoas[])
     }
 
     fflush(stdin);
+    
 
     cout << "\nNome: ";
     string nome;
