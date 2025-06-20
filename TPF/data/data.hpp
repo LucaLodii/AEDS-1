@@ -32,6 +32,8 @@ public:
 
     bool dataValida() const;
 
+    bool mesIgualParametro(int mes);
+
     string mesExtenso();
 
     int diasMes();

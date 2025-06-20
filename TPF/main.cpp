@@ -5,6 +5,8 @@
 #include "data/data.hpp"
 #include "pessoas/pessoas.hpp"
 
+using namespace std;
+
 // Para rodar: g++ main.cpp pessoas/pessoas.cpp data/data.cpp -o main
 
 int main()
@@ -13,7 +15,7 @@ int main()
     abertura(pessoas); // Inicializa o sistema
 
     int opcao;
-    bool pessoasCadastradas = false;
+
     do
     {
         printf("\nMenu de funcionalidades, escolha uma opcao: \n");
@@ -24,7 +26,8 @@ int main()
         printf("4 - Pesquisar por CPF\n");
         printf("5 - Excluir pessoa\n");
         printf("6 - Apagar todas as pessoas cadastradas\n");
-        scanf("%i", &opcao);
+        cin >> opcao;
+        cin.ignore();
 
         switch (opcao)
         {
@@ -38,14 +41,14 @@ int main()
             break;
 
         case 2: // For each
-            for (Pessoa pessoa : pessoas)
-            {
-                pessoa.escrevePessoa();
-                pessoasCadastradas = true;
-            }
-            if (!pessoasCadastradas)
-            {
+            if (Pessoa::TAM == 0){
                 cout << "Nenhuma pessoa cadastrada." << endl;
+            }
+            else {
+                for (int i = 0; i < Pessoa::TAM; i++)
+                {
+                    pessoas[i].escrevePessoa();
+                }
             }
             break;
 

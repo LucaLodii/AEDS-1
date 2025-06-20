@@ -58,7 +58,7 @@ string Pessoa::getCPF()
 
 bool Pessoa::setNascimento(int dia, int mes, int ano)
 {
-    this->nascimento.setData(dia, mes, ano);
+    return this->nascimento.setData(dia, mes, ano);
 }
 
 Data Pessoa::getNascimento()
@@ -126,7 +126,7 @@ void leiaCPF(char cpf[])
         fflush(stdin);
         //limpar buffer no macOS
         fpurge(stdin);
-        
+
         if (scanf("%14s", cpf) == 1)
         {
             if (strlen(cpf) == 14 && cpf[3] == '.' && cpf[7] == '.' && cpf[11] == '-')
