@@ -92,25 +92,28 @@ void cadastrePessoa(Pessoa pessoas[])
     }
 
     fflush(stdin);
+    //limpar buffer no macOS
+    fpurge(stdin);
     
-
     cout << "\nNome: ";
     string nome;
     getline(cin, nome);
     pessoas[Pessoa::TAM].setNome(nome);
-
+    
     Data nascimento;
     cout << "\nData de nascimento: ";
     nascimento.leiaData();
     pessoas[Pessoa::TAM].setNascimento(nascimento.getDia(), nascimento.getMes(), nascimento.getAno());
-
+    
     fflush(stdin);
-
+    //limpar buffer no macOS
+    fpurge(stdin);
+    
     cout << "CPF: ";
     string cpf;
     getline(cin, cpf);
     pessoas[Pessoa::TAM].setCPF(cpf);
-
+    
     Pessoa::TAM++;
 }
 
@@ -121,6 +124,9 @@ void leiaCPF(char cpf[])
     {
         cout << "\nCPF (formato 000.000.000-00): ";
         fflush(stdin);
+        //limpar buffer no macOS
+        fpurge(stdin);
+        
         if (scanf("%14s", cpf) == 1)
         {
             if (strlen(cpf) == 14 && cpf[3] == '.' && cpf[7] == '.' && cpf[11] == '-')
