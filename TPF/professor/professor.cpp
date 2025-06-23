@@ -42,7 +42,6 @@ void pesquisaProfessorNome(Pessoa *pessoas[])
 {
     string supostoNome;
     cout << "\nDigite o nome a ser encontrado: ";
-    cin.ignore();
     getline(cin, supostoNome);
 
     int encontradas = 0;
@@ -78,7 +77,6 @@ void pesquisaProfessorCPF(Pessoa *pessoas[])
 {
     string supostoCPF;
     cout << "\nDigite o CPF a ser encontrado (000.000.000-00): ";
-    cin.ignore(); // evita erro caso o buffer do cin esteja sujo
     getline(cin, supostoCPF);
 
     int encontradas = 0;
@@ -104,7 +102,6 @@ bool deletaProfessor(Pessoa *pessoas[])
 {
     string cpf;
     cout << "\nCPF para excluir (000.000.000-00): ";
-    cin.ignore();
     getline(cin, cpf);
 
     for (int i = 0; i < Pessoa::TAM; i++)

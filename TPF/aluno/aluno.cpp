@@ -104,7 +104,6 @@ bool deletaAluno(Pessoa *pessoas[])
 {
     string cpf;
     cout << "\nCPF para excluir (000.000.000-00): ";
-    cin.ignore();
     getline(cin, cpf);
 
     for (int i = 0; i < Pessoa::TAM; i++)
