@@ -6,10 +6,16 @@ class Professor : public Pessoa
 {
 private:
     string especializacao;
+    const int tipo = 2;
 
 public:
     void setEspecializacao(string especializacao);
     string getEspecializacao();
+
+    int getTipo()
+    {
+        return tipo;
+    }
 
     Professor(
         string nome, string, int mes, int dia, int ano)
@@ -18,7 +24,18 @@ public:
 
     Professor(string especializacao);
 
-    Professor(){};
+    Professor() {};
+
+    void leiaPessoa();
+
+    void escrevePessoa();
 };
+
+void pesquisaProfessorNome(Pessoa *pessoas[]);
+void pesquisaProfessorCPF(Pessoa* pessoas[]);
+bool deletaProfessor(Pessoa *pessoas[]);
+void apagarTodosProfessores(Pessoa *pessoas[]);
+void listaProfessores(Pessoa *pessoas[]);
+
 
 #endif

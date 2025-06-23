@@ -6,9 +6,14 @@ class Aluno : public Pessoa
 {
 private:
     unsigned long int matricula;
+    const int tipo = 1;
 
 public:
     void setMatricula(unsigned long int matricula);
+
+    int getTipo(){
+        return tipo;
+    }
 
     unsigned long int getMatricula();
 
@@ -20,6 +25,16 @@ public:
     Aluno(unsigned long int matricula);
 
     Aluno(){};
+
+    void leiaPessoa();
+
+    void escrevePessoa();
 };
+
+void pesquisaAlunoNome(Pessoa *pessoas[]);
+void pesquisaAlunoCPF(Pessoa* pessoas[]);
+bool deletaAluno(Pessoa *pessoas[]);
+void apagarTodosAlunos(Pessoa *pessoas[]);
+void listaAlunos(Pessoa *pessoas[]);
 
 #endif
