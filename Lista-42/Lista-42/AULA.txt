@@ -1,0 +1,4 @@
+1- ENTENDER: Virtual puro (void mover() = 0;)
+    serviço nenhum
+    
+2- itálico = abstrato

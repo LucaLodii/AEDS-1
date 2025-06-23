@@ -26,11 +26,4 @@ arranjo que deverá receber uma nova instância de Aluno ou de Professor.
 referida classe é igual a um mês recebido em uma variável paramétrica. A função deverá retornar
 verdadeiro caso o mês do objeto corrente for igual àquele armazenado na variável paramétrica, ou
 falso, caso contrário.
-Pontifícia Universidade Católica de Minas Gerais
-ICEI - Instituto de Ciências Exatas e Informática
-DCC - Departamento de Ciência da Computação
-Campus Lourdes
-Bacharelado em Ciência da Computação
-Algoritmos e Estruturas de Dados I
-Professor: Lúcio Mauro Pereira
-Lista de Exercícios nº 40
+

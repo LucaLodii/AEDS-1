@@ -41,7 +41,7 @@ int main()
         switch (opcao)
         {
         case 0:
-            std::cout << "\nObrigado por usar este programa!\n";
+            cout << "\nObrigado por usar este programa!\n";
             break;
 
         case 1:
@@ -49,35 +49,35 @@ int main()
             int opcaoC;
             do
             {
-                std::cout << "\nSubmenu - Circulos\n";
-                std::cout << "0 - Voltar ao menu anterior\n";
-                std::cout << "1 - Cadastrar\n";
-                std::cout << "2 - Listar\n";
-                std::cout << "Escolha: ";
-                std::cin >> opcaoC;
+                cout << "\nSubmenu - Circulos\n";
+                cout << "0 - Voltar ao menu anterior\n";
+                cout << "1 - Cadastrar\n";
+                cout << "2 - Listar\n";
+                cout << "Escolha: ";
+                cin >> opcaoC;
 
                 switch (opcaoC)
                 {
                 case 1:
                 {
-                    std::cout << "\nCadastrar Circulo\n";
+                    cout << "\nCadastrar Circulo\n";
                     if (numFigurasCadastradas < MAX)
                     {
                         Circulo *novo = new Circulo();
                         novo->leia();
                         arrFiguras[numFigurasCadastradas] = novo;
                         numFigurasCadastradas++;
-                        std::cout << "Circulo cadastrado com sucesso! Total de círculos: " << Circulo::getQuantidade() << "\n";
+                        cout << "Circulo cadastrado com sucesso! Total de círculos: " << Circulo::getQuantidade() << "\n";
                     }
                     else
                     {
-                        std::cout << "Limite de figuras atingido!\n";
+                        cout << "Limite de figuras atingido!\n";
                     }
                     break;
                 }
                 case 2:
                 {
-                    std::cout << "\nListando Círculos:\n";
+                    cout << "\nListando Círculos:\n";
                     bool encontrouCirculo = false;
 
                     for (int i = 0; i < numFigurasCadastradas; ++i)
@@ -92,15 +92,15 @@ int main()
 
                     if (!encontrouCirculo)
                     {
-                        std::cout << "Nenhum círculo cadastrado.\n";
+                        cout << "Nenhum círculo cadastrado.\n";
                     }
                     break;
                 }
                 case 0:
-                    std::cout << "Voltando...\n";
+                    cout << "Voltando...\n";
                     break;
                 default:
-                    std::cout << "Opcao invalida!\n";
+                    cout << "Opcao invalida!\n";
                     break;
                 }
             } while (opcaoC != 0);
@@ -112,35 +112,35 @@ int main()
             int opcaoQ;
             do
             {
-                std::cout << "\nSubmenu - Quadrados\n";
-                std::cout << "0 - Voltar ao menu anterior\n";
-                std::cout << "1 - Cadastrar\n";
-                std::cout << "2 - Listar\n";
-                std::cout << "Escolha: ";
-                std::cin >> opcaoQ;
+                cout << "\nSubmenu - Quadrados\n";
+                cout << "0 - Voltar ao menu anterior\n";
+                cout << "1 - Cadastrar\n";
+                cout << "2 - Listar\n";
+                cout << "Escolha: ";
+                cin >> opcaoQ;
 
                 switch (opcaoQ)
                 {
                 case 1:
                 {
-                    std::cout << "\nCadastrar Quadrado\n";
+                    cout << "\nCadastrar Quadrado\n";
                     if (numFigurasCadastradas < MAX)
                     {
                         Quadrado *novo = new Quadrado();
                         novo->leia();
                         arrFiguras[numFigurasCadastradas] = novo;
                         numFigurasCadastradas++;
-                        std::cout << "Quadrado cadastrado com sucesso! Total de quadrados: " << Quadrado::getQuantidade() << "\n";
+                        cout << "Quadrado cadastrado com sucesso! Total de quadrados: " << Quadrado::getQuantidade() << "\n";
                     }
                     else
                     {
-                        std::cout << "Limite de figuras atingido!\n";
+                        cout << "Limite de figuras atingido!\n";
                     }
                     break;
                 }
                 case 2:
                 {
-                    std::cout << "\nListando Quadrados:\n";
+                    cout << "\nListando Quadrados:\n";
                     bool encontrouQuadrado = false;
 
                     for (int i = 0; i < numFigurasCadastradas; ++i)
@@ -155,15 +155,15 @@ int main()
 
                     if (!encontrouQuadrado)
                     {
-                        std::cout << "Nenhum quadrado cadastrado.\n";
+                        cout << "Nenhum quadrado cadastrado.\n";
                     }
                     break;
                 }
                 case 0:
-                    std::cout << "Voltando...\n";
+                    cout << "Voltando...\n";
                     break;
                 default:
-                    std::cout << "Opcao invalida!\n";
+                    cout << "Opcao invalida!\n";
                     break;
                 }
             } while (opcaoQ != 0);
