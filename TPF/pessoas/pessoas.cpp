@@ -256,6 +256,5 @@ void gravaPessoas(Pessoa *pessoas[])
 
 void despedida(Pessoa *pessoas[])
 {
-    printf("\nObrigado!\n");
     gravaPessoas(pessoas);
 }
