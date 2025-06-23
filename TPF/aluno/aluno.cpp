@@ -24,7 +24,7 @@ void Aluno::leiaPessoa()
     cout << "\nNome: ";
     getline(cin, nome);
     setNome(nome);
-    cin.ignore();
+    
     cout << "\nCPF: ";
     leiaCPF();
     cout << "\nData de nascimento: [DD MM AAAA]";
@@ -160,6 +160,19 @@ void listaAlunos(Pessoa *pessoas[])
             {
                 pessoas[i]->escrevePessoa();
             }
+        }
+    }
+}
+
+void listarAlunosAniversariantes(Pessoa *pessoas[], int mes)
+{
+    for (int i = 0; i < Pessoa::TAM; i++)
+    {
+        Data nascimento = pessoas[i]->getNascimento();
+        int mesNiver = nascimento.getMes();
+        if (pessoas[i]->getTipo() == 2 && mes == mesNiver)
+        {
+            pessoas[i]->escrevePessoa();
         }
     }
 }

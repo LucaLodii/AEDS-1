@@ -164,3 +164,16 @@ void listaProfessores(Pessoa *pessoas[])
         }
     }
 }
+
+void listarProfessoresAniversariantes(Pessoa *pessoas[], int mes)
+{
+    for (int i = 0; i < Pessoa::TAM; i++)
+    {
+        Data nascimento = pessoas[i]->getNascimento();
+        int mesNiver = nascimento.getMes();
+        if (pessoas[i]->getTipo() == 2 && mes == mesNiver)
+        {
+            pessoas[i]->escrevePessoa();
+        }
+    }
+}

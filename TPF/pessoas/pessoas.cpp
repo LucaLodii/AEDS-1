@@ -16,18 +16,22 @@ void abertura(Pessoa *pessoas[])
     carregaPessoas(pessoas);
 }
 
-int tamanho(char *arq)
-{
-    FILE *arqTamanho = fopen(arq, "r");
-    if (arqTamanho != nullptr)
-    {
-        fscanf(arqTamanho, "%i", &Pessoa::TAM);
+int tamanho(const char *filename) {
+    FILE *file = fopen(filename, "r");
+
+    if (file != nullptr) {
+        if (fscanf(file, "%i", &Pessoa::TAM) != 1) {
+            Pessoa::TAM = 0;
+        }
+        fclose(file);
+    } else {        
+        file = fopen(filename, "w");
+        if (file != nullptr) {
+            fprintf(file, "%d\n", Pessoa::TAM); 
+            fclose(file); 
+        }
     }
-    else
-    {
-        arqTamanho = fopen(arq, "w");
-    }
-    fclose(arqTamanho);
+
     return Pessoa::TAM;
 }
 

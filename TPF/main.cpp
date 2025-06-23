@@ -13,10 +13,11 @@ using namespace std;
 
 int main()
 {
+    setlocale(LC_ALL, "");
     Pessoa *pessoas[MAX];
     abertura(pessoas); // Inicializa o sistema
 
-    int opcao, subOpcao;
+    int opcao, subOpcao, mes;
 
     do
     {
@@ -44,7 +45,8 @@ int main()
             system("cls");
             cout << "0 - Voltar ao menu inicial" << endl;
             cout << "1 - Cadastrar Professor" << endl;
-            cout << "2 - Cadastrar Aluno" << endl << endl;
+            cout << "2 - Cadastrar Aluno" << endl
+                 << endl;
             cin >> subOpcao;
             cin.ignore();
 
@@ -72,7 +74,8 @@ int main()
             system("cls");
             cout << "0 - Voltar ao menu inicial" << endl;
             cout << "1 - Listar Professor" << endl;
-            cout << "2 - Listar Aluno" << endl << endl;
+            cout << "2 - Listar Aluno" << endl
+                 << endl;
             cin >> subOpcao;
             cin.ignore();
 
@@ -83,10 +86,12 @@ int main()
 
             case 1:
                 listaAlunos(pessoas);
+                cin.get();
                 break;
 
             case 2:
                 listaProfessores(pessoas);
+                cin.get();
                 break;
 
             default:
@@ -98,7 +103,8 @@ int main()
             system("cls");
             cout << "0 - Voltar ao menu inicial" << endl;
             cout << "1 - Pesquisar Professores por nome" << endl;
-            cout << "2 - Pesquisar Alunos por nome" << endl << endl;
+            cout << "2 - Pesquisar Alunos por nome" << endl
+                 << endl;
             cin >> subOpcao;
             cin.ignore();
 
@@ -126,7 +132,8 @@ int main()
             system("cls");
             cout << "0 - Voltar ao menu inicial" << endl;
             cout << "1 - Pesquisar Professores por CPF" << endl;
-            cout << "2 - Pesquisar Alunos por CPF" << endl << endl;
+            cout << "2 - Pesquisar Alunos por CPF" << endl
+                 << endl;
             cin >> subOpcao;
             cin.ignore();
 
@@ -149,12 +156,13 @@ int main()
                 break;
             }
             break;
-        
+
         case 5:
             system("cls");
             cout << "0 - Voltar ao menu inicial" << endl;
             cout << "1 - Excluir Professor (pelo CPF)" << endl;
-            cout << "2 - Excluir Aluno (pelo CPF)" << endl << endl;
+            cout << "2 - Excluir Aluno (pelo CPF)" << endl
+                 << endl;
             cin >> subOpcao;
             cin.ignore();
 
@@ -182,7 +190,8 @@ int main()
             system("cls");
             cout << "0 - Voltar ao menu inicial" << endl;
             cout << "1 - Excluir todos os Professores" << endl;
-            cout << "2 - Excluir todos os Alunos" << endl << endl;
+            cout << "2 - Excluir todos os Alunos" << endl
+                 << endl;
             cin >> subOpcao;
             cin.ignore();
 
@@ -213,7 +222,8 @@ int main()
                 cout << "0 - Voltar ao menu inicial" << endl;
                 cout << "1 - Informar o mês a ser pesquisado" << endl;
                 cout << "2 - Listar os Professores aniversariantes do mês" << endl;
-                cout << "3 - Listar os Alunos aniversariantes do mês" << endl << endl;
+                cout << "3 - Listar os Alunos aniversariantes do mês" << endl
+                     << endl;
                 cin >> subOpcao;
                 cin.ignore();
 
@@ -223,11 +233,18 @@ int main()
                     break;
 
                 case 1:
-
+                    cout << "Mes a ser pesquisado: [01 a 12]";
+                    cin >> mes;
                     break;
 
                 case 2:
+                    listarProfessoresAniversariantes(pessoas, mes);
+                    cin.get();
+                    break;
 
+                case 3:
+                    listarAlunosAniversariantes(pessoas, mes);
+                    cin.get();
                     break;
 
                 default:

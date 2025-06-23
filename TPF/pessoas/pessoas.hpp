@@ -46,7 +46,7 @@ void abertura(Pessoa* pessoas[]);       // Inicializa o sistema
 void carregaPessoas(Pessoa* pessoas[]); // Carrega do arquivo
 void despedida(Pessoa* pessoas[]);      // Grava no arquivo ao encerrar
 
-int tamanho(char *arq);              // Verifica tamanho do arquivo
+int tamanho(const char *filename);              // Verifica tamanho do arquivo
 void gravaPessoas(Pessoa* pessoas[]); // Salva no arquivo
 void gravaTAM();
 

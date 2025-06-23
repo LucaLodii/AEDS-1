@@ -19,6 +19,7 @@ public:
     bool setAno(int ano);
 
     Data();
+    ~Data(){};
     Data(int ano);
     Data(int dia, int mes, int ano);
 
