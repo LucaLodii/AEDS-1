@@ -9,7 +9,7 @@ using namespace std;
 
 int Pessoa::TAM = 0; // Definição da variável global
 
-void abertura(Pessoa pessoas[])
+void abertura(Pessoa *pessoas[])
 {
     cout << "\nControle de Pessoas\n";
     Pessoa::TAM = tamanho((char *)"tamanhoArq.dat");
@@ -26,8 +26,6 @@ int tamanho(char *arq)
     else
     {
         arqTamanho = fopen(arq, "w");
-        Pessoa::TAM = 0;
-        fprintf(arqTamanho, "%i", Pessoa::TAM);
     }
     fclose(arqTamanho);
     return Pessoa::TAM;
@@ -58,7 +56,7 @@ string Pessoa::getCPF()
 
 bool Pessoa::setNascimento(int dia, int mes, int ano)
 {
-    this->nascimento.setData(dia, mes, ano);
+    return this->nascimento.setData(dia, mes, ano);
 }
 
 Data Pessoa::getNascimento()
@@ -66,79 +64,63 @@ Data Pessoa::getNascimento()
     return nascimento;
 }
 
-void Pessoa::leiaPessoa()
+// void cadastrePessoa(Pessoa* pessoas[])
+// {
+//     if (Pessoa::TAM >= MAX)
+//     {
+//         cout << "Limite maximo de pessoas atingido!" << endl;
+//         return;
+//     }
+
+//     cin.ignore();
+
+//     cout << "\nNome: ";
+//     string nome;
+//     getline(cin, nome);
+//     pessoas[Pessoa::TAM]->setNome(nome);
+
+//     Data nascimento;
+//     cout << "\nData de nascimento: ";
+//     nascimento.leiaData();
+//     pessoas[Pessoa::TAM]->setNascimento(nascimento.getDia(), nascimento.getMes(), nascimento.getAno());
+
+//     cin.ignore();
+
+//     cout << "CPF: ";
+//     string cpf;
+//     getline(cin, cpf);
+//     pessoas[Pessoa::TAM]->setCPF(cpf);
+
+//     Pessoa::TAM++;
+// }
+
+void leiaCPF()
 {
-    string nome;
-    cout << "\nNome: ";
-    cin >> nome;
-    setNome(nome);
-    cout << "\nData de nascimento: ";
-    this->nascimento.leiaData();
-}
-
-void Pessoa::escrevePessoa()
-{
-    cout << "\nNome: " << getNome();
-    cout << "\nData de Nascimento: ";
-    nascimento.escreveData();
-}
-
-void cadastrePessoa(Pessoa pessoas[])
-{
-    if (Pessoa::TAM >= MAX)
-    {
-        cout << "Limite maximo de pessoas atingido!" << endl;
-        return;
-    }
-
-    fflush(stdin);
-
-    cout << "\nNome: ";
-    string nome;
-    getline(cin, nome);
-    pessoas[Pessoa::TAM].setNome(nome);
-
-    Data nascimento;
-    cout << "\nData de nascimento: ";
-    nascimento.leiaData();
-    pessoas[Pessoa::TAM].setNascimento(nascimento.getDia(), nascimento.getMes(), nascimento.getAno());
-
-    fflush(stdin);
-
-    cout << "CPF: ";
     string cpf;
     getline(cin, cpf);
-    pessoas[Pessoa::TAM].setCPF(cpf);
-
-    Pessoa::TAM++;
-}
-
-void leiaCPF(char cpf[])
-{
     int formatoValido = 0;
+    if (cpf.length() == 14 && cpf[3] == '.' && cpf[7] == '.' && cpf[11] == '-')
+    {
+        formatoValido = 1;
+    }
     while (!formatoValido)
     {
         cout << "\nCPF (formato 000.000.000-00): ";
-        fflush(stdin);
-        if (scanf("%14s", cpf) == 1)
+
+        getline(cin, cpf);
+
+        if (cpf.length() == 14 && cpf[3] == '.' && cpf[7] == '.' && cpf[11] == '-')
         {
-            if (strlen(cpf) == 14 && cpf[3] == '.' && cpf[7] == '.' && cpf[11] == '-')
-            {
-                formatoValido = 1;
-            }
-            else
-            {
-                cout << "Formato incorreto! Use: 000.000.000-00\n";
-            }
+            formatoValido = 1;
         }
         else
         {
-            cout << "Erro na leitura. Tente novamente.\n";
+            cout << "Formato incorreto! Use: 000.000.000-00\n";
         }
     }
 }
 
-void pesquisaPessoaNome(Pessoa pessoas[])
+void pesquisaPessoaNome(Pessoa *pessoas[])
 {
     string supostoNome;
     cout << "\nDigite o nome a ser encontrado: ";
@@ -148,9 +130,9 @@ void pesquisaPessoaNome(Pessoa pessoas[])
     int encontradas = 0;
     for (int i = 0; i < Pessoa::TAM; i++)
     {
-        if (pessoas[i].getNome() == supostoNome)
+        if (pessoas[i]->getNome() == supostoNome)
         {
-            pessoas[i].escrevePessoa();
+            pessoas[i]->escrevePessoa();
             encontradas++;
         }
     }
@@ -161,7 +143,7 @@ void pesquisaPessoaNome(Pessoa pessoas[])
     }
 }
 
-void pesquisaPessoaCPF(Pessoa pessoas[])
+void pesquisaPessoaCPF(Pessoa *pessoas[])
 {
     string supostoCPF;
     cout << "\nDigite o CPF a ser encontrado (000.000.000-00): ";
@@ -171,9 +153,9 @@ void pesquisaPessoaCPF(Pessoa pessoas[])
     int encontradas = 0;
     for (int i = 0; i < Pessoa::TAM; i++)
     {
-        if (pessoas[i].getCPF() == supostoCPF)
+        if (pessoas[i]->getCPF() == supostoCPF)
         {
-            pessoas[i].escrevePessoa();
+            pessoas[i]->escrevePessoa();
             encontradas++;
         }
     }
@@ -184,7 +166,7 @@ void pesquisaPessoaCPF(Pessoa pessoas[])
     }
 }
 
-bool deletaPessoa(Pessoa pessoas[])
+bool deletaPessoa(Pessoa *pessoas[])
 {
     string cpf;
     cout << "\nCPF para excluir (000.000.000-00): ";
@@ -193,7 +175,7 @@ bool deletaPessoa(Pessoa pessoas[])
 
     for (int i = 0; i < Pessoa::TAM; i++)
     {
-        if (pessoas[i].getCPF() == cpf)
+        if (pessoas[i]->getCPF() == cpf)
         {
             for (int j = i; j < Pessoa::TAM - 1; j++)
             {
@@ -234,13 +216,13 @@ Pessoa::~Pessoa()
     TAM--;
 }
 
-void apagarTodos(Pessoa pessoas[])
+void apagarTodos(Pessoa *pessoas[])
 {
     Pessoa::TAM = 0;
     printf("Todos os cadastros foram removidos.\n");
 }
 
-void carregaPessoas(Pessoa pessoas[])
+void carregaPessoas(Pessoa *pessoas[])
 {
     FILE *arquivo = fopen("pessoas.dat", "rb");
     if (arquivo)
@@ -250,17 +232,27 @@ void carregaPessoas(Pessoa pessoas[])
     }
 }
 
-void gravaPessoas(Pessoa pessoas[])
+void gravaTAM(){
+    FILE *arquivo = fopen("tamanhoArq.dat", "wb");
+    if (arquivo)
+    {
+        fwrite(&Pessoa::TAM, sizeof(int), 1, arquivo);
+        fclose(arquivo);
+    }
+}
+void gravaPessoas(Pessoa *pessoas[])
 {
     FILE *arquivo = fopen("pessoas.dat", "wb");
     if (arquivo)
     {
         fwrite(pessoas, sizeof(Pessoa), Pessoa::TAM, arquivo);
         fclose(arquivo);
+        gravaTAM();
     }
 }
 
-void despedida(Pessoa pessoas[])
+
+void despedida(Pessoa *pessoas[])
 {
     printf("\nObrigado!\n");
     gravaPessoas(pessoas);

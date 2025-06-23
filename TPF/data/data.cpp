@@ -181,3 +181,11 @@ bool Data::setData(int d, int m, int a)
     bool daySet = setDia(d);
     return monthSet && daySet && yearSet;
 }
+
+bool Data::mesIgualParametro(int mes){
+    bool ehIgual = false;
+    if(getMes() == mes){
+        ehIgual = true;
+    }
+    return ehIgual;
+}
