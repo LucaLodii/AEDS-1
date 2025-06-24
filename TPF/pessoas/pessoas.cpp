@@ -100,7 +100,7 @@ Data Pessoa::getNascimento()
 //     Pessoa::TAM++;
 // }
 
-void leiaCPF()
+string leiaCPF()
 {
     string cpf;
     getline(cin, cpf);
@@ -124,6 +124,7 @@ void leiaCPF()
             cout << "Formato incorreto! Use: 000.000.000-00\n";
         }
     }
+    return cpf;
 }
 
 void pesquisaPessoaNome(Pessoa *pessoas[])
@@ -198,30 +199,34 @@ Pessoa::Pessoa()
 {
     nascimento.setData();
     nome = "";
-    TAM++;
 }
 
 Pessoa::Pessoa(string nome)
 {
     nascimento.setData();
     setNome(nome);
-    TAM++;
 }
 
 Pessoa::Pessoa(string nome, int dia, int mes, int ano)
 {
     nascimento.setData(dia, mes, ano);
     setNome(nome);
-    TAM++;
 }
 
 Pessoa::~Pessoa()
 {
-    TAM--;
 }
 
 void apagarTodos(Pessoa *pessoas[])
 {
+    // Delete all objects from memory first
+    for (int i = 0; i < Pessoa::TAM; i++)
+    {
+        if (pessoas[i] != nullptr) {
+            delete pessoas[i];
+            pessoas[i] = nullptr;
+        }
+    }
     Pessoa::TAM = 0;
     printf("Todos os cadastros foram removidos.\n");
 }
@@ -231,14 +236,18 @@ void carregaPessoas(Pessoa *pessoas[])
     FILE *arquivo = fopen("pessoas.dat", "rb");
     if (arquivo)
     {
+        int loaded = 0;
         for(int i = 0; i < Pessoa::TAM; i++)
         {
             Pessoa* p = criarPessoaDoArquivo(arquivo);
             if (p != nullptr) {
-                pessoas[i] = p;
+                pessoas[loaded++] = p;
+            } else {
+                break; // Stop if we can't read more
             }
         }
         fclose(arquivo);
+        Pessoa::TAM = loaded; // Update TAM to actual loaded
     }
 }
 
@@ -247,6 +256,9 @@ Pessoa* criarPessoaDoArquivo(FILE* arquivo) {
     Pessoa* novaPessoa = nullptr;
 
     int itemsLidos = fread(&tipo, sizeof(int), 1, arquivo);
+    if (itemsLidos != 1) {
+        return nullptr; // Could not read type
+    }
 
     switch (tipo) {
         case 1:
@@ -256,11 +268,14 @@ Pessoa* criarPessoaDoArquivo(FILE* arquivo) {
             novaPessoa = new Professor();
             break;
         default:
-            break;
+            return nullptr;
     }
 
     if (novaPessoa != nullptr) {
-        novaPessoa->carregar(arquivo);
+        if (!novaPessoa->carregar(arquivo)) {
+            delete novaPessoa;
+            return nullptr;
+        }
     }
 
     return novaPessoa;

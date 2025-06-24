@@ -23,7 +23,7 @@ public:
     Pessoa(string nome, int dia, int mes, int ano);
     virtual int getTipo() = 0;
 
-    ~Pessoa();
+    virtual ~Pessoa();
 
     void setNome(string);
     string getNome();
@@ -37,7 +37,7 @@ public:
     virtual void leiaPessoa() = 0;
     virtual void escrevePessoa() = 0;
     virtual void gravar(FILE* arquivo) = 0;
-    virtual void carregar(FILE* arquivo) = 0;
+    virtual bool carregar(FILE* arquivo) = 0;
 };
 
 // --- Funções auxiliares do sistema ---
@@ -56,7 +56,7 @@ void pesquisaPessoaCPF(Pessoa* pessoas[]);
 
 // --- Funções de manipulação ---
 // void cadastrePessoa(Pessoa* pessoas[]);
-void leiaCPF();
+string leiaCPF();
 bool deletaPessoa(Pessoa* pessoas[]);
 void apagarTodos(Pessoa* pessoas[]);
 

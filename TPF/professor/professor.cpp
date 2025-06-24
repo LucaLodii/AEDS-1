@@ -26,7 +26,7 @@ void Professor::leiaPessoa()
     setNome(nome);
 
     cout << "\nCPF: ";
-    leiaCPF();
+    setCPF(leiaCPF());
     cout << "\nData de nascimento: [DD MM AAAA]";
     int dia, mes, ano;
     cin >> dia >> mes >> ano;
@@ -35,7 +35,6 @@ void Professor::leiaPessoa()
     string especializacao;
     cin >> especializacao;
     setEspecializacao(especializacao);
-    Pessoa::TAM++;
 }
 
 void pesquisaProfessorNome(Pessoa *pessoas[])
@@ -106,10 +105,13 @@ bool deletaProfessor(Pessoa *pessoas[])
 
     for (int i = 0; i < Pessoa::TAM; i++)
     {
-        if (pessoas[i]->getTipo() == 1)
+        if (pessoas[i]->getTipo() == 2)
         {
             if (pessoas[i]->getCPF() == cpf)
             {
+                // Delete the object from memory first
+                delete pessoas[i];
+                
                 for (int j = i; j < Pessoa::TAM - 1; j++)
                 {
                     pessoas[j] = pessoas[j + 1]; // Faz o "shift"
@@ -130,15 +132,15 @@ void apagarTodosProfessores(Pessoa *pessoas[])
     {
         if (pessoas[i]->getTipo() == 2)
         {
+            // Delete the object from memory first
+            delete pessoas[i];
+            
             for (int j = i; j < Pessoa::TAM - 1; j++)
             {
                 pessoas[j] = pessoas[j + 1]; // Faz o "shift"
             }
             Pessoa::TAM--;
-        }
-        if (pessoas[i]->getTipo() == 2)
-        {
-            i--;
+            i--; // Stay at the same index since we shifted
         }
     }
     cout << "Professores excluidos com sucesso!\n";
@@ -209,35 +211,36 @@ void Professor::gravar(FILE *arquivo)
     fwrite(especializacao.c_str(), sizeof(char), espLen, arquivo);    
 }
 
-void Professor::carregar(FILE *arquivo)
+bool Professor::carregar(FILE *arquivo)
 {
     int nomeLen;
-    fread(&nomeLen, sizeof(int), 1, arquivo);
+    if (fread(&nomeLen, sizeof(int), 1, arquivo) != 1 || nomeLen <= 0 || nomeLen > 1000) return false;
     char *nomeBuf = new char[nomeLen + 1];
-    fread(nomeBuf, sizeof(char), nomeLen, arquivo);
+    if (fread(nomeBuf, sizeof(char), nomeLen, arquivo) != (size_t)nomeLen) { delete[] nomeBuf; return false; }
     nomeBuf[nomeLen] = '\0';
     setNome(nomeBuf);
     delete[] nomeBuf;
 
     int cpfLen;
-    fread(&cpfLen, sizeof(int), 1, arquivo);
+    if (fread(&cpfLen, sizeof(int), 1, arquivo) != 1 || cpfLen <= 0 || cpfLen > 100) return false;
     char *cpfBuf = new char[cpfLen + 1];
-    fread(cpfBuf, sizeof(char), cpfLen, arquivo);
+    if (fread(cpfBuf, sizeof(char), cpfLen, arquivo) != (size_t)cpfLen) { delete[] cpfBuf; return false; }
     cpfBuf[cpfLen] = '\0';
     setCPF(cpfBuf);
     delete[] cpfBuf;
     
     int dia, mes, ano;
-    fread(&dia, sizeof(int), 1, arquivo);
-    fread(&mes, sizeof(int), 1, arquivo);
-    fread(&ano, sizeof(int), 1, arquivo);
+    if (fread(&dia, sizeof(int), 1, arquivo) != 1) return false;
+    if (fread(&mes, sizeof(int), 1, arquivo) != 1) return false;
+    if (fread(&ano, sizeof(int), 1, arquivo) != 1) return false;
     setNascimento(dia, mes, ano);
     
     int especializacaoLen;
-    fread(&especializacaoLen, sizeof(int), 1, arquivo);
+    if (fread(&especializacaoLen, sizeof(int), 1, arquivo) != 1 || especializacaoLen <= 0 || especializacaoLen > 1000) return false;
     char *espBuf = new char[especializacaoLen + 1];
-    fread(espBuf, sizeof(char), especializacaoLen, arquivo);
+    if (fread(espBuf, sizeof(char), especializacaoLen, arquivo) != (size_t)especializacaoLen) { delete[] espBuf; return false; }
     espBuf[especializacaoLen] = '\0';
     setEspecializacao(espBuf);
     delete[] espBuf;
+    return true;
 }

@@ -26,7 +26,7 @@ void Aluno::leiaPessoa()
     setNome(nome);
 
     cout << "\nCPF: ";
-    leiaCPF();
+    setCPF(leiaCPF());
     cout << "\nData de nascimento: [DD MM AAAA]";
     int dia, mes, ano;
     cin >> dia >> mes >> ano;
@@ -35,7 +35,6 @@ void Aluno::leiaPessoa()
     unsigned long int matricula;
     cin >> matricula;
     setMatricula(matricula);
-    Pessoa::TAM++;
 }
 
 void pesquisaAlunoNome(Pessoa *pessoas[])
@@ -112,6 +111,9 @@ bool deletaAluno(Pessoa *pessoas[])
         {
             if (pessoas[i]->getCPF() == cpf)
             {
+                // Delete the object from memory first
+                delete pessoas[i];
+                
                 for (int j = i; j < Pessoa::TAM - 1; j++)
                 {
                     pessoas[j] = pessoas[j + 1]; // Faz o "shift"
@@ -132,15 +134,15 @@ void apagarTodosAlunos(Pessoa *pessoas[])
     {
         if (pessoas[i]->getTipo() == 1)
         {
+            // Delete the object from memory first
+            delete pessoas[i];
+            
             for (int j = i; j < Pessoa::TAM - 1; j++)
             {
                 pessoas[j] = pessoas[j + 1]; // Faz o "shift"
             }
             Pessoa::TAM--;
-        }
-        if (pessoas[i]->getTipo() == 1)
-        {
-            i--;
+            i--; // Stay at the same index since we shifted
         }
     }
     cout << "Alunos excluidos com sucesso!\n";
@@ -209,31 +211,32 @@ void Aluno::gravar(FILE *arquivo)
     fwrite(&matricula, sizeof(unsigned long int), 1, arquivo);
 }
 
-void Aluno::carregar(FILE *arquivo)
+bool Aluno::carregar(FILE *arquivo)
 {
     int nomeLen;
-    fread(&nomeLen, sizeof(int), 1, arquivo);
+    if (fread(&nomeLen, sizeof(int), 1, arquivo) != 1 || nomeLen <= 0 || nomeLen > 1000) return false;
     char *nomeBuf = new char[nomeLen + 1];
-    fread(nomeBuf, sizeof(char), nomeLen, arquivo);
+    if (fread(nomeBuf, sizeof(char), nomeLen, arquivo) != (size_t)nomeLen) { delete[] nomeBuf; return false; }
     nomeBuf[nomeLen] = '\0';
     setNome(nomeBuf);
     delete[] nomeBuf;
 
     int cpfLen;
-    fread(&cpfLen, sizeof(int), 1, arquivo);
+    if (fread(&cpfLen, sizeof(int), 1, arquivo) != 1 || cpfLen <= 0 || cpfLen > 100) return false;
     char *cpfBuf = new char[cpfLen + 1];
-    fread(cpfBuf, sizeof(char), cpfLen, arquivo);
+    if (fread(cpfBuf, sizeof(char), cpfLen, arquivo) != (size_t)cpfLen) { delete[] cpfBuf; return false; }
     cpfBuf[cpfLen] = '\0';
     setCPF(cpfBuf);
     delete[] cpfBuf;
 
     int dia, mes, ano;
-    fread(&dia, sizeof(int), 1, arquivo);
-    fread(&mes, sizeof(int), 1, arquivo);
-    fread(&ano, sizeof(int), 1, arquivo);
+    if (fread(&dia, sizeof(int), 1, arquivo) != 1) return false;
+    if (fread(&mes, sizeof(int), 1, arquivo) != 1) return false;
+    if (fread(&ano, sizeof(int), 1, arquivo) != 1) return false;
     setNascimento(dia, mes, ano);
 
     unsigned long int matricula;
-    fread(&matricula, sizeof(unsigned long int), 1, arquivo);
+    if (fread(&matricula, sizeof(unsigned long int), 1, arquivo) != 1) return false;
     setMatricula(matricula);
+    return true;
 }

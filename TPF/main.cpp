@@ -22,6 +22,8 @@ int main()
     do
     {
         system("cls");
+        cout << Pessoa::TAM << endl;
+
         printf("\nMenu de funcionalidades, escolha uma opcao: \n");
         printf("0 - Sair do Programa\n");
         printf("1 - Cadastrar pessoa\n");
@@ -39,6 +41,14 @@ int main()
         case 0:
             printf("\nObrigado por usar este programa\n");
             despedida(pessoas);
+            
+            // Limpar objetos alocados
+            for (int i = 0; i < Pessoa::TAM; i++)
+            {
+                if (pessoas[i] != nullptr) {
+                    delete pessoas[i];
+                }
+            }
             break;
 
         case 1:
@@ -56,13 +66,27 @@ int main()
                 break;
 
             case 1:
+                if (Pessoa::TAM >= MAX) {
+                    cout << "Limite maximo de pessoas atingido!" << endl;
+                    break;
+                }
                 pessoas[Pessoa::TAM] = new Professor();
                 pessoas[Pessoa::TAM]->leiaPessoa();
+                cout << pessoas[Pessoa::TAM]->getNome() << endl;
+
+                Pessoa::TAM++;
                 break;
 
             case 2:
+                if (Pessoa::TAM >= MAX) {
+                    cout << "Limite maximo de pessoas atingido!" << endl;
+                    break;
+                }
                 pessoas[Pessoa::TAM] = new Aluno();
                 pessoas[Pessoa::TAM]->leiaPessoa();
+                cout << pessoas[Pessoa::TAM]->getNome() << endl;
+
+                Pessoa::TAM++;
                 break;
 
             default:
@@ -85,12 +109,12 @@ int main()
                 break;
 
             case 1:
-                listaAlunos(pessoas);
+                listaProfessores(pessoas);
                 cin.get();
                 break;
 
             case 2:
-                listaProfessores(pessoas);
+                listaAlunos(pessoas);
                 cin.get();
                 break;
 
