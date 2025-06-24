@@ -24,7 +24,7 @@ void Aluno::leiaPessoa()
     cout << "\nNome: ";
     getline(cin, nome);
     setNome(nome);
-    
+
     cout << "\nCPF: ";
     leiaCPF();
     cout << "\nData de nascimento: [DD MM AAAA]";
@@ -138,7 +138,8 @@ void apagarTodosAlunos(Pessoa *pessoas[])
             }
             Pessoa::TAM--;
         }
-        if(pessoas[i]->getTipo() == 1){
+        if (pessoas[i]->getTipo() == 1)
+        {
             i--;
         }
     }
@@ -174,4 +175,65 @@ void listarAlunosAniversariantes(Pessoa *pessoas[], int mes)
             pessoas[i]->escrevePessoa();
         }
     }
+}
+
+// funcoes de arquivos
+void Aluno::gravar(FILE *arquivo)
+{
+    // Anotar o Tipo da Classe (1 == Aluno)
+    int tipo = 1;
+    fwrite(&tipo, sizeof(int), 1, arquivo);
+
+    string nome = getNome();
+
+    int nomeLen = nome.length();
+    fwrite(&nomeLen, sizeof(int), 1, arquivo);
+    fwrite(nome.c_str(), sizeof(char), nomeLen, arquivo);
+
+    string cpf = getCPF();
+
+    int cpfLen = cpf.length();
+    fwrite(&cpfLen, sizeof(int), 1, arquivo);
+    fwrite(cpf.c_str(), sizeof(char), cpfLen, arquivo);
+
+    Data nascimento = getNascimento();
+    int dia = nascimento.getDia();
+    int mes = nascimento.getMes();
+    int ano = nascimento.getAno();
+
+    fwrite(&dia, sizeof(int), 1, arquivo);
+    fwrite(&mes, sizeof(int), 1, arquivo);
+    fwrite(&ano, sizeof(int), 1, arquivo);
+
+    unsigned long int matricula = getMatricula();
+    fwrite(&matricula, sizeof(unsigned long int), 1, arquivo);
+}
+
+void Aluno::carregar(FILE *arquivo)
+{
+    int nomeLen;
+    fread(&nomeLen, sizeof(int), 1, arquivo);
+    char *nomeBuf = new char[nomeLen + 1];
+    fread(nomeBuf, sizeof(char), nomeLen, arquivo);
+    nomeBuf[nomeLen] = '\0';
+    setNome(nomeBuf);
+    delete[] nomeBuf;
+
+    int cpfLen;
+    fread(&cpfLen, sizeof(int), 1, arquivo);
+    char *cpfBuf = new char[cpfLen + 1];
+    fread(cpfBuf, sizeof(char), cpfLen, arquivo);
+    cpfBuf[cpfLen] = '\0';
+    setCPF(cpfBuf);
+    delete[] cpfBuf;
+
+    int dia, mes, ano;
+    fread(&dia, sizeof(int), 1, arquivo);
+    fread(&mes, sizeof(int), 1, arquivo);
+    fread(&ano, sizeof(int), 1, arquivo);
+    setNascimento(dia, mes, ano);
+
+    unsigned long int matricula;
+    fread(&matricula, sizeof(unsigned long int), 1, arquivo);
+    setMatricula(matricula);
 }

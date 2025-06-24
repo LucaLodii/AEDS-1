@@ -27,8 +27,9 @@ public:
     Aluno(){};
 
     void leiaPessoa();
-
     void escrevePessoa();
+    void gravar(FILE* arquivo);
+    void carregar(FILE* arquivo);
 };
 
 void pesquisaAlunoNome(Pessoa *pessoas[]);

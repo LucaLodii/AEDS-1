@@ -5,6 +5,8 @@
 #include <cstdio>
 #include <string>
 #include "pessoas.hpp"
+#include "../professor/professor.hpp"
+#include "../aluno/aluno.hpp"
 using namespace std;
 
 int Pessoa::TAM = 0; // Definição da variável global
@@ -12,7 +14,7 @@ int Pessoa::TAM = 0; // Definição da variável global
 void abertura(Pessoa *pessoas[])
 {
     cout << "\nControle de Pessoas\n";
-    Pessoa::TAM = tamanho((char *)"tamanhoArq.dat");
+    Pessoa::TAM = tamanho("tamanhoArq.dat");
     carregaPessoas(pessoas);
 }
 
@@ -229,9 +231,39 @@ void carregaPessoas(Pessoa *pessoas[])
     FILE *arquivo = fopen("pessoas.dat", "rb");
     if (arquivo)
     {
-        fread(pessoas, sizeof(Pessoa), Pessoa::TAM, arquivo);
+        for(int i = 0; i < Pessoa::TAM; i++)
+        {
+            Pessoa* p = criarPessoaDoArquivo(arquivo);
+            if (p != nullptr) {
+                pessoas[i] = p;
+            }
+        }
         fclose(arquivo);
     }
+}
+
+Pessoa* criarPessoaDoArquivo(FILE* arquivo) {
+    int tipo;
+    Pessoa* novaPessoa = nullptr;
+
+    int itemsLidos = fread(&tipo, sizeof(int), 1, arquivo);
+
+    switch (tipo) {
+        case 1:
+            novaPessoa = new Aluno();
+            break;
+        case 2:
+            novaPessoa = new Professor();
+            break;
+        default:
+            break;
+    }
+
+    if (novaPessoa != nullptr) {
+        novaPessoa->carregar(arquivo);
+    }
+
+    return novaPessoa;
 }
 
 void gravaTAM(){
@@ -247,7 +279,12 @@ void gravaPessoas(Pessoa *pessoas[])
     FILE *arquivo = fopen("pessoas.dat", "wb");
     if (arquivo)
     {
-        fwrite(pessoas, sizeof(Pessoa), Pessoa::TAM, arquivo);
+        for (int i = 0; i < Pessoa::TAM; ++i)
+        {
+            if (pessoas[i] != nullptr) {
+                pessoas[i]->gravar(arquivo);
+            }
+        }
         fclose(arquivo);
         gravaTAM();
     }

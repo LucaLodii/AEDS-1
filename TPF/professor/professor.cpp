@@ -174,3 +174,70 @@ void listarProfessoresAniversariantes(Pessoa *pessoas[], int mes)
         }
     }
 }
+
+// funcoes de arquivos
+void Professor::gravar(FILE *arquivo)
+{
+    // Anotar o Tipo da Classe (2 == Professor)
+    int tipo = 2;
+    fwrite(&tipo, sizeof(int), 1, arquivo);
+
+    string nome = getNome();
+    
+    int nomeLen = nome.length();
+    fwrite(&nomeLen, sizeof(int), 1, arquivo);
+    fwrite(nome.c_str(), sizeof(char), nomeLen, arquivo);
+    
+    string cpf = getCPF();
+
+    int cpfLen = cpf.length();
+    fwrite(&cpfLen, sizeof(int), 1, arquivo);
+    fwrite(cpf.c_str(), sizeof(char), cpfLen, arquivo);
+
+    Data nascimento = getNascimento();
+    int dia = nascimento.getDia();
+    int mes = nascimento.getMes();
+    int ano = nascimento.getAno();
+
+    fwrite(&dia, sizeof(int), 1, arquivo);
+    fwrite(&mes, sizeof(int), 1, arquivo);
+    fwrite(&ano, sizeof(int), 1, arquivo);
+
+    string especializacao = getEspecializacao();
+    int espLen = especializacao.length();
+    fwrite(&espLen, sizeof(int), 1, arquivo);
+    fwrite(especializacao.c_str(), sizeof(char), espLen, arquivo);    
+}
+
+void Professor::carregar(FILE *arquivo)
+{
+    int nomeLen;
+    fread(&nomeLen, sizeof(int), 1, arquivo);
+    char *nomeBuf = new char[nomeLen + 1];
+    fread(nomeBuf, sizeof(char), nomeLen, arquivo);
+    nomeBuf[nomeLen] = '\0';
+    setNome(nomeBuf);
+    delete[] nomeBuf;
+
+    int cpfLen;
+    fread(&cpfLen, sizeof(int), 1, arquivo);
+    char *cpfBuf = new char[cpfLen + 1];
+    fread(cpfBuf, sizeof(char), cpfLen, arquivo);
+    cpfBuf[cpfLen] = '\0';
+    setCPF(cpfBuf);
+    delete[] cpfBuf;
+    
+    int dia, mes, ano;
+    fread(&dia, sizeof(int), 1, arquivo);
+    fread(&mes, sizeof(int), 1, arquivo);
+    fread(&ano, sizeof(int), 1, arquivo);
+    setNascimento(dia, mes, ano);
+    
+    int especializacaoLen;
+    fread(&especializacaoLen, sizeof(int), 1, arquivo);
+    char *espBuf = new char[especializacaoLen + 1];
+    fread(espBuf, sizeof(char), especializacaoLen, arquivo);
+    espBuf[especializacaoLen] = '\0';
+    setEspecializacao(espBuf);
+    delete[] espBuf;
+}
