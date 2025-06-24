@@ -34,11 +34,10 @@ public:
     bool setNascimento(int dia, int mes, int ano);
     Data getNascimento();
 
-    void leiaNome();
-    void escrevaNome();
-
     virtual void leiaPessoa() = 0;
     virtual void escrevePessoa() = 0;
+    virtual void gravar(FILE* arquivo) = 0;
+    virtual void carregar(FILE* arquivo) = 0;
 };
 
 // --- Funções auxiliares do sistema ---
@@ -46,8 +45,9 @@ void abertura(Pessoa* pessoas[]);       // Inicializa o sistema
 void carregaPessoas(Pessoa* pessoas[]); // Carrega do arquivo
 void despedida(Pessoa* pessoas[]);      // Grava no arquivo ao encerrar
 
-int tamanho(char *arq);              // Verifica tamanho do arquivo
+int tamanho(const char *filename);              // Verifica tamanho do arquivo
 void gravaPessoas(Pessoa* pessoas[]); // Salva no arquivo
+Pessoa* criarPessoaDoArquivo(FILE* arquivo);
 void gravaTAM();
 
 // --- Funções de pesquisa ---

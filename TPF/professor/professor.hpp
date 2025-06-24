@@ -18,7 +18,7 @@ public:
     }
 
     Professor(
-        string nome, string, int mes, int dia, int ano)
+        string nome, int mes, int dia, int ano)
         : Pessoa(
               nome, mes, dia, ano) {};
 
@@ -27,8 +27,9 @@ public:
     Professor() {};
 
     void leiaPessoa();
-
     void escrevePessoa();
+    void gravar(FILE* arquivo);
+    void carregar(FILE* arquivo);
 };
 
 void pesquisaProfessorNome(Pessoa *pessoas[]);
@@ -36,6 +37,7 @@ void pesquisaProfessorCPF(Pessoa* pessoas[]);
 bool deletaProfessor(Pessoa *pessoas[]);
 void apagarTodosProfessores(Pessoa *pessoas[]);
 void listaProfessores(Pessoa *pessoas[]);
+void listarProfessoresAniversariantes(Pessoa *pessoas[], int mes);
 
 
 #endif
