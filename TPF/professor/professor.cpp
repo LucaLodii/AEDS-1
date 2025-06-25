@@ -83,7 +83,7 @@ void pesquisaProfessorCPF(Pessoa *pessoas[])
     {
         if (pessoas[i]->getTipo() == 2)
         {
-            if (pessoas[i]->getNome() == supostoCPF)
+            if (pessoas[i]->getCPF() == supostoCPF)
             {
                 pessoas[i]->escrevePessoa();
                 encontradas++;

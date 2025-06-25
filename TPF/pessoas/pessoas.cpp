@@ -19,17 +19,20 @@ void abertura(Pessoa *pessoas[])
 }
 
 int tamanho(const char *filename) {
-    FILE *file = fopen(filename, "r");
+    FILE *file = fopen(filename, "rb");
+    int tam;
 
     if (file != nullptr) {
-        if (fscanf(file, "%i", &Pessoa::TAM) != 1) {
+        if (fread(&tam, sizeof(int), 1, file) == 1) {
+            Pessoa::TAM = tam;
+        } else {
             Pessoa::TAM = 0;
         }
         fclose(file);
     } else {        
-        file = fopen(filename, "w");
+        file = fopen(filename, "wb");
         if (file != nullptr) {
-            fprintf(file, "%d\n", Pessoa::TAM); 
+            fwrite(&Pessoa::TAM, sizeof(int), 1, file); 
             fclose(file); 
         }
     }
@@ -256,6 +259,7 @@ Pessoa* criarPessoaDoArquivo(FILE* arquivo) {
     Pessoa* novaPessoa = nullptr;
 
     int itemsLidos = fread(&tipo, sizeof(int), 1, arquivo);
+    cout << "Items lidos: " << itemsLidos << endl; //debugging
     if (itemsLidos != 1) {
         return nullptr; // Could not read type
     }

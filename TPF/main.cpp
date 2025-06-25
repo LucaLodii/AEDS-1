@@ -21,9 +21,11 @@ int main()
 
     do
     {
-        system("cls");
-        cout << Pessoa::TAM << endl;
+        // system("cls"); limpar terminal em Windows
+        system("clear"); // limpar terminal em Linux e macOS
+        cout << Pessoa::TAM << endl; //debugging
 
+        // menu principal
         printf("\nMenu de funcionalidades, escolha uma opcao: \n");
         printf("0 - Sair do Programa\n");
         printf("1 - Cadastrar pessoa\n");
@@ -41,18 +43,20 @@ int main()
         case 0:
             printf("\nObrigado por usar este programa\n");
             despedida(pessoas);
-            
+
             // Limpar objetos alocados
             for (int i = 0; i < Pessoa::TAM; i++)
             {
-                if (pessoas[i] != nullptr) {
+                if (pessoas[i] != nullptr)
+                {
                     delete pessoas[i];
                 }
             }
             break;
 
         case 1:
-            system("cls");
+            // system("cls"); limpar terminal em Windows
+            system("clear"); // limpar terminal em Linux e macOS
             cout << "0 - Voltar ao menu inicial" << endl;
             cout << "1 - Cadastrar Professor" << endl;
             cout << "2 - Cadastrar Aluno" << endl
@@ -66,7 +70,8 @@ int main()
                 break;
 
             case 1:
-                if (Pessoa::TAM >= MAX) {
+                if (Pessoa::TAM >= MAX)
+                {
                     cout << "Limite maximo de pessoas atingido!" << endl;
                     break;
                 }
@@ -78,7 +83,8 @@ int main()
                 break;
 
             case 2:
-                if (Pessoa::TAM >= MAX) {
+                if (Pessoa::TAM >= MAX)
+                {
                     cout << "Limite maximo de pessoas atingido!" << endl;
                     break;
                 }
@@ -95,7 +101,8 @@ int main()
             break;
 
         case 2:
-            system("cls");
+            // system("cls"); limpar terminal em Windows
+            system("clear"); // limpar terminal em Linux e macOS
             cout << "0 - Voltar ao menu inicial" << endl;
             cout << "1 - Listar Professor" << endl;
             cout << "2 - Listar Aluno" << endl
@@ -124,7 +131,8 @@ int main()
             break;
 
         case 3:
-            system("cls");
+            // system("cls"); limpar terminal em Windows
+            system("clear"); // limpar terminal em Linux e macOS
             cout << "0 - Voltar ao menu inicial" << endl;
             cout << "1 - Pesquisar Professores por nome" << endl;
             cout << "2 - Pesquisar Alunos por nome" << endl
@@ -153,7 +161,8 @@ int main()
             break;
 
         case 4:
-            system("cls");
+            // system("cls"); limpar terminal em Windows
+            // system("clear"); // limpar terminal em Linux e macOS
             cout << "0 - Voltar ao menu inicial" << endl;
             cout << "1 - Pesquisar Professores por CPF" << endl;
             cout << "2 - Pesquisar Alunos por CPF" << endl
@@ -182,7 +191,8 @@ int main()
             break;
 
         case 5:
-            system("cls");
+            // system("cls"); limpar terminal em Windows
+            system("clear"); // limpar terminal em Linux e macOS
             cout << "0 - Voltar ao menu inicial" << endl;
             cout << "1 - Excluir Professor (pelo CPF)" << endl;
             cout << "2 - Excluir Aluno (pelo CPF)" << endl
@@ -211,7 +221,8 @@ int main()
             break;
 
         case 6:
-            system("cls");
+            // system("cls"); limpar terminal em Windows
+            system("clear"); // limpar terminal em Linux e macOS
             cout << "0 - Voltar ao menu inicial" << endl;
             cout << "1 - Excluir todos os Professores" << endl;
             cout << "2 - Excluir todos os Alunos" << endl
@@ -242,7 +253,8 @@ int main()
         case 7:
             do
             {
-                system("cls");
+                // system("cls"); limpar terminal em Windows
+                system("clear"); // limpar terminal em Linux e macOS
                 cout << "0 - Voltar ao menu inicial" << endl;
                 cout << "1 - Informar o mês a ser pesquisado" << endl;
                 cout << "2 - Listar os Professores aniversariantes do mês" << endl;

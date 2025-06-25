@@ -41,7 +41,6 @@ void pesquisaAlunoNome(Pessoa *pessoas[])
 {
     string supostoNome;
     cout << "\nDigite o nome a ser encontrado: ";
-    cin.ignore();
     getline(cin, supostoNome);
 
     int encontradas = 0;
@@ -77,7 +76,6 @@ void pesquisaAlunoCPF(Pessoa *pessoas[])
 {
     string supostoCPF;
     cout << "\nDigite o CPF a ser encontrado (000.000.000-00): ";
-    cin.ignore(); // evita erro caso o buffer do cin esteja sujo
     getline(cin, supostoCPF);
 
     int encontradas = 0;
@@ -85,7 +83,7 @@ void pesquisaAlunoCPF(Pessoa *pessoas[])
     {
         if (pessoas[i]->getTipo() == 1)
         {
-            if (pessoas[i]->getNome() == supostoCPF)
+            if (pessoas[i]->getCPF() == supostoCPF)
             {
                 pessoas[i]->escrevePessoa();
                 encontradas++;
