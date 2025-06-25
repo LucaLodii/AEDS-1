@@ -18,22 +18,30 @@ void abertura(Pessoa *pessoas[])
     carregaPessoas(pessoas);
 }
 
-int tamanho(const char *filename) {
+int tamanho(const char *filename)
+{
     FILE *file = fopen(filename, "rb");
     int tam;
 
-    if (file != nullptr) {
-        if (fread(&tam, sizeof(int), 1, file) == 1) {
+    if (file != nullptr)
+    {
+        if (fread(&tam, sizeof(int), 1, file) == 1)
+        {
             Pessoa::TAM = tam;
-        } else {
+        }
+        else
+        {
             Pessoa::TAM = 0;
         }
         fclose(file);
-    } else {        
+    }
+    else
+    {
         file = fopen(filename, "wb");
-        if (file != nullptr) {
-            fwrite(&Pessoa::TAM, sizeof(int), 1, file); 
-            fclose(file); 
+        if (file != nullptr)
+        {
+            fwrite(&Pessoa::TAM, sizeof(int), 1, file);
+            fclose(file);
         }
     }
 
@@ -181,6 +189,8 @@ bool deletaPessoa(Pessoa *pessoas[])
     cin.ignore();
     getline(cin, cpf);
 
+    bool apagou = false;
+
     for (int i = 0; i < Pessoa::TAM; i++)
     {
         if (pessoas[i]->getCPF() == cpf)
@@ -191,11 +201,11 @@ bool deletaPessoa(Pessoa *pessoas[])
             }
             Pessoa::TAM--;
             cout << "Pessoa excluida com sucesso!\n";
-            return true;
+            apagou = true;
         }
     }
     cout << "CPF não encontrado.\n";
-    return false;
+    return apagou;
 }
 
 Pessoa::Pessoa()
@@ -225,7 +235,8 @@ void apagarTodos(Pessoa *pessoas[])
     // Delete all objects from memory first
     for (int i = 0; i < Pessoa::TAM; i++)
     {
-        if (pessoas[i] != nullptr) {
+        if (pessoas[i] != nullptr)
+        {
             delete pessoas[i];
             pessoas[i] = nullptr;
         }
@@ -240,12 +251,15 @@ void carregaPessoas(Pessoa *pessoas[])
     if (arquivo)
     {
         int loaded = 0;
-        for(int i = 0; i < Pessoa::TAM; i++)
+        for (int i = 0; i < Pessoa::TAM; i++)
         {
-            Pessoa* p = criarPessoaDoArquivo(arquivo);
-            if (p != nullptr) {
+            Pessoa *p = criarPessoaDoArquivo(arquivo);
+            if (p != nullptr)
+            {
                 pessoas[loaded++] = p;
-            } else {
+            }
+            else
+            {
                 break; // Stop if we can't read more
             }
         }
@@ -254,38 +268,43 @@ void carregaPessoas(Pessoa *pessoas[])
     }
 }
 
-Pessoa* criarPessoaDoArquivo(FILE* arquivo) {
+Pessoa *criarPessoaDoArquivo(FILE *arquivo)
+{
     int tipo;
-    Pessoa* novaPessoa = nullptr;
+    Pessoa *novaPessoa = nullptr;
 
     int itemsLidos = fread(&tipo, sizeof(int), 1, arquivo);
-    cout << "Items lidos: " << itemsLidos << endl; //debugging
-    if (itemsLidos != 1) {
-        return nullptr; // Could not read type
+    if (itemsLidos != 1)
+    {
+        novaPessoa = nullptr;
     }
 
-    switch (tipo) {
-        case 1:
-            novaPessoa = new Aluno();
-            break;
-        case 2:
-            novaPessoa = new Professor();
-            break;
-        default:
-            return nullptr;
+    switch (tipo)
+    {
+    case 1:
+        novaPessoa = new Aluno();
+        break;
+    case 2:
+        novaPessoa = new Professor();
+        break;
+    default:
+        novaPessoa = nullptr;
     }
 
-    if (novaPessoa != nullptr) {
-        if (!novaPessoa->carregar(arquivo)) {
+    if (novaPessoa != nullptr)
+    {
+        if (!novaPessoa->carregar(arquivo))
+        {
             delete novaPessoa;
-            return nullptr;
+            novaPessoa = nullptr;
         }
     }
 
     return novaPessoa;
 }
 
-void gravaTAM(){
+void gravaTAM()
+{
     FILE *arquivo = fopen("tamanhoArq.dat", "wb");
     if (arquivo)
     {
@@ -300,7 +319,8 @@ void gravaPessoas(Pessoa *pessoas[])
     {
         for (int i = 0; i < Pessoa::TAM; ++i)
         {
-            if (pessoas[i] != nullptr) {
+            if (pessoas[i] != nullptr)
+            {
                 pessoas[i]->gravar(arquivo);
             }
         }
@@ -308,7 +328,6 @@ void gravaPessoas(Pessoa *pessoas[])
         gravaTAM();
     }
 }
-
 
 void despedida(Pessoa *pessoas[])
 {

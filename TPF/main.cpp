@@ -23,7 +23,6 @@ int main()
     {
         // system("cls"); limpar terminal em Windows
         system("clear"); // limpar terminal em Linux e macOS
-        cout << Pessoa::TAM << endl; //debugging
 
         // menu principal
         printf("\nMenu de funcionalidades, escolha uma opcao: \n");
@@ -162,7 +161,7 @@ int main()
 
         case 4:
             // system("cls"); limpar terminal em Windows
-            // system("clear"); // limpar terminal em Linux e macOS
+            system("clear"); // limpar terminal em Linux e macOS
             cout << "0 - Voltar ao menu inicial" << endl;
             cout << "1 - Pesquisar Professores por CPF" << endl;
             cout << "2 - Pesquisar Alunos por CPF" << endl

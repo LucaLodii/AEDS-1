@@ -69,7 +69,7 @@ void Professor::escrevePessoa()
     Data nascimento = getNascimento();
     nascimento.escreveData();
     cout << "\nCPF: " << getCPF();
-    cout << "\nEspecializacao: " << getEspecializacao();
+    cout << "\nEspecializacao: " << getEspecializacao() << endl;
 }
 
 void pesquisaProfessorCPF(Pessoa *pessoas[])
@@ -213,34 +213,35 @@ void Professor::gravar(FILE *arquivo)
 
 bool Professor::carregar(FILE *arquivo)
 {
+    bool carregou = true;
     int nomeLen;
-    if (fread(&nomeLen, sizeof(int), 1, arquivo) != 1 || nomeLen <= 0 || nomeLen > 1000) return false;
+    if (fread(&nomeLen, sizeof(int), 1, arquivo) != 1 || nomeLen <= 0 || nomeLen > 1000) carregou = false;
     char *nomeBuf = new char[nomeLen + 1];
-    if (fread(nomeBuf, sizeof(char), nomeLen, arquivo) != (size_t)nomeLen) { delete[] nomeBuf; return false; }
+    if (fread(nomeBuf, sizeof(char), nomeLen, arquivo) != (size_t)nomeLen) { delete[] nomeBuf; carregou = false; }
     nomeBuf[nomeLen] = '\0';
     setNome(nomeBuf);
     delete[] nomeBuf;
 
     int cpfLen;
-    if (fread(&cpfLen, sizeof(int), 1, arquivo) != 1 || cpfLen <= 0 || cpfLen > 100) return false;
+    if (fread(&cpfLen, sizeof(int), 1, arquivo) != 1 || cpfLen <= 0 || cpfLen > 100) carregou = false;
     char *cpfBuf = new char[cpfLen + 1];
-    if (fread(cpfBuf, sizeof(char), cpfLen, arquivo) != (size_t)cpfLen) { delete[] cpfBuf; return false; }
+    if (fread(cpfBuf, sizeof(char), cpfLen, arquivo) != (size_t)cpfLen) { delete[] cpfBuf; carregou = false; }
     cpfBuf[cpfLen] = '\0';
     setCPF(cpfBuf);
     delete[] cpfBuf;
     
     int dia, mes, ano;
-    if (fread(&dia, sizeof(int), 1, arquivo) != 1) return false;
-    if (fread(&mes, sizeof(int), 1, arquivo) != 1) return false;
-    if (fread(&ano, sizeof(int), 1, arquivo) != 1) return false;
+    if (fread(&dia, sizeof(int), 1, arquivo) != 1) carregou = false;
+    if (fread(&mes, sizeof(int), 1, arquivo) != 1) carregou = false;
+    if (fread(&ano, sizeof(int), 1, arquivo) != 1) carregou = false;
     setNascimento(dia, mes, ano);
     
     int especializacaoLen;
-    if (fread(&especializacaoLen, sizeof(int), 1, arquivo) != 1 || especializacaoLen <= 0 || especializacaoLen > 1000) return false;
+    if (fread(&especializacaoLen, sizeof(int), 1, arquivo) != 1 || especializacaoLen <= 0 || especializacaoLen > 1000) carregou = false;
     char *espBuf = new char[especializacaoLen + 1];
-    if (fread(espBuf, sizeof(char), especializacaoLen, arquivo) != (size_t)especializacaoLen) { delete[] espBuf; return false; }
+    if (fread(espBuf, sizeof(char), especializacaoLen, arquivo) != (size_t)especializacaoLen) { delete[] espBuf; carregou = false; }
     espBuf[especializacaoLen] = '\0';
     setEspecializacao(espBuf);
     delete[] espBuf;
-    return true;
+    return carregou;
 }
