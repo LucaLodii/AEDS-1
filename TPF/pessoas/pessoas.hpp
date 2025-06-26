@@ -21,8 +21,9 @@ public:
     Pessoa();
     Pessoa(string nome);
     Pessoa(string nome, int dia, int mes, int ano);
+    virtual int getTipo() = 0;
 
-    ~Pessoa();
+    virtual ~Pessoa();
 
     void setNome(string);
     string getNome();
@@ -33,29 +34,30 @@ public:
     bool setNascimento(int dia, int mes, int ano);
     Data getNascimento();
 
-    void leiaNome();
-    void escrevaNome();
-
-    void leiaPessoa();
-    void escrevePessoa();
+    virtual void leiaPessoa() = 0;
+    virtual void escrevePessoa() = 0;
+    virtual void gravar(FILE* arquivo) = 0;
+    virtual bool carregar(FILE* arquivo) = 0;
 };
 
 // --- Funções auxiliares do sistema ---
-void abertura(Pessoa pessoas[]);       // Inicializa o sistema
-void carregaPessoas(Pessoa pessoas[]); // Carrega do arquivo
-void despedida(Pessoa pessoas[]);      // Grava no arquivo ao encerrar
+void abertura(Pessoa* pessoas[]);       // Inicializa o sistema
+void carregaPessoas(Pessoa* pessoas[]); // Carrega do arquivo
+void despedida(Pessoa* pessoas[]);      // Grava no arquivo ao encerrar
 
-int tamanho(char *arq);              // Verifica tamanho do arquivo
-void gravaPessoas(Pessoa pessoas[]); // Salva no arquivo
+int tamanho(const char *filename);              // Verifica tamanho do arquivo
+void gravaPessoas(Pessoa* pessoas[]); // Salva no arquivo
+Pessoa* criarPessoaDoArquivo(FILE* arquivo);
+void gravaTAM();
 
 // --- Funções de pesquisa ---
-void pesquisaPessoaNome(Pessoa pessoas[]);
-void pesquisaPessoaCPF(Pessoa pessoas[]);
+void pesquisaPessoaNome(Pessoa* pessoas[]);
+void pesquisaPessoaCPF(Pessoa* pessoas[]);
 
 // --- Funções de manipulação ---
-void cadastrePessoa(Pessoa pessoas[]);
-void leiaCPF(char cpf[]);
-bool deletaPessoa(Pessoa pessoas[]);
-void apagarTodos(Pessoa pessoas[]);
+// void cadastrePessoa(Pessoa* pessoas[]);
+string leiaCPF();
+bool deletaPessoa(Pessoa* pessoas[]);
+void apagarTodos(Pessoa* pessoas[]);
 
 #endif

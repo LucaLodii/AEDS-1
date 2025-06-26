@@ -4,18 +4,27 @@
 #include <string>
 #include "data/data.hpp"
 #include "pessoas/pessoas.hpp"
+#include "professor/professor.hpp"
+#include "aluno/aluno.hpp"
 
-// Para rodar: g++ main.cpp pessoas/pessoas.cpp data/data.cpp -o main
+using namespace std;
+
+// Para rodar: g++ main.cpp pessoas/pessoas.cpp data/data.cpp professor/professor.cpp aluno/aluno.cpp -o main
 
 int main()
 {
-    Pessoa pessoas[MAX];
+    setlocale(LC_ALL, "");
+    Pessoa *pessoas[MAX];
     abertura(pessoas); // Inicializa o sistema
 
-    int opcao;
-    bool pessoasCadastradas = false;
+    int opcao, subOpcao, mes;
+
     do
     {
+        // system("cls"); limpar terminal em Windows
+        system("clear"); // limpar terminal em Linux e macOS
+
+        // menu principal
         printf("\nMenu de funcionalidades, escolha uma opcao: \n");
         printf("0 - Sair do Programa\n");
         printf("1 - Cadastrar pessoa\n");
@@ -24,51 +33,264 @@ int main()
         printf("4 - Pesquisar por CPF\n");
         printf("5 - Excluir pessoa\n");
         printf("6 - Apagar todas as pessoas cadastradas\n");
-        scanf("%i", &opcao);
+        printf("7 - Aniversariantes do mês\n\n");
+        cin >> opcao;
+        cin.ignore();
 
         switch (opcao)
         {
         case 0:
             printf("\nObrigado por usar este programa\n");
             despedida(pessoas);
+
+            // Limpar objetos alocados
+            for (int i = 0; i < Pessoa::TAM; i++)
+            {
+                if (pessoas[i] != nullptr)
+                {
+                    delete pessoas[i];
+                }
+            }
             break;
 
         case 1:
-            cadastrePessoa(pessoas);
+            // system("cls"); limpar terminal em Windows
+            system("clear"); // limpar terminal em Linux e macOS
+            cout << "0 - Voltar ao menu inicial" << endl;
+            cout << "1 - Cadastrar Professor" << endl;
+            cout << "2 - Cadastrar Aluno" << endl
+                 << endl;
+            cin >> subOpcao;
+            cin.ignore();
+
+            switch (subOpcao)
+            {
+            case 0:
+                break;
+
+            case 1:
+                if (Pessoa::TAM >= MAX)
+                {
+                    cout << "Limite maximo de pessoas atingido!" << endl;
+                    break;
+                }
+                pessoas[Pessoa::TAM] = new Professor();
+                pessoas[Pessoa::TAM]->leiaPessoa();
+                cout << pessoas[Pessoa::TAM]->getNome() << endl;
+
+                Pessoa::TAM++;
+                break;
+
+            case 2:
+                if (Pessoa::TAM >= MAX)
+                {
+                    cout << "Limite maximo de pessoas atingido!" << endl;
+                    break;
+                }
+                pessoas[Pessoa::TAM] = new Aluno();
+                pessoas[Pessoa::TAM]->leiaPessoa();
+                cout << pessoas[Pessoa::TAM]->getNome() << endl;
+
+                Pessoa::TAM++;
+                break;
+
+            default:
+                break;
+            }
             break;
 
-        case 2: // For each
-            for (Pessoa pessoa : pessoas)
+        case 2:
+            // system("cls"); limpar terminal em Windows
+            system("clear"); // limpar terminal em Linux e macOS
+            cout << "0 - Voltar ao menu inicial" << endl;
+            cout << "1 - Listar Professor" << endl;
+            cout << "2 - Listar Aluno" << endl
+                 << endl;
+            cin >> subOpcao;
+            cin.ignore();
+
+            switch (subOpcao)
             {
-                pessoa.escrevePessoa();
-                pessoasCadastradas = true;
-            }
-            if (!pessoasCadastradas)
-            {
-                cout << "Nenhuma pessoa cadastrada." << endl;
+            case 0:
+                break;
+
+            case 1:
+                listaProfessores(pessoas);
+                cin.get();
+                break;
+
+            case 2:
+                listaAlunos(pessoas);
+                cin.get();
+                break;
+
+            default:
+                break;
             }
             break;
 
         case 3:
-            pesquisaPessoaNome(pessoas);
+            // system("cls"); limpar terminal em Windows
+            system("clear"); // limpar terminal em Linux e macOS
+            cout << "0 - Voltar ao menu inicial" << endl;
+            cout << "1 - Pesquisar Professores por nome" << endl;
+            cout << "2 - Pesquisar Alunos por nome" << endl
+                 << endl;
+            cin >> subOpcao;
+            cin.ignore();
+
+            switch (subOpcao)
+            {
+            case 0:
+                break;
+
+            case 1:
+                pesquisaProfessorNome(pessoas);
+                cin.get();
+                break;
+
+            case 2:
+                pesquisaAlunoNome(pessoas);
+                cin.get();
+                break;
+
+            default:
+                break;
+            }
             break;
 
         case 4:
-        {
-            pesquisaPessoaCPF(pessoas);
+            // system("cls"); limpar terminal em Windows
+            system("clear"); // limpar terminal em Linux e macOS
+            cout << "0 - Voltar ao menu inicial" << endl;
+            cout << "1 - Pesquisar Professores por CPF" << endl;
+            cout << "2 - Pesquisar Alunos por CPF" << endl
+                 << endl;
+            cin >> subOpcao;
+            cin.ignore();
+
+            switch (subOpcao)
+            {
+            case 0:
+                break;
+
+            case 1:
+                pesquisaProfessorCPF(pessoas);
+                cin.get();
+                break;
+
+            case 2:
+                pesquisaAlunoCPF(pessoas);
+                cin.get();
+                break;
+
+            default:
+                break;
+            }
             break;
-        }
+
         case 5:
-            deletaPessoa(pessoas);
+            // system("cls"); limpar terminal em Windows
+            system("clear"); // limpar terminal em Linux e macOS
+            cout << "0 - Voltar ao menu inicial" << endl;
+            cout << "1 - Excluir Professor (pelo CPF)" << endl;
+            cout << "2 - Excluir Aluno (pelo CPF)" << endl
+                 << endl;
+            cin >> subOpcao;
+            cin.ignore();
+
+            switch (subOpcao)
+            {
+            case 0:
+                break;
+
+            case 1:
+                deletaProfessor(pessoas);
+                cin.get();
+                break;
+
+            case 2:
+                deletaAluno(pessoas);
+                cin.get();
+                break;
+
+            default:
+                break;
+            }
             break;
+
         case 6:
-            apagarTodos(pessoas);
+            // system("cls"); limpar terminal em Windows
+            system("clear"); // limpar terminal em Linux e macOS
+            cout << "0 - Voltar ao menu inicial" << endl;
+            cout << "1 - Excluir todos os Professores" << endl;
+            cout << "2 - Excluir todos os Alunos" << endl
+                 << endl;
+            cin >> subOpcao;
+            cin.ignore();
+
+            switch (subOpcao)
+            {
+            case 0:
+                break;
+
+            case 1:
+                apagarTodosProfessores(pessoas);
+                cin.get();
+                break;
+
+            case 2:
+                apagarTodosAlunos(pessoas);
+                cin.get();
+                break;
+
+            default:
+                break;
+            }
+            break;
+
+        case 7:
+            do
+            {
+                // system("cls"); limpar terminal em Windows
+                system("clear"); // limpar terminal em Linux e macOS
+                cout << "0 - Voltar ao menu inicial" << endl;
+                cout << "1 - Informar o mês a ser pesquisado" << endl;
+                cout << "2 - Listar os Professores aniversariantes do mês" << endl;
+                cout << "3 - Listar os Alunos aniversariantes do mês" << endl
+                     << endl;
+                cin >> subOpcao;
+                cin.ignore();
+
+                switch (subOpcao)
+                {
+                case 0:
+                    break;
+
+                case 1:
+                    cout << "Mes a ser pesquisado: [01 a 12]";
+                    cin >> mes;
+                    break;
+
+                case 2:
+                    listarProfessoresAniversariantes(pessoas, mes);
+                    cin.get();
+                    break;
+
+                case 3:
+                    listarAlunosAniversariantes(pessoas, mes);
+                    cin.get();
+                    break;
+
+                default:
+                    break;
+                }
+            } while (subOpcao != 0);
             break;
 
         default:
             printf("\nOpcao invalida!\n");
         }
-
     } while (opcao != 0);
 
     return 0;

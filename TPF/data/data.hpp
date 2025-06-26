@@ -19,6 +19,7 @@ public:
     bool setAno(int ano);
 
     Data();
+    ~Data(){};
     Data(int ano);
     Data(int dia, int mes, int ano);
 
@@ -31,6 +32,8 @@ public:
     int getAno() const;
 
     bool dataValida() const;
+
+    bool mesIgualParametro(int mes);
 
     string mesExtenso();
 
