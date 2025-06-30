@@ -1,3 +1,42 @@
+/*H******************************************************************************
+* FILENAME :    main.cpp                      DESIGN REF:     TP
+
+* DESCRIPTION :
+*       Ponto de entrada principal do Sistema de Registro de Pessoas. Gerencia o menu
+*       de opções e a interação com o usuário, orquestrando as chamadas aos demais módulos.
+*       Implementa um sistema de menu interativo com funcionalidades completas de CRUD
+*       para Alunos e Professores.
+*
+* PUBLIC FUNCTIONS :
+*       - Sistema de menu interativo com múltiplas opções
+*       - Gerenciamento de cadastro de Alunos e Professores
+*       - Operações de listagem, pesquisa e exclusão
+*       - Gerenciamento de aniversariantes por mês
+*       - Inicialização e finalização do sistema
+*
+* NOTES :
+*       Este arquivo é o ponto de entrada principal do sistema. Ele gerencia o menu de opções e a interação com o usuário, orquestrando as chamadas aos demais módulos.
+*       O sistema é composto por três classes principais: Pessoa, Professor e Aluno.      
+*       A classe Pessoa é abstrata e serve como base para as outras duas.
+*       A classe Professor é uma classe derivada de Pessoa e possui atributos específicos para professores.
+*       A classe Aluno é uma classe derivada de Pessoa e possui atributos específicos para alunos.
+*       Todas as funções seguem o padrão de um único retorno sem breaks.
+*
+*       Parte do Sistema de Registro de Pessoas para o projeto final de AEDs.
+*
+*       Leonardo Stuart de A. Ramalho, 2025. All rights reserved.
+*
+* AUTHOR    : Leonardo Stuart de A. Ramalho                     START DATE : 24 May 25
+*
+* CHANGES :
+*
+* REF NO  VERSION DATE      WHO  DETAIL
+* ------- ------- --------- ---- -------------------------------------------
+* 001     1.0     16May25   LL   Criacao inicial do arquivo main.cpp.
+* 002     2.0     30Jun06   LL   Implementação de tratamento por exceção
+*
+*H*/
+
 #include <stdio.h>
 #include <stdbool.h>
 #include <iostream>

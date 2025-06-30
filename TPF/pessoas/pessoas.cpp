@@ -1,3 +1,41 @@
+/*H******************************************************************************
+* FILENAME :    pessoas.cpp                   DESIGN REF:     TP
+
+* DESCRIPTION :
+*       Implementação da classe abstrata Pessoa e funções auxiliares do sistema.
+*       Contém todas as implementações das funções declaradas no header pessoas.hpp,
+*       incluindo gerenciamento de memória, persistência em arquivo e operações
+*       de pesquisa e manipulação de dados.
+*
+* PUBLIC FUNCTIONS :
+*       - Implementação da classe abstrata Pessoa
+*       - Implementação de funções de inicialização (abertura, despedida)
+*       - Implementação de funções de persistência (carregaPessoas, gravaPessoas)
+*       - Implementação de funções de pesquisa (pesquisaPessoaNome, pesquisaPessoaCPF)
+*       - Implementação de funções de manipulação (deletaPessoa, apagarTodos)
+*       - Implementação de funções utilitárias (leiaCPF, tamanho)
+*
+* NOTES :
+*       Implementação robusta com gerenciamento adequado de memória e
+*       persistência em arquivos binários. Inclui tratamento de exceções
+*       e validação de dados. Todas as funções seguem o padrão de um
+*       único retorno sem breaks.
+*
+*       Parte do Sistema de Registro de Pessoas para o projeto final de AEDs.
+*
+*       Leonardo Stuart de A. Ramalho, 2025. All rights reserved.
+*
+* AUTHOR    : Leonardo Stuart de A. Ramalho                     START DATE : 24 May 25
+*
+* CHANGES :
+*
+* REF NO  VERSION DATE      WHO  DETAIL
+* ------- ------- --------- ---- -------------------------------------------
+* 001     1.0     16May25   LL   Criacao inicial do arquivo pessoas.cpp.
+* 002     2.0     30Jun06   LL   Implementação de sistema de persistência
+*
+*H*/
+
 #include "../data/data.hpp"
 #include <iostream>
 #include <fstream>
@@ -197,6 +235,7 @@ bool deletaPessoa(Pessoa *pessoas[])
         {
             for (int j = i; j < Pessoa::TAM - 1; j++)
             {
+                delete pessoas[j];
                 pessoas[j] = pessoas[j + 1]; // Faz o "shift"
             }
             Pessoa::TAM--;
@@ -204,7 +243,10 @@ bool deletaPessoa(Pessoa *pessoas[])
             apagou = true;
         }
     }
-    cout << "CPF não encontrado.\n";
+    if (apagou == false)
+    {
+        cout << "CPF não encontrado.\n";
+    }
     return apagou;
 }
 
@@ -232,7 +274,7 @@ Pessoa::~Pessoa()
 
 void apagarTodos(Pessoa *pessoas[])
 {
-    // Delete all objects from memory first
+    // Apaga todos os objetos da memoria primeiro
     for (int i = 0; i < Pessoa::TAM; i++)
     {
         if (pessoas[i] != nullptr)
@@ -251,20 +293,18 @@ void carregaPessoas(Pessoa *pessoas[])
     if (arquivo)
     {
         int loaded = 0;
-        for (int i = 0; i < Pessoa::TAM; i++)
+        Pessoa *p;
+
+        // O laço continua enquanto houver espaço no array (loaded < Pessoa::TAM)
+        // E a função conseguir ler uma nova pessoa do arquivo.
+        // A atribuição e a verificação são feitas em uma única expressão.
+        while (loaded < Pessoa::TAM && (p = criarPessoaDoArquivo(arquivo)) != nullptr)
         {
-            Pessoa *p = criarPessoaDoArquivo(arquivo);
-            if (p != nullptr)
-            {
-                pessoas[loaded++] = p;
-            }
-            else
-            {
-                break; // Stop if we can't read more
-            }
+            pessoas[loaded++] = p;
         }
+
         fclose(arquivo);
-        Pessoa::TAM = loaded; // Update TAM to actual loaded
+        Pessoa::TAM = loaded; // Atualiza o TAM para o número de pessoas carregadas
     }
 }
 
