@@ -258,6 +258,7 @@ int main()
                 cout << "1 - Informar o mês a ser pesquisado" << endl;
                 cout << "2 - Listar os Professores aniversariantes do mês" << endl;
                 cout << "3 - Listar os Alunos aniversariantes do mês" << endl
+                     << "4 - Listar todos os aniversariantes do mês" << endl
                      << endl;
                 cin >> subOpcao;
                 cin.ignore();
@@ -279,6 +280,11 @@ int main()
 
                 case 3:
                     listarAlunosAniversariantes(pessoas, mes);
+                    cin.get();
+                    break;
+
+                case 4:
+                    listarTodosAniversariantes(pessoas, mes);
                     cin.get();
                     break;
 

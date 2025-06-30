@@ -53,6 +53,7 @@ void gravaTAM();
 // --- Funções de pesquisa ---
 void pesquisaPessoaNome(Pessoa* pessoas[]);
 void pesquisaPessoaCPF(Pessoa* pessoas[]);
+void listarTodosAniversariantes(Pessoa *pessoas[], int mes);
 
 // --- Funções de manipulação ---
 // void cadastrePessoa(Pessoa* pessoas[]);

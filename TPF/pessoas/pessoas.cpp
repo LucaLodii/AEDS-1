@@ -333,3 +333,16 @@ void despedida(Pessoa *pessoas[])
 {
     gravaPessoas(pessoas);
 }
+
+void listarTodosAniversariantes(Pessoa *pessoas[], int mes)
+{
+    for (int i = 0; i < Pessoa::TAM; i++)
+    {
+        Data nascimento = pessoas[i]->getNascimento();
+        int mesNiver = nascimento.getMes();
+        if (mes == mesNiver)
+        {
+            pessoas[i]->escrevePessoa();
+        }
+    }
+}
