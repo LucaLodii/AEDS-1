@@ -42,21 +42,25 @@
 
 using namespace std;
 
+// Construtor com especialização
 Professor::Professor(string especializacao)
 {
     setEspecializacao(especializacao);
 }
 
+// Define a especialização do professor
 void Professor::setEspecializacao(string especializacao)
 {
     this->especializacao = especializacao;
 };
 
+// Retorna a especialização do professor
 string Professor::getEspecializacao()
 {
     return especializacao;
 };
 
+// Lê dados do professor do usuário
 void Professor::leiaPessoa()
 {
     string nome;
@@ -76,6 +80,7 @@ void Professor::leiaPessoa()
     setEspecializacao(especializacao);
 }
 
+// Pesquisa professor por nome
 void pesquisaProfessorNome(Pessoa *pessoas[])
 {
     string supostoNome;
@@ -101,6 +106,7 @@ void pesquisaProfessorNome(Pessoa *pessoas[])
     }
 }
 
+// Exibe dados do professor
 void Professor::escrevePessoa()
 {
     cout << "\nNome: " << getNome();
@@ -111,6 +117,7 @@ void Professor::escrevePessoa()
     cout << "\nEspecializacao: " << getEspecializacao() << endl;
 }
 
+// Pesquisa professor por CPF
 void pesquisaProfessorCPF(Pessoa *pessoas[])
 {
     string supostoCPF;
@@ -136,6 +143,7 @@ void pesquisaProfessorCPF(Pessoa *pessoas[])
     }
 }
 
+// Deleta professor por CPF
 bool deletaProfessor(Pessoa *pessoas[])
 {
     string cpf;
@@ -169,6 +177,7 @@ bool deletaProfessor(Pessoa *pessoas[])
     return apagou;
 }
 
+// Remove todos os professores da memória
 void apagarTodosProfessores(Pessoa *pessoas[])
 {
     for (int i = 0; i < Pessoa::TAM; i++)
@@ -189,6 +198,7 @@ void apagarTodosProfessores(Pessoa *pessoas[])
     cout << "Professores excluidos com sucesso!\n";
 }
 
+// Lista todos os professores cadastrados
 void listaProfessores(Pessoa *pessoas[])
 {
     if (Pessoa::TAM == 0)
@@ -207,6 +217,7 @@ void listaProfessores(Pessoa *pessoas[])
     }
 }
 
+// Lista professores aniversariantes de um mês específico
 void listarProfessoresAniversariantes(Pessoa *pessoas[], int mes)
 {
     for (int i = 0; i < Pessoa::TAM; i++)
@@ -220,7 +231,7 @@ void listarProfessoresAniversariantes(Pessoa *pessoas[], int mes)
     }
 }
 
-// funcoes de arquivos
+// Funções de arquivos - Salva dados do professor no arquivo
 void Professor::gravar(FILE *arquivo)
 {
     // Anotar o Tipo da Classe (2 == Professor)
@@ -254,6 +265,7 @@ void Professor::gravar(FILE *arquivo)
     fwrite(especializacao.c_str(), sizeof(char), espLen, arquivo);    
 }
 
+// Carrega dados do professor do arquivo
 bool Professor::carregar(FILE *arquivo)
 {
     bool carregou = true;

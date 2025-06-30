@@ -49,6 +49,7 @@ using namespace std;
 
 int Pessoa::TAM = 0; // Definição da variável global
 
+// Inicializa o sistema e carrega dados salvos
 void abertura(Pessoa *pessoas[])
 {
     cout << "\nControle de Pessoas\n";
@@ -56,6 +57,7 @@ void abertura(Pessoa *pessoas[])
     carregaPessoas(pessoas);
 }
 
+// Lê o tamanho do arquivo ou cria se não existir
 int tamanho(const char *filename)
 {
     FILE *file = fopen(filename, "rb");
@@ -86,6 +88,7 @@ int tamanho(const char *filename)
     return Pessoa::TAM;
 }
 
+// Setters e Getters da classe Pessoa
 void Pessoa::setNome(string nome)
 {
     this->nome = nome;
@@ -96,6 +99,7 @@ string Pessoa::getNome()
     return nome;
 }
 
+// Valida e define o CPF no formato correto
 void Pessoa::setCPF(string CPF)
 {
     if (CPF.length() == 14 && CPF[3] == '.' && CPF[7] == '.' && CPF[11] == '-')
@@ -109,6 +113,7 @@ string Pessoa::getCPF()
     return CPF;
 }
 
+// Define a data de nascimento
 bool Pessoa::setNascimento(int dia, int mes, int ano)
 {
     return this->nascimento.setData(dia, mes, ano);
@@ -119,36 +124,7 @@ Data Pessoa::getNascimento()
     return nascimento;
 }
 
-// void cadastrePessoa(Pessoa* pessoas[])
-// {
-//     if (Pessoa::TAM >= MAX)
-//     {
-//         cout << "Limite maximo de pessoas atingido!" << endl;
-//         return;
-//     }
-
-//     cin.ignore();
-
-//     cout << "\nNome: ";
-//     string nome;
-//     getline(cin, nome);
-//     pessoas[Pessoa::TAM]->setNome(nome);
-
-//     Data nascimento;
-//     cout << "\nData de nascimento: ";
-//     nascimento.leiaData();
-//     pessoas[Pessoa::TAM]->setNascimento(nascimento.getDia(), nascimento.getMes(), nascimento.getAno());
-
-//     cin.ignore();
-
-//     cout << "CPF: ";
-//     string cpf;
-//     getline(cin, cpf);
-//     pessoas[Pessoa::TAM]->setCPF(cpf);
-
-//     Pessoa::TAM++;
-// }
-
+// Lê CPF do usuário com validação de formato
 string leiaCPF()
 {
     string cpf;
@@ -176,6 +152,7 @@ string leiaCPF()
     return cpf;
 }
 
+// Pesquisa pessoa por nome
 void pesquisaPessoaNome(Pessoa *pessoas[])
 {
     string supostoNome;
@@ -198,6 +175,7 @@ void pesquisaPessoaNome(Pessoa *pessoas[])
     }
 }
 
+// Pesquisa pessoa por CPF
 void pesquisaPessoaCPF(Pessoa *pessoas[])
 {
     string supostoCPF;
@@ -220,6 +198,7 @@ void pesquisaPessoaCPF(Pessoa *pessoas[])
     }
 }
 
+// Deleta pessoa por CPF
 bool deletaPessoa(Pessoa *pessoas[])
 {
     string cpf;
@@ -250,6 +229,7 @@ bool deletaPessoa(Pessoa *pessoas[])
     return apagou;
 }
 
+// Construtores da classe Pessoa
 Pessoa::Pessoa()
 {
     nascimento.setData();
@@ -272,6 +252,7 @@ Pessoa::~Pessoa()
 {
 }
 
+// Remove todas as pessoas da memória
 void apagarTodos(Pessoa *pessoas[])
 {
     // Apaga todos os objetos da memoria primeiro
@@ -287,6 +268,7 @@ void apagarTodos(Pessoa *pessoas[])
     printf("Todos os cadastros foram removidos.\n");
 }
 
+// Carrega pessoas do arquivo
 void carregaPessoas(Pessoa *pessoas[])
 {
     FILE *arquivo = fopen("pessoas.dat", "rb");
@@ -308,6 +290,7 @@ void carregaPessoas(Pessoa *pessoas[])
     }
 }
 
+// Cria objeto Pessoa a partir do arquivo baseado no tipo
 Pessoa *criarPessoaDoArquivo(FILE *arquivo)
 {
     int tipo;
@@ -359,6 +342,7 @@ Pessoa *criarPessoaDoArquivo(FILE *arquivo)
     return novaPessoa;
 }
 
+// Salva o tamanho atual no arquivo
 void gravaTAM()
 {
     FILE *arquivo = fopen("tamanhoArq.dat", "wb");
@@ -368,6 +352,8 @@ void gravaTAM()
         fclose(arquivo);
     }
 }
+
+// Salva todas as pessoas no arquivo
 void gravaPessoas(Pessoa *pessoas[])
 {
     FILE *arquivo = fopen("pessoas.dat", "wb");
@@ -385,11 +371,13 @@ void gravaPessoas(Pessoa *pessoas[])
     }
 }
 
+// Finaliza o sistema salvando dados
 void despedida(Pessoa *pessoas[])
 {
     gravaPessoas(pessoas);
 }
 
+// Lista aniversariantes de um mês específico
 void listarTodosAniversariantes(Pessoa *pessoas[], int mes)
 {
     for (int i = 0; i < Pessoa::TAM; i++)
@@ -403,6 +391,7 @@ void listarTodosAniversariantes(Pessoa *pessoas[], int mes)
     }
 }
 
+// Processa objeto com tratamento de exceção
 void processarObjeto(Pessoa *pessoa)
 {
     if (pessoa == nullptr)
@@ -412,6 +401,7 @@ void processarObjeto(Pessoa *pessoa)
     pessoa->mostrarMensagem();
 }
 
+// Mensagem de inicialização
 void Pessoa::mostrarMensagem()
 {
     cout << "Pessoa inicializada e funcional!" << endl;

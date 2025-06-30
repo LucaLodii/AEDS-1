@@ -50,6 +50,7 @@ using namespace std;
 
 // Para rodar: g++ main.cpp pessoas/pessoas.cpp data/data.cpp professor/professor.cpp aluno/aluno.cpp -o main
 
+// Função principal do sistema
 int main()
 {
     setlocale(LC_ALL, "");
@@ -58,12 +59,13 @@ int main()
 
     int opcao, subOpcao, mes;
 
+    // Loop principal do menu
     do
     {
         // system("cls"); limpar terminal em Windows
         system("clear"); // limpar terminal em Linux e macOS
 
-        // menu principal
+        // Menu principal do sistema
         printf("\nMenu de funcionalidades, escolha uma opcao: \n");
         printf("0 - Sair do Programa\n");
         printf("1 - Cadastrar pessoa\n");
@@ -76,13 +78,14 @@ int main()
         cin >> opcao;
         cin.ignore();
 
+        // Switch para gerenciar as opções do menu
         switch (opcao)
         {
-        case 0:
+        case 0: // Sair do programa
             printf("\nObrigado por usar este programa\n");
             despedida(pessoas);
 
-            // Limpar objetos alocados
+            // Limpar objetos alocados da memória
             for (int i = 0; i < Pessoa::TAM; i++)
             {
                 if (pessoas[i] != nullptr)
@@ -92,7 +95,7 @@ int main()
             }
             break;
 
-        case 1:
+        case 1: // Cadastrar pessoa
             // system("cls"); limpar terminal em Windows
             system("clear"); // limpar terminal em Linux e macOS
             cout << "0 - Voltar ao menu inicial" << endl;
@@ -107,7 +110,7 @@ int main()
             case 0:
                 break;
 
-            case 1:
+            case 1: // Cadastrar Professor
                 if (Pessoa::TAM >= MAX)
                 {
                     cout << "Limite maximo de pessoas atingido!" << endl;
@@ -128,7 +131,7 @@ int main()
                 Pessoa::TAM++;
                 break;
 
-            case 2:
+            case 2: // Cadastrar Aluno
                 if (Pessoa::TAM >= MAX)
                 {
                     cout << "Limite maximo de pessoas atingido!" << endl;
@@ -154,7 +157,7 @@ int main()
             }
             break;
 
-        case 2:
+        case 2: // Listar pessoas cadastradas
             // system("cls"); limpar terminal em Windows
             system("clear"); // limpar terminal em Linux e macOS
             cout << "0 - Voltar ao menu inicial" << endl;
@@ -169,12 +172,12 @@ int main()
             case 0:
                 break;
 
-            case 1:
+            case 1: // Listar Professores
                 listaProfessores(pessoas);
                 cin.get();
                 break;
 
-            case 2:
+            case 2: // Listar Alunos
                 listaAlunos(pessoas);
                 cin.get();
                 break;
@@ -184,7 +187,7 @@ int main()
             }
             break;
 
-        case 3:
+        case 3: // Pesquisar por nome
             // system("cls"); limpar terminal em Windows
             system("clear"); // limpar terminal em Linux e macOS
             cout << "0 - Voltar ao menu inicial" << endl;
@@ -199,12 +202,12 @@ int main()
             case 0:
                 break;
 
-            case 1:
+            case 1: // Pesquisar Professores por nome
                 pesquisaProfessorNome(pessoas);
                 cin.get();
                 break;
 
-            case 2:
+            case 2: // Pesquisar Alunos por nome
                 pesquisaAlunoNome(pessoas);
                 cin.get();
                 break;
@@ -214,7 +217,7 @@ int main()
             }
             break;
 
-        case 4:
+        case 4: // Pesquisar por CPF
             // system("cls"); limpar terminal em Windows
             system("clear"); // limpar terminal em Linux e macOS
             cout << "0 - Voltar ao menu inicial" << endl;
@@ -229,12 +232,12 @@ int main()
             case 0:
                 break;
 
-            case 1:
+            case 1: // Pesquisar Professores por CPF
                 pesquisaProfessorCPF(pessoas);
                 cin.get();
                 break;
 
-            case 2:
+            case 2: // Pesquisar Alunos por CPF
                 pesquisaAlunoCPF(pessoas);
                 cin.get();
                 break;
@@ -244,7 +247,7 @@ int main()
             }
             break;
 
-        case 5:
+        case 5: // Excluir pessoa
             // system("cls"); limpar terminal em Windows
             system("clear"); // limpar terminal em Linux e macOS
             cout << "0 - Voltar ao menu inicial" << endl;
@@ -259,12 +262,12 @@ int main()
             case 0:
                 break;
 
-            case 1:
+            case 1: // Excluir Professor
                 deletaProfessor(pessoas);
                 cin.get();
                 break;
 
-            case 2:
+            case 2: // Excluir Aluno
                 deletaAluno(pessoas);
                 cin.get();
                 break;
@@ -274,7 +277,7 @@ int main()
             }
             break;
 
-        case 6:
+        case 6: // Apagar todas as pessoas
             // system("cls"); limpar terminal em Windows
             system("clear"); // limpar terminal em Linux e macOS
             cout << "0 - Voltar ao menu inicial" << endl;
@@ -289,12 +292,12 @@ int main()
             case 0:
                 break;
 
-            case 1:
+            case 1: // Excluir todos os Professores
                 apagarTodosProfessores(pessoas);
                 cin.get();
                 break;
 
-            case 2:
+            case 2: // Excluir todos os Alunos
                 apagarTodosAlunos(pessoas);
                 cin.get();
                 break;
@@ -304,7 +307,7 @@ int main()
             }
             break;
 
-        case 7:
+        case 7: // Aniversariantes do mês
             do
             {
                 // system("cls"); limpar terminal em Windows
@@ -323,22 +326,22 @@ int main()
                 case 0:
                     break;
 
-                case 1:
+                case 1: // Informar mês
                     cout << "Mes a ser pesquisado: [01 a 12]";
                     cin >> mes;
                     break;
 
-                case 2:
+                case 2: // Listar Professores aniversariantes
                     listarProfessoresAniversariantes(pessoas, mes);
                     cin.get();
                     break;
 
-                case 3:
+                case 3: // Listar Alunos aniversariantes
                     listarAlunosAniversariantes(pessoas, mes);
                     cin.get();
                     break;
 
-                case 4:
+                case 4: // Listar todos os aniversariantes
                     listarTodosAniversariantes(pessoas, mes);
                     cin.get();
                     break;

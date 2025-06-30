@@ -43,6 +43,7 @@
 
 using namespace std;
 
+// Retorna o nome do mês por extenso
 string Data::mesExtenso()
 {
     string mes = " ";
@@ -54,6 +55,7 @@ string Data::mesExtenso()
     return mes;
 }
 
+// Valida se a data é válida considerando dias por mês e anos bissextos
 bool Data::dataValida() const
 {
     bool valida = true;
@@ -96,6 +98,7 @@ bool Data::dataValida() const
     return valida;
 }
 
+// Retorna o número de dias no mês atual
 int Data::diasMes()
 {
     int dias = 31; // Valor padrao de dias
@@ -125,6 +128,7 @@ int Data::diasMes()
     return dias;
 }
 
+// Define o dia se for válido para o mês atual
 bool Data::setDia(int d)
 {
     if (d >= 1 && d <= diasMes())
@@ -135,6 +139,7 @@ bool Data::setDia(int d)
     return false;
 }
 
+// Define o mês se estiver no intervalo válido
 bool Data::setMes(int m)
 {
     if (m >= 1 && m <= 12)
@@ -145,6 +150,7 @@ bool Data::setMes(int m)
     return false;
 }
 
+// Define o ano se estiver no intervalo válido
 bool Data::setAno(int a)
 {
     if (a >= 1900 && a <= 2100)
@@ -155,6 +161,7 @@ bool Data::setAno(int a)
     return false;
 }
 
+// Getters - retornam os valores dos atributos
 int Data::getDia() const
 {
     return dia;
@@ -170,11 +177,13 @@ int Data::getAno() const
     return ano;
 }
 
+// Exibe a data no formato DD/MM/AAAA
 void Data::escreveData()
 {
     cout << dia << "/" << mes << "/" << ano;
 }
 
+// Lê uma data do usuário com validação
 void Data::leiaData()
 {
     int d, m, a;
@@ -190,6 +199,7 @@ void Data::leiaData()
     } while (!setMes(m) || !setDia(d));
 }
 
+// Obtém a data atual do sistema
 Data obterDataAtual()
 {
     Data d;
@@ -201,11 +211,13 @@ Data obterDataAtual()
     return d;
 }
 
+// Calcula a idade baseada na data de nascimento
 int calcularIdade(const Data &nascimento)
 {
     Data atual = obterDataAtual();
     int idade = atual.getAno() - nascimento.getAno();
 
+    // Ajusta a idade se ainda não chegou o aniversário
     if (atual.getMes() < nascimento.getMes())
     {
         idade--;
@@ -220,6 +232,7 @@ int calcularIdade(const Data &nascimento)
     return idade;
 }
 
+// Construtores
 Data::Data()
 {
     setData();
@@ -235,6 +248,7 @@ Data::Data(int dia, int mes, int ano)
     setData(dia, mes, ano);
 }
 
+// Define data vazia (0/0/0)
 bool Data::setData() {
     dia = 0;
     mes = 0;
@@ -242,6 +256,7 @@ bool Data::setData() {
     return true;
 }
 
+// Define apenas o ano
 bool Data::setData(int a) {
     dia = 0;
     mes = 0;
@@ -249,6 +264,7 @@ bool Data::setData(int a) {
     return true;
 }
 
+// Define data completa com validação
 bool Data::setData(int d, int m, int a)
 {
     bool yearSet = setAno(a);
@@ -257,6 +273,7 @@ bool Data::setData(int d, int m, int a)
     return monthSet && daySet && yearSet;
 }
 
+// Verifica se o mês é igual ao parâmetro
 bool Data::mesIgualParametro(int mes){
     bool ehIgual = false;
     if(getMes() == mes){

@@ -42,21 +42,25 @@
 
 using namespace std;
 
+// Construtor com matrícula
 Aluno::Aluno(unsigned long int matricula)
 {
     setMatricula(matricula);
 }
 
+// Define a matrícula do aluno
 void Aluno::setMatricula(unsigned long int matricula)
 {
     this->matricula = matricula;
 };
 
+// Retorna a matrícula do aluno
 unsigned long int Aluno::getMatricula()
 {
     return matricula;
 };
 
+// Lê dados do aluno do usuário
 void Aluno::leiaPessoa()
 {
     string nome;
@@ -76,6 +80,7 @@ void Aluno::leiaPessoa()
     setMatricula(matricula);
 }
 
+// Pesquisa aluno por nome
 void pesquisaAlunoNome(Pessoa *pessoas[])
 {
     string supostoNome;
@@ -101,6 +106,7 @@ void pesquisaAlunoNome(Pessoa *pessoas[])
     }
 }
 
+// Exibe dados do aluno
 void Aluno::escrevePessoa()
 {
     cout << "\nNome: " << getNome();
@@ -111,6 +117,7 @@ void Aluno::escrevePessoa()
     cout << "\nMatricula: " << getMatricula() << endl;
 }
 
+// Pesquisa aluno por CPF
 void pesquisaAlunoCPF(Pessoa *pessoas[])
 {
     string supostoCPF;
@@ -136,6 +143,7 @@ void pesquisaAlunoCPF(Pessoa *pessoas[])
     }
 }
 
+// Deleta aluno por CPF
 bool deletaAluno(Pessoa *pessoas[])
 {
     string cpf;
@@ -171,6 +179,7 @@ bool deletaAluno(Pessoa *pessoas[])
     return apagou;
 }
 
+// Remove todos os alunos da memória
 void apagarTodosAlunos(Pessoa *pessoas[])
 {
     for (int i = 0; i < Pessoa::TAM; i++)
@@ -191,6 +200,7 @@ void apagarTodosAlunos(Pessoa *pessoas[])
     cout << "Alunos excluidos com sucesso!\n";
 }
 
+// Lista todos os alunos cadastrados
 void listaAlunos(Pessoa *pessoas[])
 {
     if (Pessoa::TAM == 0)
@@ -209,6 +219,7 @@ void listaAlunos(Pessoa *pessoas[])
     }
 }
 
+// Lista alunos aniversariantes de um mês específico
 void listarAlunosAniversariantes(Pessoa *pessoas[], int mes)
 {
     for (int i = 0; i < Pessoa::TAM; i++)
@@ -222,7 +233,7 @@ void listarAlunosAniversariantes(Pessoa *pessoas[], int mes)
     }
 }
 
-// funcoes de arquivos
+// Funções de arquivos - Salva dados do aluno no arquivo
 void Aluno::gravar(FILE *arquivo)
 {
     // Anotar o Tipo da Classe (1 == Aluno)
@@ -254,6 +265,7 @@ void Aluno::gravar(FILE *arquivo)
     fwrite(&matricula, sizeof(unsigned long int), 1, arquivo);
 }
 
+// Carrega dados do aluno do arquivo
 bool Aluno::carregar(FILE *arquivo)
 {
     int nomeLen;
