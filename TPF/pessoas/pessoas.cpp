@@ -283,9 +283,25 @@ Pessoa *criarPessoaDoArquivo(FILE *arquivo)
     {
     case 1:
         novaPessoa = new Aluno();
+        try
+        {
+            processarObjeto(novaPessoa);
+        }
+        catch (const runtime_error &e)
+        {
+            cout << e.what() << endl;
+        }
         break;
     case 2:
         novaPessoa = new Professor();
+        try
+        {
+            processarObjeto(novaPessoa);
+        }
+        catch (const runtime_error &e)
+        {
+            cout << e.what() << endl;
+        }
         break;
     default:
         novaPessoa = nullptr;
@@ -345,4 +361,18 @@ void listarTodosAniversariantes(Pessoa *pessoas[], int mes)
             pessoas[i]->escrevePessoa();
         }
     }
+}
+
+void processarObjeto(Pessoa *pessoa)
+{
+    if (pessoa == nullptr)
+    {
+        throw runtime_error("Erro: Objeto é NULL.");
+    }
+    pessoa->mostrarMensagem();
+}
+
+void Pessoa::mostrarMensagem()
+{
+    cout << "Pessoa inicializada e funcional!" << endl;
 }

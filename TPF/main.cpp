@@ -75,6 +75,14 @@ int main()
                     break;
                 }
                 pessoas[Pessoa::TAM] = new Professor();
+                try
+                {
+                    processarObjeto(pessoas[Pessoa::TAM]);
+                }
+                catch (const runtime_error &e)
+                {
+                    cout << e.what() << endl;
+                }
                 pessoas[Pessoa::TAM]->leiaPessoa();
                 cout << pessoas[Pessoa::TAM]->getNome() << endl;
 
@@ -88,6 +96,14 @@ int main()
                     break;
                 }
                 pessoas[Pessoa::TAM] = new Aluno();
+                try
+                {
+                    processarObjeto(pessoas[Pessoa::TAM]);
+                }
+                catch (const runtime_error &e)
+                {
+                    cout << e.what() << endl;
+                }
                 pessoas[Pessoa::TAM]->leiaPessoa();
                 cout << pessoas[Pessoa::TAM]->getNome() << endl;
 
