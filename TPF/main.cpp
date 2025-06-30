@@ -1,41 +1,37 @@
-/*H******************************************************************************
-* FILENAME :    main.cpp                      DESIGN REF:     TP
-
+/*H**************************************************************************************************************
+*FILENAME :    main.cpp                   DESIGN REF:     TPF
+*
 * DESCRIPTION :
-*       Ponto de entrada principal do Sistema de Registro de Pessoas. Gerencia o menu
-*       de opções e a interação com o usuário, orquestrando as chamadas aos demais módulos.
-*       Implementa um sistema de menu interativo com funcionalidades completas de CRUD
-*       para Alunos e Professores.
+*       Este arquivo é o ponto de entrada principal do Sistema de Registro de Pessoas.
+*       Ele gerencia o fluxo de execução do programa, apresentando o menu de opções
+*       ao usuário e coordenando as chamadas para as funcionalidades de registro,
+*       listagem, pesquisa, exclusão e gestão de dados de pessoas, professores e alunos.
+*       Atua como a interface de alto nível do sistema
 *
 * PUBLIC FUNCTIONS :
-*       - Sistema de menu interativo com múltiplas opções
-*       - Gerenciamento de cadastro de Alunos e Professores
-*       - Operações de listagem, pesquisa e exclusão
-*       - Gerenciamento de aniversariantes por mês
-*       - Inicialização e finalização do sistema
+*       Data()
+*       Data(int dia, int mes, int ano)
+*       Data(int ano)
+*       bool setData(int dia, int mes, int ano)
+*       int getDia() const
+*       bool dataValida()
+*       void escreveData() const
 *
 * NOTES :
-*       Este arquivo é o ponto de entrada principal do sistema. Ele gerencia o menu de opções e a interação com o usuário, orquestrando as chamadas aos demais módulos.
-*       O sistema é composto por três classes principais: Pessoa, Professor e Aluno.      
-*       A classe Pessoa é abstrata e serve como base para as outras duas.
-*       A classe Professor é uma classe derivada de Pessoa e possui atributos específicos para professores.
-*       A classe Aluno é uma classe derivada de Pessoa e possui atributos específicos para alunos.
-*       Todas as funções seguem o padrão de um único retorno sem breaks.
+*       Sistema de Registro de Pessoas para o projeto final de AEDs.
 *
-*       Parte do Sistema de Registro de Pessoas para o projeto final de AEDs.
+* Luca L. 2025, 2025. All rights reserved.
 *
-*       Leonardo Stuart de A. Ramalho, 2025. All rights reserved.
-*
-* AUTHOR    : Leonardo Stuart de A. Ramalho                     START DATE : 24 May 25
+* AUTHOR    : Luca L.                     START DATE : 16 May 25
 *
 * CHANGES :
 *
-* REF NO  VERSION DATE      WHO  DETAIL
-* ------- ------- --------- ---- -------------------------------------------
-* 001     1.0     16May25   LL   Criacao inicial do arquivo main.cpp.
-* 002     2.0     30Jun06   LL   Implementação de tratamento por exceção
+* REF NO  VERSION   DATE    WHO                DETAIL
+*------- ------- --------- ---- -------------------------------------------
+*001       1.0    16May25   LL   Criacao inicial do arquivo main.cpp.
+*002       1.1    30Jun06   LL   Implementação de tratamento por exceção
 *
-*H*/
+*H*/ 
 
 #include <stdio.h>
 #include <stdbool.h>
