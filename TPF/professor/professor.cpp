@@ -59,7 +59,7 @@ string Professor::getEspecializacao()
     return especializacao;
 };
 
-void Professor::leiaPessoa()
+void Professor::leiaPessoa() // Funcão para ler Nome, CPF, data de nascimento e especialização do prof
 {
     string nome;
     cout << "\nNome: ";

@@ -5,7 +5,7 @@
 class Aluno : public Pessoa
 {
 private:
-    unsigned long int matricula;
+    unsigned long int matricula;    // único do aluno, professores não possuem
     const int tipo = 1;
 
 public:

@@ -93,7 +93,7 @@ void pesquisaAlunoNome(Pessoa *pessoas[])
         {
             if (pessoas[i]->getNome() == supostoNome)
             {
-                pessoas[i]->escrevePessoa(); // Polimorfismo: chama escrevePessoa de Aluno
+                pessoas[i]->escrevePessoa(); 
                 encontradas++;
             }
         }

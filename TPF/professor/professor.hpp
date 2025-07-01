@@ -5,7 +5,7 @@
 class Professor : public Pessoa
 {
 private:
-    string especializacao;
+    string especializacao;  // único do professor, alunos não possuem
     const int tipo = 2;
 
 public:
