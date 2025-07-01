@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-// g++ questao3/main.cpp questao1/main.hpp -o q3
+// g++ questao3/main.cpp -o q3
 using namespace std;
 
 

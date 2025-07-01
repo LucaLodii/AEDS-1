@@ -24,8 +24,6 @@
  *
  *H*/
 
-#include <stdio.h>
-#include <stdbool.h>
 #include <iostream>
 #include <string>
 #include "data/data.hpp"

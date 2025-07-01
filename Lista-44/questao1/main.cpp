@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 
-// g++ questao1/main.cpp questao1/main.hpp -o q1
+// g++ questao1/main.cpp -o q1
 
 using namespace std;
 
