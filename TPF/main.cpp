@@ -39,7 +39,6 @@ using namespace std;
 
 int main()
 {
-    setlocale(LC_ALL, "");
     Pessoa *pessoas[MAX];
     abertura(pessoas); // Inicializa o sistema
 

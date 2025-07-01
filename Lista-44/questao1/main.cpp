@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 
-// g++ main.cpp -o main
+// g++ questao1/main.cpp questao1/main.hpp -o q1
 
 using namespace std;
 
@@ -23,7 +23,6 @@ int myString::tamanhoIgual(string A, string B)
 
 int rec2(string A, string B, int i, int minLength)
 {
-
     if (i >= minLength)
         return 0;
 
