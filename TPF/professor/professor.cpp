@@ -1,41 +1,43 @@
-/*H******************************************************************************
-* FILENAME :    professor.cpp                 DESIGN REF:     TP
-
+/*H**************************************************************************************************************
+*FILENAME  :    professor.cpp                   DESIGN REF:      TPF
+*
 * DESCRIPTION :
-*       Implementação da classe Professor que herda da classe abstrata Pessoa.
-*       Contém todas as implementações das funções declaradas no header professor.hpp,
-*       incluindo gerenciamento de especialização, persistência em arquivo e
-*       operações específicas para professores.
+*       Implementação da classe 'Professor', que herda de 'Pessoa', e suas funcionalidades
+*       específicas. Este arquivo contém a lógica para a criação, manipulação (getters/setters),
+*       leitura e exibição de dados de professores, além de funções para pesquisa, exclusão,
+*       listagem e gerenciamento de registros de professores no sistema.
+*       Inclui também as rotinas para persistência de dados de Professor em arquivo binário.
 *
 * PUBLIC FUNCTIONS :
-*       - Implementação da classe Professor com herança de Pessoa
-*       - Implementação de funções de especialização (setEspecializacao, getEspecializacao)
-*       - Implementação de funções de identificação (getTipo)
-*       - Implementação de funções de entrada/saída (leiaPessoa, escrevePessoa)
-*       - Implementação de funções de persistência (gravar, carregar)
-*       - Implementação de funções de pesquisa (pesquisaProfessorNome, pesquisaProfessorCPF)
-*       - Implementação de funções de manipulação (deletaProfessor, apagarTodosProfessores)
+*       Professor::Professor(string especializacao)
+*       void Professor::setEspecializacao(string especializacao)
+*       string Professor::getEspecializacao()
+*       void Professor::leiaPessoa() // Sobrescrito
+*       void Professor::escrevePessoa() // Sobrescrito
+*       void Professor::gravar(FILE *arquivo)
+*       bool Professor::carregar(FILE *arquivo)
+*       void pesquisaProfessorNome(Pessoa *pessoas[])
+*       void pesquisaProfessorCPF(Pessoa *pessoas[])
+*       bool deletaProfessor(Pessoa *pessoas[])
+*       void apagarTodosProfessores(Pessoa *pessoas[])
+*       void listaProfessores(Pessoa *pessoas[])
+*       void listarProfessoresAniversariantes(Pessoa *pessoas[], int mes)
 *
 * NOTES :
-*       Implementação robusta com gerenciamento adequado de memória e
-*       persistência em arquivos binários. Inclui validação de dados e
-*       tratamento de erros. Todas as funções seguem o padrão de um
-*       único retorno sem breaks.
-*
 *       Parte do Sistema de Registro de Pessoas para o projeto final de AEDs.
 *
-*       Leonardo Stuart de A. Ramalho, 2025. All rights reserved.
+* COPYRIGHT : Luca L. 2025, 2025. All rights reserved.
 *
-* AUTHOR    : Leonardo Stuart de A. Ramalho                     START DATE : 24 May 25
+* AUTHOR    : Luca L.                     START DATE : 16 May 25
 *
 * CHANGES :
 *
-* REF NO  VERSION DATE      WHO  DETAIL
-* ------- ------- --------- ---- -------------------------------------------
-* 001     1.0     16May25   LL   Criacao inicial do arquivo professor.cpp.
-* 002     2.0     30Jun06   LL   Implementação de funcionalidades específicas
+* REF NO  VERSION   DATE      WHO          DETAIL
+*------- ------- --------- ---- -------------------------------------------
+*001       1.0     16May25   LL   Criacao inicial do arquivo professor.cpp.
+*002       1.1     30Jun25   LL   Implementacao de metodos da classe Professor e funcoes de gerenciamento.
 *
-*H*/
+*******************************************************************************/
 
 #include <iostream>
 #include "professor.hpp"
@@ -259,6 +261,7 @@ bool Professor::carregar(FILE *arquivo)
     bool carregou = true;
     int nomeLen;
     
+    // Leitura e validação do tamanho do nome
     if (fread(&nomeLen, sizeof(int), 1, arquivo) != 1 || nomeLen <= 0 || nomeLen > 1000) 
     {
         carregou = false;
@@ -267,6 +270,7 @@ bool Professor::carregar(FILE *arquivo)
     if (carregou)
     {
         char *nomeBuf = new char[nomeLen + 1];
+        // Leitura do nome
         if (fread(nomeBuf, sizeof(char), nomeLen, arquivo) != (size_t)nomeLen) 
         { 
             delete[] nomeBuf; 
@@ -281,6 +285,7 @@ bool Professor::carregar(FILE *arquivo)
     }
 
     int cpfLen;
+    // Leitura e validação do tamanho do CPF
     if (carregou && (fread(&cpfLen, sizeof(int), 1, arquivo) != 1 || cpfLen <= 0 || cpfLen > 100))
     {
         carregou = false;
@@ -289,6 +294,7 @@ bool Professor::carregar(FILE *arquivo)
     if (carregou)
     {
         char *cpfBuf = new char[cpfLen + 1];
+        // Leitura do CPF
         if (fread(cpfBuf, sizeof(char), cpfLen, arquivo) != (size_t)cpfLen) 
         { 
             delete[] cpfBuf; 
@@ -303,6 +309,7 @@ bool Professor::carregar(FILE *arquivo)
     }
     
     int dia, mes, ano;
+    // Leitura de dia, mês e ano
     if (carregou && fread(&dia, sizeof(int), 1, arquivo) != 1)
     {
         carregou = false;
@@ -322,6 +329,7 @@ bool Professor::carregar(FILE *arquivo)
     }
     
     int especializacaoLen;
+    // Leitura e validação do tamanho da especialização
     if (carregou && (fread(&especializacaoLen, sizeof(int), 1, arquivo) != 1 || especializacaoLen <= 0 || especializacaoLen > 1000))
     {
         carregou = false;
@@ -330,6 +338,7 @@ bool Professor::carregar(FILE *arquivo)
     if (carregou)
     {
         char *espBuf = new char[especializacaoLen + 1];
+        // Leitura da especialização
         if (fread(espBuf, sizeof(char), especializacaoLen, arquivo) != (size_t)especializacaoLen) 
         { 
             delete[] espBuf; 

@@ -1,40 +1,76 @@
-/*H******************************************************************************
-* FILENAME :    pessoas.cpp                   DESIGN REF:     TP
-
-* DESCRIPTION :
-*       Implementação da classe abstrata Pessoa e funções auxiliares do sistema.
-*       Contém todas as implementações das funções declaradas no header pessoas.hpp,
-*       incluindo gerenciamento de memória, persistência em arquivo e operações
-*       de pesquisa e manipulação de dados.
+/*H**************************************************************************************************************
+*FILENAME  :    pessoa.cpp                      DESIGN REF:      TPF
 *
+* DESCRIPTION :
+*       Implementação da classe base abstrata 'Pessoa' e das funcionalidades
+*       globais para gerenciamento de um array de objetos Pessoa. Define a estrutura
+*       comum de dados (nome, CPF, data de nascimento) e os métodos polimórficos
+*       (leiaPessoa, escrevePessoa, gravar, carregar, getTipo) que devem ser
+*       implementados pelas classes derivadas (Aluno, Professor).
+*       Este arquivo também contém a lógica central para inicialização do sistema,
+*       manipulação de dados em memória e persistência em arquivo binário para
+*       odas as entidades 'Pessoa' do sistema.
+*       
 * PUBLIC FUNCTIONS :
-*       - Implementação da classe abstrata Pessoa
-*       - Implementação de funções de inicialização (abertura, despedida)
-*       - Implementação de funções de persistência (carregaPessoas, gravaPessoas)
-*       - Implementação de funções de pesquisa (pesquisaPessoaNome, pesquisaPessoaCPF)
-*       - Implementação de funções de manipulação (deletaPessoa, apagarTodos)
-*       - Implementação de funções utilitárias (leiaCPF, tamanho)
+* // Membros Estáticos da Classe Pessoa:
+*       static int Pessoa::TAM
+*
+* // Construtores da Classe Pessoa:
+*       Pessoa::Pessoa()
+*       Pessoa::Pessoa(string nome)
+*       Pessoa::Pessoa(string nome, int dia, int mes, int ano)
+*
+* // Métodos Virtuais Puros (Interface para classes derivadas):
+*       virtual int Pessoa::getTipo() = 0
+*       virtual void Pessoa::leiaPessoa() = 0
+*       virtual void Pessoa::escrevePessoa() = 0
+*       virtual void Pessoa::gravar(FILE *arquivo) = 0
+*       virtual bool Pessoa::carregar(FILE *arquivo) = 0
+*
+* // Destrutor Virtual:
+*       virtual Pessoa::~Pessoa()
+*
+* // Métodos da Classe Pessoa:
+*       void Pessoa::setNome(string nome)
+*       string Pessoa::getNome()
+*       void Pessoa::setCPF(string CPF)
+*       string Pessoa::getCPF()
+*       void Pessoa::mostrarMensagem()
+*       bool Pessoa::setNascimento(int dia, int mes, int ano)
+*       Data Pessoa::getNascimento()
+*
+* // Funções Globais do Sistema (Operando em Pessoa* array):
+*       void abertura(Pessoa *pessoas[])
+*       void carregaPessoas(Pessoa *pessoas[])
+*       void despedida(Pessoa *pessoas[])
+*       void processarObjeto(Pessoa *pessoa)
+*       int tamanho(const char *filename)
+*       void gravaPessoas(Pessoa *pessoas[])
+*       Pessoa *criarPessoaDoArquivo(FILE *arquivo)
+*       void gravaTAM()
+*       void pesquisaPessoaNome(Pessoa *pessoas[])
+*       void pesquisaPessoaCPF(Pessoa *pessoas[])
+*       void listarTodosAniversariantes(Pessoa *pessoas[], int mes)
+*       string leiaCPF() // Função auxiliar para leitura de CPF
+*       bool deletaPessoa(Pessoa *pessoas[])
+*       void apagarTodos(Pessoa *pessoas[])
 *
 * NOTES :
-*       Implementação robusta com gerenciamento adequado de memória e
-*       persistência em arquivos binários. Inclui tratamento de exceções
-*       e validação de dados. Todas as funções seguem o padrão de um
-*       único retorno sem breaks.
-*
 *       Parte do Sistema de Registro de Pessoas para o projeto final de AEDs.
+*       O arquivo pessoas.cpp é crucial para o gerenciamento polimórfico das entidades.
 *
-*       Leonardo Stuart de A. Ramalho, 2025. All rights reserved.
+* COPYRIGHT : Luca L. 2025, 2025. All rights reserved.
 *
-* AUTHOR    : Leonardo Stuart de A. Ramalho                     START DATE : 24 May 25
+* AUTHOR    : Luca L.                     START DATE : 16 May 25
 *
 * CHANGES :
 *
-* REF NO  VERSION DATE      WHO  DETAIL
-* ------- ------- --------- ---- -------------------------------------------
-* 001     1.0     16May25   LL   Criacao inicial do arquivo pessoas.cpp.
-* 002     2.0     30Jun06   LL   Implementação de sistema de persistência
+* REF NO  VERSION   DATE      WHO          DETAIL
+*------- ------- --------- ---- -------------------------------------------
+*001       1.0     16May25   LL   Criacao inicial do arquivo pessoas.cpp (como pessoas.cpp).
+*002       1.1     30Jun25   LL   Implementacao da classe Pessoa como base abstrata e funcoes de gerenciamento polimorfico.
 *
-*H*/
+*******************************************************************************/
 
 #include "../data/data.hpp"
 #include <iostream>
@@ -118,36 +154,6 @@ Data Pessoa::getNascimento()
 {
     return nascimento;
 }
-
-// void cadastrePessoa(Pessoa* pessoas[])
-// {
-//     if (Pessoa::TAM >= MAX)
-//     {
-//         cout << "Limite maximo de pessoas atingido!" << endl;
-//         return;
-//     }
-
-//     cin.ignore();
-
-//     cout << "\nNome: ";
-//     string nome;
-//     getline(cin, nome);
-//     pessoas[Pessoa::TAM]->setNome(nome);
-
-//     Data nascimento;
-//     cout << "\nData de nascimento: ";
-//     nascimento.leiaData();
-//     pessoas[Pessoa::TAM]->setNascimento(nascimento.getDia(), nascimento.getMes(), nascimento.getAno());
-
-//     cin.ignore();
-
-//     cout << "CPF: ";
-//     string cpf;
-//     getline(cin, cpf);
-//     pessoas[Pessoa::TAM]->setCPF(cpf);
-
-//     Pessoa::TAM++;
-// }
 
 string leiaCPF()
 {
@@ -313,15 +319,17 @@ Pessoa *criarPessoaDoArquivo(FILE *arquivo)
     int tipo;
     Pessoa *novaPessoa = nullptr;
 
+    // Tenta ler o tipo de pessoa do arquivo
     int itemsLidos = fread(&tipo, sizeof(int), 1, arquivo);
     if (itemsLidos != 1)
     {
         novaPessoa = nullptr;
     }
 
+    // Cria objeto da classe correta (Aluno ou Professor) com base no tipo
     switch (tipo)
     {
-    case 1:
+    case 1: // Aluno
         novaPessoa = new Aluno();
         try
         {
@@ -332,7 +340,7 @@ Pessoa *criarPessoaDoArquivo(FILE *arquivo)
             cout << e.what() << endl;
         }
         break;
-    case 2:
+    case 2: // Professor
         novaPessoa = new Professor();
         try
         {
@@ -343,15 +351,16 @@ Pessoa *criarPessoaDoArquivo(FILE *arquivo)
             cout << e.what() << endl;
         }
         break;
-    default:
+    default: // Tipo desconhecido
         novaPessoa = nullptr;
     }
 
+    // Carrega dados do objeto e verifica sucesso
     if (novaPessoa != nullptr)
     {
         if (!novaPessoa->carregar(arquivo))
         {
-            delete novaPessoa;
+            delete novaPessoa; // Libera memória em caso de falha no carregamento
             novaPessoa = nullptr;
         }
     }
@@ -359,6 +368,7 @@ Pessoa *criarPessoaDoArquivo(FILE *arquivo)
     return novaPessoa;
 }
 
+// Grava o contador total de pessoas (Pessoa::TAM) em arquivo
 void gravaTAM()
 {
     FILE *arquivo = fopen("tamanhoArq.dat", "wb");
@@ -368,6 +378,8 @@ void gravaTAM()
         fclose(arquivo);
     }
 }
+
+// Grava todas as pessoas do array em arquivo
 void gravaPessoas(Pessoa *pessoas[])
 {
     FILE *arquivo = fopen("pessoas.dat", "wb");
@@ -377,19 +389,21 @@ void gravaPessoas(Pessoa *pessoas[])
         {
             if (pessoas[i] != nullptr)
             {
-                pessoas[i]->gravar(arquivo);
+                pessoas[i]->gravar(arquivo); // Grava objeto polimorficamente
             }
         }
         fclose(arquivo);
-        gravaTAM();
+        gravaTAM(); // Atualiza o arquivo de tamanho
     }
 }
 
+// Função de despedida: salva dados ao encerrar
 void despedida(Pessoa *pessoas[])
 {
     gravaPessoas(pessoas);
 }
 
+// Lista aniversariantes para um dado mês
 void listarTodosAniversariantes(Pessoa *pessoas[], int mes)
 {
     for (int i = 0; i < Pessoa::TAM; i++)
@@ -398,11 +412,12 @@ void listarTodosAniversariantes(Pessoa *pessoas[], int mes)
         int mesNiver = nascimento.getMes();
         if (mes == mesNiver)
         {
-            pessoas[i]->escrevePessoa();
+            pessoas[i]->escrevePessoa(); // Exibe pessoa polimorficamente
         }
     }
 }
 
+// Processa um objeto Pessoa, com tratamento de exceção
 void processarObjeto(Pessoa *pessoa)
 {
     if (pessoa == nullptr)
@@ -412,6 +427,7 @@ void processarObjeto(Pessoa *pessoa)
     pessoa->mostrarMensagem();
 }
 
+// Exibe mensagem de inicialização da Pessoa
 void Pessoa::mostrarMensagem()
 {
     cout << "Pessoa inicializada e funcional!" << endl;

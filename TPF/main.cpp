@@ -1,37 +1,28 @@
 /*H**************************************************************************************************************
-*FILENAME :    main.cpp                   DESIGN REF:     TPF
-*
-* DESCRIPTION :
-*       Este arquivo é o ponto de entrada principal do Sistema de Registro de Pessoas.
-*       Ele gerencia o fluxo de execução do programa, apresentando o menu de opções
-*       ao usuário e coordenando as chamadas para as funcionalidades de registro,
-*       listagem, pesquisa, exclusão e gestão de dados de pessoas, professores e alunos.
-*       Atua como a interface de alto nível do sistema
-*
-* PUBLIC FUNCTIONS :
-*       Data()
-*       Data(int dia, int mes, int ano)
-*       Data(int ano)
-*       bool setData(int dia, int mes, int ano)
-*       int getDia() const
-*       bool dataValida()
-*       void escreveData() const
-*
-* NOTES :
-*       Sistema de Registro de Pessoas para o projeto final de AEDs.
-*
-* Luca L. 2025, 2025. All rights reserved.
-*
-* AUTHOR    : Luca L.                     START DATE : 16 May 25
-*
-* CHANGES :
-*
-* REF NO  VERSION   DATE    WHO                DETAIL
-*------- ------- --------- ---- -------------------------------------------
-*001       1.0    16May25   LL   Criacao inicial do arquivo main.cpp.
-*002       1.1    30Jun06   LL   Implementação de tratamento por exceção
-*
-*H*/ 
+ *FILENAME :    main.cpp                   DESIGN REF:    TPF
+ *
+ * DESCRIPTION :
+ *       Este arquivo é o ponto de entrada principal do Sistema de Registro de Pessoas.
+ *       Ele gerencia o fluxo de execução do programa, apresentando o menu de opções
+ *       ao usuário e coordenando as chamadas para as funcionalidades de registro,
+ *       listagem, pesquisa, exclusão e gestão de dados de pessoas, professores e alunos.
+ *       Atua como a interface de alto nível do sistema
+ *
+ * NOTES :
+ *       Sistema de Registro de Pessoas para o projeto final de AEDs.
+ *
+ * Luca L. 2025, 2025. All rights reserved.
+ *
+ * AUTHOR    : Luca L.                     START DATE : 16 May 25
+ *
+ * CHANGES :
+ *
+ * REF NO  VERSION   DATE    WHO                DETAIL
+ *------- ------- --------- ---- -------------------------------------------
+ *001       1.0    16May25   LL   Criacao inicial do arquivo main.cpp.
+ *002       1.1    30Jun06   LL   Implementação de tratamento por exceção
+ *
+ *H*/
 
 #include <stdio.h>
 #include <stdbool.h>
@@ -55,27 +46,23 @@ int main()
     int opcao, subOpcao, mes;
 
     do
-    {
-        // system("cls"); limpar terminal em Windows
-        system("clear"); // limpar terminal em Linux e macOS
-
-        // menu principal
-        printf("\nMenu de funcionalidades, escolha uma opcao: \n");
-        printf("0 - Sair do Programa\n");
-        printf("1 - Cadastrar pessoa\n");
-        printf("2 - Listar todas as pessoas cadastradas\n");
-        printf("3 - Pesquisar por nome\n");
-        printf("4 - Pesquisar por CPF\n");
-        printf("5 - Excluir pessoa\n");
-        printf("6 - Apagar todas as pessoas cadastradas\n");
-        printf("7 - Aniversariantes do mês\n\n");
+    { // menu principal
+        cout << "\nMenu de funcionalidades, escolha uma opcao: \n";
+        cout << "0 - Sair do Programa\n";
+        cout << "1 - Cadastrar pessoa\n";
+        cout << "2 - Listar todas as pessoas cadastradas\n";
+        cout << "3 - Pesquisar por nome\n";
+        cout << "4 - Pesquisar por CPF\n";
+        cout << "5 - Excluir pessoa\n";
+        cout << "6 - Apagar todas as pessoas cadastradas\n";
+        cout << "7 - Aniversariantes do mes\n\n";
         cin >> opcao;
         cin.ignore();
 
         switch (opcao)
         {
         case 0:
-            printf("\nObrigado por usar este programa\n");
+            cout << "\nObrigado por usar este programa\n";
             despedida(pessoas);
 
             // Limpar objetos alocados
@@ -89,8 +76,6 @@ int main()
             break;
 
         case 1:
-            // system("cls"); limpar terminal em Windows
-            system("clear"); // limpar terminal em Linux e macOS
             cout << "0 - Voltar ao menu inicial" << endl;
             cout << "1 - Cadastrar Professor" << endl;
             cout << "2 - Cadastrar Aluno" << endl
@@ -151,8 +136,6 @@ int main()
             break;
 
         case 2:
-            // system("cls"); limpar terminal em Windows
-            system("clear"); // limpar terminal em Linux e macOS
             cout << "0 - Voltar ao menu inicial" << endl;
             cout << "1 - Listar Professor" << endl;
             cout << "2 - Listar Aluno" << endl
@@ -181,8 +164,6 @@ int main()
             break;
 
         case 3:
-            // system("cls"); limpar terminal em Windows
-            system("clear"); // limpar terminal em Linux e macOS
             cout << "0 - Voltar ao menu inicial" << endl;
             cout << "1 - Pesquisar Professores por nome" << endl;
             cout << "2 - Pesquisar Alunos por nome" << endl
@@ -211,8 +192,6 @@ int main()
             break;
 
         case 4:
-            // system("cls"); limpar terminal em Windows
-            system("clear"); // limpar terminal em Linux e macOS
             cout << "0 - Voltar ao menu inicial" << endl;
             cout << "1 - Pesquisar Professores por CPF" << endl;
             cout << "2 - Pesquisar Alunos por CPF" << endl
@@ -241,8 +220,6 @@ int main()
             break;
 
         case 5:
-            // system("cls"); limpar terminal em Windows
-            system("clear"); // limpar terminal em Linux e macOS
             cout << "0 - Voltar ao menu inicial" << endl;
             cout << "1 - Excluir Professor (pelo CPF)" << endl;
             cout << "2 - Excluir Aluno (pelo CPF)" << endl
@@ -271,8 +248,6 @@ int main()
             break;
 
         case 6:
-            // system("cls"); limpar terminal em Windows
-            system("clear"); // limpar terminal em Linux e macOS
             cout << "0 - Voltar ao menu inicial" << endl;
             cout << "1 - Excluir todos os Professores" << endl;
             cout << "2 - Excluir todos os Alunos" << endl
@@ -303,13 +278,11 @@ int main()
         case 7:
             do
             {
-                // system("cls"); limpar terminal em Windows
-                system("clear"); // limpar terminal em Linux e macOS
                 cout << "0 - Voltar ao menu inicial" << endl;
-                cout << "1 - Informar o mês a ser pesquisado" << endl;
-                cout << "2 - Listar os Professores aniversariantes do mês" << endl;
-                cout << "3 - Listar os Alunos aniversariantes do mês" << endl
-                     << "4 - Listar todos os aniversariantes do mês" << endl
+                cout << "1 - Informar o mes a ser pesquisado" << endl;
+                cout << "2 - Listar os Professores aniversariantes do mes" << endl;
+                cout << "3 - Listar os Alunos aniversariantes do mes" << endl
+                     << "4 - Listar todos os aniversariantes do mes" << endl
                      << endl;
                 cin >> subOpcao;
                 cin.ignore();
@@ -346,7 +319,7 @@ int main()
             break;
 
         default:
-            printf("\nOpcao invalida!\n");
+            cout << "\nOpcao invalida!\n";
         }
     } while (opcao != 0);
 

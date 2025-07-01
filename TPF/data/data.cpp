@@ -1,40 +1,51 @@
-/*H******************************************************************************
-* FILENAME :    data.cpp                     DESIGN REF:     TP
-
+/*H**************************************************************************************************************
+*FILENAME  :    data.cpp                        DESIGN REF:      TPF
+*
 * DESCRIPTION :
-*       Implementação da classe Data que gerencia operações relacionadas a datas.
-*       Contém todas as implementações das funções declaradas no header data.hpp,
-*       incluindo validação robusta de datas, cálculos de idade e manipulação
-*       de anos bissextos.
+*       Implementação da classe 'Data' para representação, manipulação e validação
+*       de datas (dia, mês e ano). Este arquivo contém as definições dos construtores
+*       sobrecarregados, getters, setters, e métodos utilitários como validação de
+*       datas, cálculo de dias no mês e formatação do mês por extenso. Inclui também
+*       a lógica para leitura/escrita de dados de data e funções auxiliares para
+*       obter a data atual do sistema e calcular a idade a partir de uma data de nascimento.
 *
 * PUBLIC FUNCTIONS :
-*       - Implementação de construtores e destrutor da classe Data
-*       - Implementação de funções de validação (dataValida, setDia, setMes, setAno)
-*       - Implementação de funções de acesso (getDia, getMes, getAno)
-*       - Implementação de funções de manipulação (setData, mesExtenso, diasMes)
-*       - Implementação de funções de entrada/saída (escreveData, leiaData)
-*       - Implementação de funções utilitárias (obterDataAtual, calcularIdade)
+*       Data::Data()
+*       Data::Data(int ano)
+*       Data::Data(int dia, int mes, int ano)
+*       bool Data::setDia(int dia)
+*       bool Data::setMes(int mes)
+*       bool Data::setAno(int ano)
+*       bool Data::setData()
+*       bool Data::setData(int ano)
+*       bool Data::setData(int dia, int mes, int ano)
+*       int Data::getDia() const
+*       int Data::getMes() const
+*       int Data::getAno() const
+*       bool Data::dataValida() const
+*       bool Data::mesIgualParametro(int mes)
+*       string Data::mesExtenso()
+*       int Data::diasMes()
+*       void Data::escreveData()
+*       void Data::leiaData()
+*       Data obterDataAtual()
+*       int calcularIdade(const Data &nascimento)
 *
 * NOTES :
-*       Implementação robusta com validação completa de datas, incluindo
-*       verificação de anos bissextos e validação de dias por mês específico.
-*       Todas as funções seguem o padrão de um único retorno sem breaks.
-*       Inclui tratamento de casos extremos e validação de limites.
-*
 *       Parte do Sistema de Registro de Pessoas para o projeto final de AEDs.
 *
-*       Leonardo Stuart de A. Ramalho, 2025. All rights reserved.
+* COPYRIGHT : Luca L. 2025, 2025. All rights reserved.
 *
-* AUTHOR    : Leonardo Stuart de A. Ramalho                     START DATE : 24 May 25
+* AUTHOR    : Luca L.                     START DATE : 16 May 25
 *
 * CHANGES :
 *
-* REF NO  VERSION DATE      WHO  DETAIL
-* ------- ------- --------- ---- -------------------------------------------
-* 001     1.0     16May25   LL   Criacao inicial do arquivo data.cpp.
-* 002     2.0     30Jun06   LL   Implementação de validação robusta de datas
+* REF NO  VERSION   DATE      WHO          DETAIL
+*------- ------- --------- ---- -------------------------------------------
+*001       1.0     16May25   LL   Criacao inicial do arquivo data.cpp.
+*002       1.1     30Jun25   LL   Implementacao de construtores e refinamento de getters/setters.
 *
-*H*/
+*******************************************************************************/
 
 #include "data.hpp"
 #include <iostream>
@@ -192,6 +203,7 @@ void Data::leiaData()
 
 Data obterDataAtual()
 {
+    // Obtém a data atual do sistema
     Data d;
     time_t now = time(nullptr);
     tm *ltm = localtime(&now);
@@ -203,6 +215,7 @@ Data obterDataAtual()
 
 int calcularIdade(const Data &nascimento)
 {
+    // Calcula a idade com base na data de nascimento
     Data atual = obterDataAtual();
     int idade = atual.getAno() - nascimento.getAno();
 
@@ -220,21 +233,25 @@ int calcularIdade(const Data &nascimento)
     return idade;
 }
 
+// Construtor padrão: inicializa a data com valores zero
 Data::Data()
 {
     setData();
 }
 
+// Construtor: inicializa a data com o ano fornecido e dia/mês zero
 Data::Data(int ano)
 {
     setData(ano);
 }
 
+// Construtor: inicializa a data com dia, mês e ano fornecidos
 Data::Data(int dia, int mes, int ano)
 {
     setData(dia, mes, ano);
 }
 
+// Define a data para valores zero
 bool Data::setData() {
     dia = 0;
     mes = 0;
@@ -242,6 +259,7 @@ bool Data::setData() {
     return true;
 }
 
+// Define o ano e zera dia/mês
 bool Data::setData(int a) {
     dia = 0;
     mes = 0;
@@ -249,14 +267,16 @@ bool Data::setData(int a) {
     return true;
 }
 
+// Define dia, mês e ano, utilizando os setters individuais
 bool Data::setData(int d, int m, int a)
 {
     bool yearSet = setAno(a);
     bool monthSet = setMes(m);
     bool daySet = setDia(d);
-    return monthSet && daySet && yearSet;
+    return monthSet && daySet && yearSet; // Retorna true se todos os componentes foram definidos com sucesso
 }
 
+// Verifica se o mês do objeto é igual ao mês passado como parâmetro
 bool Data::mesIgualParametro(int mes){
     bool ehIgual = false;
     if(getMes() == mes){

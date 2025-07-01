@@ -1,41 +1,43 @@
-/*H******************************************************************************
-* FILENAME :    aluno.cpp                     DESIGN REF:     TP
-
+/*H**************************************************************************************************************
+*FILENAME  :    aluno.cpp                       DESIGN REF:      TPF
+*
 * DESCRIPTION :
-*       Implementação da classe Aluno que herda da classe abstrata Pessoa.
-*       Contém todas as implementações das funções declaradas no header aluno.hpp,
-*       incluindo gerenciamento de matrícula, persistência em arquivo e
-*       operações específicas para alunos.
+*       Implementação da classe 'Aluno', que herda de 'Pessoa', e suas funcionalidades
+*       específicas. Este arquivo contém a lógica para a criação, manipulação (getters/setters),
+*       leitura e exibição de dados de alunos, além de funções para pesquisa, exclusão,
+*       listagem e gerenciamento de registros de alunos no sistema.
+*       Inclui também as rotinas para persistência de dados de Aluno em arquivo binário.
 *
 * PUBLIC FUNCTIONS :
-*       - Implementação da classe Aluno com herança de Pessoa
-*       - Implementação de funções de matrícula (setMatricula, getMatricula)
-*       - Implementação de funções de identificação (getTipo)
-*       - Implementação de funções de entrada/saída (leiaPessoa, escrevePessoa)
-*       - Implementação de funções de persistência (gravar, carregar)
-*       - Implementação de funções de pesquisa (pesquisaAlunoNome, pesquisaAlunoCPF)
-*       - Implementação de funções de manipulação (deletaAluno, apagarTodosAlunos)
+*       Aluno::Aluno(unsigned long int matricula)
+*       void Aluno::setMatricula(unsigned long int matricula)
+*       unsigned long int Aluno::getMatricula()
+*       void Aluno::leiaPessoa() // Sobrescrito
+*       void Aluno::escrevePessoa() // Sobrescrito
+*       void Aluno::gravar(FILE *arquivo)
+*       bool Aluno::carregar(FILE *arquivo)
+*       void pesquisaAlunoNome(Pessoa *pessoas[])
+*       void pesquisaAlunoCPF(Pessoa *pessoas[])
+*       bool deletaAluno(Pessoa *pessoas[])
+*       void apagarTodosAlunos(Pessoa *pessoas[])
+*       void listaAlunos(Pessoa *pessoas[])
+*       void listarAlunosAniversariantes(Pessoa *pessoas[], int mes)
 *
 * NOTES :
-*       Implementação robusta com gerenciamento adequado de memória e
-*       persistência em arquivos binários. Inclui validação de dados e
-*       tratamento de erros. Todas as funções seguem o padrão de um
-*       único retorno sem breaks.
-*
 *       Parte do Sistema de Registro de Pessoas para o projeto final de AEDs.
 *
-*       Leonardo Stuart de A. Ramalho, 2025. All rights reserved.
+* COPYRIGHT : Luca L. 2025, 2025. All rights reserved.
 *
-* AUTHOR    : Leonardo Stuart de A. Ramalho                     START DATE : 24 May 25
+* AUTHOR    : Luca L.                     START DATE : 16 May 25
 *
 * CHANGES :
 *
-* REF NO  VERSION DATE      WHO  DETAIL
-* ------- ------- --------- ---- -------------------------------------------
-* 001     1.0     16May25   LL   Criacao inicial do arquivo aluno.cpp.
-* 002     2.0     30Jun06   LL   Implementação de funcionalidades específicas
+* REF NO  VERSION   DATE      WHO          DETAIL
+*------- ------- --------- ---- -------------------------------------------
+*001       1.0     16May25   LL   Criacao inicial do arquivo aluno.cpp.
+*002       1.1     30Jun25   LL   Implementacao de metodos da classe Aluno e funcoes de gerenciamento.
 *
-*H*/
+*******************************************************************************/
 
 #include <iostream>
 #include "aluno.hpp"
@@ -57,25 +59,27 @@ unsigned long int Aluno::getMatricula()
     return matricula;
 };
 
+// Sobrescreve leiaPessoa para incluir dados específicos de Aluno
 void Aluno::leiaPessoa()
 {
     string nome;
     cout << "\nNome: ";
     getline(cin, nome);
-    setNome(nome);
+    setNome(nome); // Chama método da classe base Pessoa
 
     cout << "\nCPF: ";
-    setCPF(leiaCPF());
+    setCPF(leiaCPF()); // Assumindo leiaCPF() é uma função auxiliar
     cout << "\nData de nascimento: [DD MM AAAA]";
     int dia, mes, ano;
     cin >> dia >> mes >> ano;
-    setNascimento(dia, mes, ano);
+    setNascimento(dia, mes, ano); // Chama método da classe base Pessoa
     cout << "\nMatricula: ";
     unsigned long int matricula;
     cin >> matricula;
     setMatricula(matricula);
 }
 
+// Pesquisa e exibe alunos por nome no array polimórfico de Pessoas
 void pesquisaAlunoNome(Pessoa *pessoas[])
 {
     string supostoNome;
@@ -85,11 +89,11 @@ void pesquisaAlunoNome(Pessoa *pessoas[])
     int encontradas = 0;
     for (int i = 0; i < Pessoa::TAM; i++)
     {
-        if (pessoas[i]->getTipo() == 1)
+        if (pessoas[i]->getTipo() == 1) // Filtra por tipo Aluno (assumindo 1 é o tipo para Aluno)
         {
             if (pessoas[i]->getNome() == supostoNome)
             {
-                pessoas[i]->escrevePessoa();
+                pessoas[i]->escrevePessoa(); // Polimorfismo: chama escrevePessoa de Aluno
                 encontradas++;
             }
         }
@@ -101,6 +105,7 @@ void pesquisaAlunoNome(Pessoa *pessoas[])
     }
 }
 
+// Sobrescreve escrevePessoa para exibir detalhes de Aluno
 void Aluno::escrevePessoa()
 {
     cout << "\nNome: " << getNome();
@@ -111,6 +116,7 @@ void Aluno::escrevePessoa()
     cout << "\nMatricula: " << getMatricula() << endl;
 }
 
+// Pesquisa e exibe alunos por CPF no array polimórfico de Pessoas
 void pesquisaAlunoCPF(Pessoa *pessoas[])
 {
     string supostoCPF;
@@ -120,7 +126,7 @@ void pesquisaAlunoCPF(Pessoa *pessoas[])
     int encontradas = 0;
     for (int i = 0; i < Pessoa::TAM; i++)
     {
-        if (pessoas[i]->getTipo() == 1)
+        if (pessoas[i]->getTipo() == 1) // Filtra por tipo Aluno
         {
             if (pessoas[i]->getCPF() == supostoCPF)
             {
@@ -259,6 +265,7 @@ bool Aluno::carregar(FILE *arquivo)
     int nomeLen;
     bool carregou = true;
     
+    // Leitura e validação do tamanho do nome
     if (fread(&nomeLen, sizeof(int), 1, arquivo) != 1 || nomeLen <= 0 || nomeLen > 1000) 
     {
         carregou = false;
@@ -267,6 +274,7 @@ bool Aluno::carregar(FILE *arquivo)
     if (carregou)
     {
         char *nomeBuf = new char[nomeLen + 1];
+        // Leitura do nome
         if (fread(nomeBuf, sizeof(char), nomeLen, arquivo) != (size_t)nomeLen) 
         { 
             delete[] nomeBuf; 
@@ -281,6 +289,7 @@ bool Aluno::carregar(FILE *arquivo)
     }
 
     int cpfLen;
+    // Leitura e validação do tamanho do CPF
     if (carregou && (fread(&cpfLen, sizeof(int), 1, arquivo) != 1 || cpfLen <= 0 || cpfLen > 100))
     {
         carregou = false;
@@ -289,6 +298,7 @@ bool Aluno::carregar(FILE *arquivo)
     if (carregou)
     {
         char *cpfBuf = new char[cpfLen + 1];
+        // Leitura do CPF
         if (fread(cpfBuf, sizeof(char), cpfLen, arquivo) != (size_t)cpfLen) 
         { 
             delete[] cpfBuf; 
@@ -303,6 +313,7 @@ bool Aluno::carregar(FILE *arquivo)
     }
 
     int dia, mes, ano;
+    // Leitura de dia, mês e ano
     if (carregou && fread(&dia, sizeof(int), 1, arquivo) != 1)
     {
         carregou = false;
@@ -322,6 +333,7 @@ bool Aluno::carregar(FILE *arquivo)
     }
 
     unsigned long int matricula;
+    // Leitura da matrícula
     if (carregou && fread(&matricula, sizeof(unsigned long int), 1, arquivo) != 1)
     {
         carregou = false;
