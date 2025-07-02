@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string>
-// g++ questao2/main.cpp -o q2
 using namespace std;
 
 const int MAX_LIN = 3;

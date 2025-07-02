@@ -1,6 +1,5 @@
 #include <iostream> // Contem stdbool.h dentro
 #include <string>
-// g++ questao1/main.cpp -o q1
 using namespace std;
 
 class Pessoa
