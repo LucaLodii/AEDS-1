@@ -1,0 +1,67 @@
+--- LISTA 47 ---
+
+Sobre o Trabalho Prático Final
+
+- Sobre a submissão:
+    1) Os arquivos gerados deverão ser compactados e postados no Canvas.
+    2) A pasta relativa ao TPF já se encontra disponível para submissão.
+    3) A submissão deverá ser feita até a quarta-feira, dia 2 de julho.
+    4) Um arquivo deverá conter o Diagrama de Classes em UML.
+    5) Fique à vontade para concentrar todo o código em único arquivo ou reservar um arquivo para cada Classe.
+
+- Não se esqueça de:
+    6) Elaborar o Diagrama de Classes em UML com as seguintes classes:
+        Classe Data
+        Classe Pessoa
+            Classe Professor, uma especialização de Pessoa
+            Classe Aluno, uma especialização de Pessoa
+            
+    7) O Diagrama de Classes deverá ser elaborado em uma das seguintes ferramentas:
+        www.drawio.com (desenho)
+        staruml.io (ferramenta case)
+        argouml-tigris-org.github.io/tigris/argouml (ferramenta case)
+
+    8) Prover um menu de opções com as seguintes funcionalidades:
+        0 – Sair do programa
+        1 - Cadastrar uma pessoa
+        2 - Listar todas as pessoas
+        3 – Pesquisar por nome
+        4 – Pesquisar por CPF
+        5 – Excluir pessoa
+        6 - Apagar todas as pessoas cadastradas
+        7 – Aniversariantes do mês
+        A partir do menu principal, um submenu deve oferecer as seguintes funcionalidades:
+        0 – Sair do programa
+        1 - Cadastrar uma pessoa
+        1.0 – Voltar ao menu anterior
+        1.1 - Cadastrar Professor
+        1.2 - Cadastrar Aluno
+        2 - Listar todas as pessoas
+        2.0 – Voltar ao menu anterior
+        2.1 – Listar Professores
+        2.2 – Listar Alunos
+        3 – Pesquisar por nome
+        3.0 – Voltar ao menu anterior
+        3.1 – Pesquisar Professores por nome
+        3.2 – Pesquisar Alunos por nome
+        4 – Pesquisar por CPF
+        4.0 – Voltar ao menu anterior
+        4.1 – Pesquisar Professores por CPF
+        4.2 – Pesquisar Alunos por CPF
+        5 – Excluir pessoa
+        5.0 – Voltar ao menu anterior
+        5.1 – Excluir Professor (pelo CPF)
+        5.2 – Excluir Aluno (pelo CPF)
+        6 - Apagar todas as pessoas cadastradas
+        6.0 – Voltar ao menu anterior
+        6.1 – Excluir todos os Professores
+        6.2 – Excluir todos os Alunos
+        7 – Aniversariantes do mês
+        7.0 – Voltar ao menu anterior
+        7.1 – Informar o mês a ser pesquisado
+        7.1 – Listar os aniversariantes do mês
+
+    9) Prover polimorfismo no item Aniversariantes do Mês: um único vetor de pessoas deverá armazenar
+        ambas as pessoas, professores e alunos.
+
+    10) Prover persistência de dados. Os dados deverão persistir em memória secundária.
